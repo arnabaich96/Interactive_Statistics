@@ -1,0 +1,82 @@
+---
+title: "Sample Mean vs. Population Mean"
+output: html_document
+runtime: shiny
+---
+
+In statistics, **sampling** is the process of selecting a subset of individuals from a **population** to estimate characteristics of the entire population. In this app, we are using a **simulated population** where the **heights** of individuals are [normally distributed]{.underline}. The accuracy of statistical estimates, such as the **sample mean** of heights, is influenced by the **sample size**. Larger samples tend to provide more reliable estimates because they better represent the population. However, even small samples can offer valuable insights, though they may exhibit greater variability. By adjusting the sample size in the app below, you can observe how the **sample mean** of heights fluctuates and compare it to the **true mean** height of the population.
+
+```{r, echo=FALSE}
+# Load the required libraries
+library(shiny)
+library(knitr)
+
+# Define the user interface
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("sampleSize",
+                  "Select Sample Size:",
+                  min = 1,
+                  max = 250,
+                  value = 10),
+      h3("Sample Heights (cm)"),
+      tableOutput("sampledValues"),
+      h3(" "),
+      tableOutput("meanTable")
+    ),
+
+    mainPanel(
+      
+      h3(" "),
+      plotOutput("meanPlot")
+    )
+  )
+)
+
+# Define the server logic
+server <- function(input, output, session) {
+  # Simulate the population (height in cm)
+  population <- rnorm(10^7, mean = 170, sd = 10) # Mean of 170 cm and SD of 10 cm
+
+  # Reactive expression to get the sample data
+  sample_data <- reactive({
+    sample(population, input$sampleSize)
+  })
+
+  # Display sampled values in a 10x2 table format
+  output$sampledValues <- renderTable({
+    sample_values <- sample_data()
+    if (length(sample_values) > 20) {
+      sample_values <- sample_values[1:20]
+    }
+    matrix(sample_values, ncol = 3,nrow = 3, byrow = TRUE)
+  }, rownames = TRUE, colnames = FALSE)
+
+  # Display the sample mean and true mean in a table format
+  output$meanTable <- renderTable({
+    sample_mean <- mean(sample_data())
+    true_mean <- mean(population)
+    cbind(c("Sample_size" ,"Sample_Mean" ,"Population_Mean"), c(input$sampleSize,round(sample_mean, 2),  round(true_mean, 2)))
+  }, colnames  = FALSE)
+
+  # Plot the true mean vs sample mean
+  output$meanPlot <- renderPlot({
+    true_mean <- mean(population)
+    sample_mean <- mean(sample_data())
+
+    hist(population, breaks = 100, main = "Height Distribution in Population",
+         xlab = "Height (cm)", xlim = c(min(population), max(population)), col = "lightblue")
+    abline(v = true_mean, col = "blue", lwd = 4)  # Thicker line for population mean
+    abline(v = sample_mean, col = "red", lwd = 4)  # Thicker line for sample mean
+    legend("topright", legend = c("Population Mean", "Sample Mean"),
+           col = c("blue", "red"), lwd = 4)
+  })
+}
+```
+
+```{r, echo=FALSE}
+shinyApp(ui = ui, server = server)
+```
+
+In the context of this app, **parameters** and **statistics** are key concepts. A **parameter** is a numerical value that describes a characteristic of the population. For example, the population mean height ($\mu$) is a parameter that represents the average height of all individuals in the population. Since we often do not have access to the entire population, we take a sample and calculate a **statistic**. A **statistic** is a numerical value calculated from the sample data, such as the sample mean height ($\bar{X}$). The sample mean is used as an estimate of the population mean. The difference between the parameter ($\mu$) and the statistic ($\bar{X}$) can vary depending on the sample size ($n$). By using this app, you can explore how closely the sample statistic approximates the population parameter as the sample size changes.
