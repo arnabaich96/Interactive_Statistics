@@ -1,0 +1,146 @@
+---
+title: "Interactive Height Analysis"
+format: html
+self_contained: true
+editor: visual
+runtime: shiny
+
+---
+
+```{r setup, include=FALSE}
+# Load necessary libraries
+library(shiny)
+library(shinyjs)
+ui <- fluidPage(
+  useShinyjs(),
+  titlePanel("Height Analysis"),
+  
+  fluidRow(
+    column(4,
+           numericInput("n", "Number of individuals:", value = 100, min = 1),
+           numericInput("max_value", "Maximum height (cm):", value = 200, min = 50),
+           actionButton("generate", "Generate Data")
+    ),
+    column(8,
+           tableOutput("heights_table")
+    )
+  ),
+  
+  hidden(
+    actionButton("next_step", "Next: Choose Summary or Plot")
+  )
+)
+
+server <- function(input, output, session) {
+  heights <- eventReactive(input$generate, {
+    runif(input$n, min = 50, max = input$max_value)
+  })
+  
+  output$heights_table <- renderTable({
+    req(heights())
+    head(heights(), 10)
+  })
+  
+  observeEvent(input$generate, {
+    show("next_step")
+  })
+  
+  observeEvent(input$next_step, {
+    showModal(modalDialog(
+      title = "Choose Summary or Plot",
+      selectInput("summary_choice", "Choose a summary statistic or plot:",
+                  choices = list(
+                    "Five-Number Summary" = "five_num",
+                    "Histogram" = "histogram",
+                    "Boxplot" = "boxplot",
+                    "Density Plot" = "density",
+                    "Detailed Summary Measures" = "detailed"
+                  )),
+      actionButton("show_summary", "Show Summary/Plot"),
+      footer = NULL
+    ))
+  })
+  
+  observeEvent(input$show_summary, {
+    removeModal()
+    summary_choice <- input$summary_choice
+    
+    if (summary_choice == "five_num") {
+      showModal(modalDialog(
+        title = "Five-Number Summary",
+        verbatimTextOutput("five_num_summary"),
+        easyClose = TRUE
+      ))
+    } else if (summary_choice == "histogram") {
+      showModal(modalDialog(
+        title = "Histogram",
+        plotOutput("histPlot"),
+        easyClose = TRUE
+      ))
+    } else if (summary_choice == "boxplot") {
+      showModal(modalDialog(
+        title = "Boxplot",
+        plotOutput("boxPlot"),
+        easyClose = TRUE
+      ))
+    } else if (summary_choice == "density") {
+      showModal(modalDialog(
+        title = "Density Plot",
+        plotOutput("densityPlot"),
+        easyClose = TRUE
+      ))
+    } else if (summary_choice == "detailed") {
+      showModal(modalDialog(
+        title = "Detailed Summary Measures",
+        verbatimTextOutput("detailed_summary"),
+        easyClose = TRUE
+      ))
+    }
+  })
+  
+  output$five_num_summary <- renderPrint({
+    summary(heights())
+  })
+  
+  output$histPlot <- renderPlot({
+    hist(heights(), 
+         main = "Histogram of Heights", 
+         xlab = "Height (cm)", 
+         ylab = "Frequency", 
+         col = "lightblue", 
+         border = "black")
+  })
+  
+  output$boxPlot <- renderPlot({
+    boxplot(heights(), 
+            main = "Boxplot of Heights", 
+            ylab = "Height (cm)", 
+            col = "lightgreen", 
+            border = "black")
+  })
+  
+  output$densityPlot <- renderPlot({
+    plot(density(heights()), 
+         main = "Density Plot of Heights", 
+         xlab = "Height (cm)", 
+         ylab = "Density", 
+         col = "blue")
+  })
+  
+  output$detailed_summary <- renderPrint({
+    summary_stats <- list(
+      Mean = mean(heights()),
+      Median = median(heights()),
+      StdDev = sd(heights()),
+      Min = min(heights()),
+      Max = max(heights()),
+      Quantiles = quantile(heights(), probs = c(0.25, 0.5, 0.75))
+    )
+    summary_stats
+  })
+}
+```
+
+
+```{r include=FALSE}
+shinyApp(ui = ui, server = server)
