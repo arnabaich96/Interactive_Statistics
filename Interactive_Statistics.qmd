@@ -1,0 +1,84 @@
+---
+title: "Interactive Statistical Concepts"
+author: "Arnab Aich"
+format: 
+  html:
+    embed-resources: true
+
+output:
+  html_document:
+    self_contained: true
+---
+
+This document contains several interactive Shiny applications, each designed to help you understand a specific statistical concept. Use the tabs to switch between the applications.
+
+```{r setup, include=FALSE ,echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE,input = FALSE,output = TRUE)
+library(shiny)
+library(plotly)
+library(gtsummary)
+library(gt)
+library(shiny)
+library(plotly)
+library(gt)
+library(tibble)
+library(shinyjs)
+library(shinyalert)
+library(shinyWidgets)
+```
+
+##  {.tabset .tabset-fade}
+
+### Preliminaries
+In statistics, **sampling** is the process of selecting a subset of individuals from a **population** to estimate characteristics of the entire population. In this app, we are using a **simulated population** where the **heights** of individuals are [normally distributed]{.underline}. The accuracy of statistical estimates, such as the **sample mean** of heights, is influenced by the **sample size**. Larger samples tend to provide more reliable estimates because they better represent the population. However, even small samples can offer valuable insights, though they may exhibit greater variability. By adjusting the sample size in the app below, you can observe how the **sample mean** of heights fluctuates and compare it to the **true mean** height of the population.
+
+```{r, echo=FALSE ,eval=TRUE,message=FALSE,warning=FALSE}
+source("R/Preliminaries.R")
+```
+
+In the context of this app, **parameters** and **statistics** are key concepts. A **parameter** is a numerical value that describes a characteristic of the population. For example, the population mean height ($\mu$) is a parameter that represents the average height of all individuals in the population. Since we often do not have access to the entire population, we take a sample and calculate a **statistic**. A **statistic** is a numerical value calculated from the sample data, such as the sample mean height ($\bar{X}$). The sample mean is used as an estimate of the population mean. The difference between the parameter ($\mu$) and the statistic ($\bar{X}$) can vary depending on the sample size ($n$). By using this app, you can explore how closely the sample statistic approximates the population parameter as the sample size changes.
+
+### Summary Statistics
+
+File Upload: Users can upload a CSV file containing one row of values separated by commas. The app will read this file and use the data for analysis.
+Manual Data Input: Users can still enter data manually in the text input field.
+Random Data Generation: If neither a file is uploaded nor data is manually entered, the app will generate a random sample of size 500.
+Summary Statistics:
+The app calculates and displays the mean, median, standard deviation, IQR, and a user-defined quantile using gtsummary.
+Interactive Visualizations:
+Boxplot: An interactive boxplot using plotly.
+Histogram with Density Curve: An interactive histogram with a density curve, with lines indicating the mean and median using plotly
+```{r Summary Statistics}
+source("R/Summary_Stat.R")
+```
+
+### Distributions
+
+Key Features:
+Distribution Selection: Users can select between Normal, Chi-squared, t, and F distributions.
+Dynamic Inputs: Based on the selected distribution, the UI dynamically presents the appropriate input fields (mean, standard deviation, degrees of freedom, etc.).
+Probability Calculation: The app calculates the probability based on the selected point and highlights the corresponding area under the curve.
+Interactive Plots: The distribution curve is plotted using plotly, and the area under the curve is highlighted according to user input (left, right, or both sides).
+Result Display: The calculated probability is displayed beneath the plot.
+```{r Distributions}
+source("R/Distributions.R")
+```
+
+Here's how you can implement the Shiny app with the features you've described:
+
+Key Features:
+Checkbox for Known Standard Deviation: A checkbox to indicate if the standard deviation (SD) is known. If checked, the user can enter the SD value.
+Confidence Interval Calculation: Automatically perform a Z-test if the SD is known, or a T-test if the SD is unknown, based on a user-specified confidence level.
+Plotting and Table:
+Generate a density plot with a shaded confidence interval and mark the midpoint.
+Print the lower, midpoint, upper bounds, and the interval length.
+Adjust plot and table titles according to the distribution used.
+Hypothesis Testing: Optional hypothesis testing with user-specified mu_0, alpha level, and alternative hypothesis direction (equal, more, less).
+Display the test statistic, p-value, critical region, and decision.
+Highlight areas on the plot based on the alternative hypothesis.
+
+```{r}
+source("R/Inference.R")
+```
+
+

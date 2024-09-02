@@ -1,15 +1,7 @@
----
-title: "Sample Mean vs. Population Mean"
-output: html_document
-runtime: shiny
----
-
-In statistics, **sampling** is the process of selecting a subset of individuals from a **population** to estimate characteristics of the entire population. In this app, we are using a **simulated population** where the **heights** of individuals are [normally distributed]{.underline}. The accuracy of statistical estimates, such as the **sample mean** of heights, is influenced by the **sample size**. Larger samples tend to provide more reliable estimates because they better represent the population. However, even small samples can offer valuable insights, though they may exhibit greater variability. By adjusting the sample size in the app below, you can observe how the **sample mean** of heights fluctuates and compare it to the **true mean** height of the population.
-
-```{r, echo=FALSE}
-# Load the required libraries
 library(shiny)
-library(knitr)
+library(ggplot2)
+
+
 
 # Define the user interface
 ui <- fluidPage(
@@ -27,7 +19,7 @@ ui <- fluidPage(
     ),
 
     mainPanel(
-      
+
       h3(" "),
       plotOutput("meanPlot")
     )
@@ -73,10 +65,5 @@ server <- function(input, output, session) {
            col = c("blue", "red"), lwd = 4)
   })
 }
-```
 
-```{r, echo=FALSE}
 shinyApp(ui = ui, server = server)
-```
-
-In the context of this app, **parameters** and **statistics** are key concepts. A **parameter** is a numerical value that describes a characteristic of the population. For example, the population mean height ($\mu$) is a parameter that represents the average height of all individuals in the population. Since we often do not have access to the entire population, we take a sample and calculate a **statistic**. A **statistic** is a numerical value calculated from the sample data, such as the sample mean height ($\bar{X}$). The sample mean is used as an estimate of the population mean. The difference between the parameter ($\mu$) and the statistic ($\bar{X}$) can vary depending on the sample size ($n$). By using this app, you can explore how closely the sample statistic approximates the population parameter as the sample size changes.
