@@ -3,13 +3,9 @@ library(ggplot2)
 library(DT)
 library(plotly)
 library(datasets)
-
-
-
+library(gt)
 
 # UI ----------------------------------------------------------------------
-
-
 
 ui <- fluidPage(
   titlePanel(h1("Chi-Square Test of Independence", align = "center")),
@@ -65,7 +61,7 @@ ui <- fluidPage(
         tabPanel("Significance Level & Results",
                  conditionalPanel(
                    condition = "input.run_analysis > 0",
-                   tableOutput("result_table"),
+                   gt_output("result_table_gt"),
                    plotlyOutput("chisq_plot")
                  )
         )
@@ -74,14 +70,11 @@ ui <- fluidPage(
   )
 )
 
-
 # Server ------------------------------------------------------------------
-
 
 server <- function(input, output, session) {
   # Reactive value for data
   data <- reactiveValues(df = NULL)
-
 
   # Generate table for manual entry
   observeEvent(input$generate_table, {
@@ -128,11 +121,11 @@ server <- function(input, output, session) {
 
   # Output results after analysis is run
   observeEvent(input$run_analysis, {
-    output$result_table <- renderTable({
+    output$result_table_gt <- render_gt({
       result <- chisq_result()
       if (is.null(result)) return(NULL)
 
-      data.frame(
+      df <- data.frame(
         Term = c("Null Hypothesis", "Alternative Hypothesis", "Test Statistic", "Degrees of Freedom", "P-value", "Conclusion"),
         Value = c(
           "Variables are independent",
@@ -143,6 +136,16 @@ server <- function(input, output, session) {
           ifelse(result$p.value < input$alpha, "Reject the Null Hypothesis", "Fail to Reject the Null Hypothesis")
         )
       )
+
+      df %>%
+        gt() %>%
+        tab_header(
+          title = "Chi-Square Test Results"
+        ) %>%
+        cols_label(
+          Term = "Term",
+          Value = "Value"
+        )
     })
 
     output$chisq_plot <- renderPlotly({
@@ -191,8 +194,6 @@ server <- function(input, output, session) {
 
       plot
     })
-
-
   })
 }
 
