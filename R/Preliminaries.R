@@ -2,6 +2,7 @@
 
 # Define the user interface
 ui <- fluidPage(
+  titlePanel(h1("Preliminaries", align = "center")),
   sidebarLayout(
     sidebarPanel(
       sliderInput("sampleSize",
