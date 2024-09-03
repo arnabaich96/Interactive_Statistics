@@ -1,6 +1,3 @@
-library(shiny)
-library(ggplot2)
-
 
 
 # Define the user interface
@@ -66,4 +63,4 @@ server <- function(input, output, session) {
   })
 }
 
-shinyApp(ui = ui, server = server)
+list(ui = ui, server = server)

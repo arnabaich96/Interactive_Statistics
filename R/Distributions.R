@@ -1,6 +1,4 @@
 
-library(shiny)
-library(plotly)
 
 ui <- fluidPage(
   titlePanel("Distribution Calculator"),
@@ -259,4 +257,5 @@ server <- function(input, output, session) {
   })
 }
 
-shinyApp(ui, server)
+list(ui = ui, server = server)
+

@@ -1,8 +1,3 @@
-library(shiny)
-library(plotly)
-library(DT)
-library(datasets)
-library(ggplot2)
 
 # UI ----------------------------------------------------------------------
 ui <- fluidPage(
@@ -236,4 +231,4 @@ server <- function(input, output, session) {
 }
 
 # Run the application
-shinyApp(ui = ui, server = server)
+list(ui = ui, server = server)

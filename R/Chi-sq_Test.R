@@ -1,9 +1,4 @@
-library(shiny)
-library(ggplot2)
-library(DT)
-library(plotly)
-library(datasets)
-library(gt)
+
 
 # UI ----------------------------------------------------------------------
 
@@ -197,4 +192,5 @@ server <- function(input, output, session) {
   })
 }
 
-shinyApp(ui, server)
+list(ui = ui, server = server)
+

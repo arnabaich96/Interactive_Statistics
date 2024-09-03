@@ -5,154 +5,154 @@ output:
   html_document:
     self_contained: true
     runtime: shiny
-format: 
-  html:
     embed-resources: true
 ---
-Understanding statistics is not just about learning formulas or memorizing definitions—it's about developing a deep intuition for how data behaves and how we can draw meaningful conclusions from it. In our increasingly data-driven world, the ability to interactively explore statistical concepts is invaluable. This document presents a series of interactive Shiny applications designed to bridge the gap between theoretical knowledge and practical understanding. Each app allows you to experiment with data, visualize outcomes, and gain insights that static graphs and numbers alone cannot provide.
-
-These tools are more than just educational—they are gateways to better decision-making in any field where data plays a role. Whether you're a student, a researcher, or a professional, these apps can help you develop the statistical intuition necessary to interpret data accurately and make informed decisions. As you move through each section, take the time to explore the inputs and outputs, consider the implications of the results, and think about how these concepts apply to your own work or studies.
 
 ```{r setup, include=FALSE, echo=FALSE}
 knitr::opts_chunk$set(echo = FALSE, input = FALSE, output = TRUE)
-library(shiny)
-library(plotly)
-library(gtsummary)
-library(gt)
-library(tibble)
-library(shinyjs)
-library(shinyalert)
-library(shinyWidgets)
+# List of libraries to load
+libraries <- c("shiny", "plotly", "gtsummary", "gt", "tibble", "shinyjs", "shinyalert", "shinyWidgets", 
+               "ggplot2", "datasets", "DT", "BSDA", "knitr", "kableExtra", "statmod")
+
+# Load each library
+lapply(libraries, library, character.only = TRUE)
+
+
 ```
+
+
+
+<style>
+  body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+  }
+  h1, h2, h3 {
+    font-family: 'Verdana', sans-serif;
+  }
+  p {
+    font-size: 18px;
+    color: #212121;
+  }
+  ul {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #616161;
+  }
+  a {
+    color: #FF5722;
+  }
+  .tabset li.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  .app-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+</style>
+
+<p style="color: #2E86C1; font-size: 18px;">
+Welcome! This document will guide you through some essential ideas in statistics using interactive and engaging tools. Statistics isn't just about numbers—it's about understanding patterns, making predictions, and drawing meaningful conclusions from data. With these tools, you'll get hands-on experience that makes learning statistics intuitive and fun.
+</p>
+
+<p style="color: #2E4053; font-size: 18px;">
+These tools are designed to be easy to use and informative. Whether you're new to statistics or just looking to refresh your knowledge, you'll learn by doing—exploring data, seeing how it behaves, and discovering how to draw conclusions. Let's dive in and see what we can learn together!
+</p>
 
 ## {.tabset .tabset-fade}
 
-### Preliminaries
+### **Preliminaries: Understanding Sampling**
 
-#### Introduction
-The foundation of statistical analysis is rooted in the concept of sampling. Imagine trying to understand the average height of trees in a forest. Measuring every tree would be impossible, so instead, we measure a sample and use this sample to infer the average height of the entire forest. This app is designed to help you understand how sample size influences the accuracy of your estimates. The app uses a simulated population where the heights of individuals are normally distributed. By adjusting the sample size, you can see how larger samples tend to yield estimates that are closer to the true population mean. However, you'll also notice that smaller samples, while more variable, still provide valuable insights.
+#### **What's This About?**
+<p>
+Imagine you're in a forest and want to know the average height of the trees. Measuring every single tree would take forever! So, instead, you measure a few trees (this is your "sample") and use that information to guess the average height of all the trees in the forest. This tool lets you see how changing the size of your sample affects your guess. Try it out—see how bigger samples tend to give you better estimates!
+</p>
 
-#### Different Contexts and Usage
-Sampling is a concept that transcends disciplines—from estimating the average income of a country's population to predicting voter behavior in an election. Understanding the relationship between sample size and estimate accuracy is crucial across these contexts. In the app, you can experiment with different sample sizes to see how larger samples provide more stable and reliable estimates. However, you'll also notice that even small samples can offer valuable insights, albeit with greater variability. This interactive approach allows you to experience firsthand how statistical estimates behave in different scenarios.
+#### **Why It Matters**
+<p>
+Sampling isn't just something we do with trees. We use sampling to estimate all sorts of things—from how much people earn in a country to how likely voters are to support a candidate in an election. The key is understanding how accurate our estimates are, and this tool helps you get a feel for that by letting you play with different sample sizes.
+</p>
 
-#### How to Use
-- **Adjust Sample Size**: Use the slider to change the sample size. Observe how the sample mean of heights varies as you increase or decrease the sample size.
-- **Compare to Population Mean**: The app displays the sample mean and compares it with the true population mean. Larger samples typically provide estimates closer to the true mean.
+#### **How to Use the Tool**
+<ul>
+  <li><b>Adjust the Sample Size</b>: Use the slider to change how many trees you're measuring. Watch how the average height changes with different sample sizes.</li>
+  <li><b>Compare with the True Average</b>: The tool shows you both your estimate and the actual average height of all the trees. See how close you can get!</li>
+</ul>
 
-```{r, echo=FALSE ,eval=TRUE, message=FALSE, warning=FALSE}
-source("R/Preliminaries.R")
+<div class="app-container">
+```{r, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+app <- source("R/Preliminaries.R")$value
+shinyApp(ui = app$ui, server = app$server)
 ```
+</div>
 
-### Summary Statistics
+### **Summary Statistics: The Basics**
 
-#### Introduction
-Summary statistics condense a large dataset into a few key numbers that provide a snapshot of the data's central tendency, variability, and overall distribution. Imagine trying to describe the performance of a class of students on an exam. Instead of listing every student's score, we use statistics like the mean, median, and standard deviation to provide a quick overview. This app allows you to explore these concepts interactively, helping you understand how different statistics reflect different aspects of the data and how they can be used to summarize and compare datasets.
+#### **What's This About?**
+<p>
+When you have a lot of data, it can be overwhelming. That's where summary statistics come in—they help you sum up all that data into a few key numbers. For example, instead of listing everyone's scores on a test, you could just tell me the average score, the highest score, and the lowest score. This tool lets you explore these summary statistics and see what they tell us about the data.
+</p>
 
-#### Different Contexts and Usage
-Summary statistics are foundational in every field where data is collected. In healthcare, they might be used to summarize patient outcomes; in business, to report quarterly sales figures. This app helps you visualize how these statistics are calculated and what they tell us about the data. For instance, the mean provides a measure of central tendency, while the standard deviation tells us about the spread of the data. By interacting with the app, you can see how changes in the data affect these statistics and what this means for interpreting the results in real-world contexts.
+#### **Why It Matters**
+<p>
+Summary statistics are used everywhere—from healthcare to business. They help us quickly understand and compare data. In this tool, you'll see how different summary statistics, like the mean (average) and standard deviation (spread of data), give us different insights into the same dataset.
+</p>
 
-#### How to Use
-- **Select a Dataset**: Choose a dataset to analyze.
-- **Explore Summary Statistics**: The app calculates key statistics such as mean, median, and standard deviation.
-- **Visualize Data**: Use histograms, boxplots, and other visual tools to see the distribution of data. You can interact with the plots to better understand the distribution and outliers.
+#### **How to Use the Tool**
+<ul>
+  <li><b>Choose a Dataset</b>: Pick a dataset to analyze.</li>
+  <li><b>Explore the Statistics</b>: The tool calculates important numbers like the average and standard deviation for you.</li>
+  <li><b>Visualize the Data</b>: Use the plots to see the distribution of the data—this makes it easier to understand what's going on!</li>
+</ul>
 
+<div class="app-container">
 ```{r Summary Statistics}
-source("R/Summary_Stat.R")
+app <- source("R/Summary_Stat.R")$value
+shinyApp(ui = app$ui, server = app$server)
 ```
+</div>
 
-### Distributions
+### **Distributions: Exploring Possibilities**
 
-#### Introduction
-Probability distributions are the mathematical functions that describe all possible outcomes of a random variable. Think of flipping a coin or rolling a dice—each possible outcome has a probability, and the distribution describes these probabilities for every possible outcome. This app allows you to explore different types of distributions, such as the Normal, Chi-squared, t, and F distributions. By adjusting the parameters, you can see how these distributions change shape and understand their unique characteristics.
+#### **What's This About?**
+<p>
+A distribution shows us all the possible outcomes of something and how likely each outcome is. Think about rolling a die—each number from 1 to 6 has an equal chance of coming up, and a distribution can show us that. This tool lets you explore different types of distributions and see how they change when you tweak the settings.
+</p>
 
-#### Different Contexts and Usage
-Distributions are at the heart of statistical modeling and decision-making. In finance, they might be used to model stock returns; in engineering, to assess material failure rates. Understanding distributions allows you to calculate probabilities and make predictions. This app gives you the ability to manipulate parameters like the mean and standard deviation for normal distributions, or degrees of freedom for t-distributions, and see the impact on the shape of the distribution. You’ll also be able to calculate probabilities for specific ranges, visualizing the corresponding area under the curve.
+#### **Why It Matters**
+<p>
+Understanding distributions is super important because they help us predict outcomes and make decisions. For example, in finance, distributions might be used to model stock returns. This tool helps you see how distributions work by letting you adjust things like the mean (center) and standard deviation (spread) and see how the shape of the distribution changes.
+</p>
 
-#### How to Use
-- **Select a Distribution**: Choose from Normal, Chi-squared, t, or F distributions.
-- **Adjust Parameters**: Input relevant parameters (e.g., mean, standard deviation, degrees of freedom) based on the selected distribution.
-- **Calculate Probabilities**: The app calculates probabilities for a specified range and highlights the corresponding area under the curve.
-- **Visualize the Distribution**: An interactive plot shows the distribution curve, and the area under the curve is shaded according to user inputs.
+#### **How to Use the Tool**
+<ul>
+  <li><b>Pick a Distribution</b>: Choose from Normal, Chi-squared, t, or F distributions.</li>
+  <li><b>Adjust the Parameters</b>: Change the mean, standard deviation, and other settings to see how the distribution changes.</li>
+  <li><b>See the Probabilities</b>: The tool calculates probabilities for you and shows them visually on the distribution plot.</li>
+</ul>
 
+<div class="app-container">
 ```{r Distributions}
-source("R/Distributions.R")
+app <- source("R/Distributions.R")$value
+shinyApp(ui = app$ui, server = app$server)
 ```
+</div>
 
-### Inference
+## **Conclusion**
 
-#### Introduction
-Statistical inference is the process of drawing conclusions about a population based on a sample. It’s like making an educated guess about a book by reading a few pages. This app allows you to explore the core concepts of statistical inference, including confidence intervals and hypothesis tests. By interactively adjusting the sample data, confidence levels, and hypothesis parameters, you can see how these changes affect the conclusions you draw from the data.
+<p style="color: #2E86C1; font-size: 18px;">
+We hope these interactive tools have helped you see how statistics works in a fun and engaging way. Remember, statistics is all about making sense of data, and the more you practice, the better you'll get at it. Keep exploring, keep asking questions, and keep learning—there's a whole world of data out there waiting for you to discover!
+</p>
 
-#### Different Contexts and Usage
-Inference is used in every field that relies on data analysis—from predicting election outcomes to testing the efficacy of new drugs. This app helps you understand how confidence intervals provide a range of plausible values for population parameters, and how hypothesis tests are used to make decisions based on sample data. You’ll learn how to perform Z-tests and T-tests depending on whether the population standard deviation is known, and see how the size of your sample and confidence level affect the re...
+<p style="color: #2E4053; font-size: 18px;">
+Whether you're looking to understand data in your studies, your work, or just in everyday life, the concepts you've learned here are the building blocks. So go ahead, dive deeper, and see what else you can discover with the power of statistics!
+</p>
 
-#### How to Use
-- **Input Data**: Enter the sample data and specify whether the population standard deviation is known.
-- **Select Confidence Level**: Choose a confidence level for constructing the interval.
-- **Perform Hypothesis Testing**: If desired, enter values for hypothesis testing, including the null hypothesis, alternative hypothesis, and significance level.
-- **Interpret Results**: The app displays the confidence interval, test statistic, p-value, and critical region, along with a plot highlighting the relevant areas.
-
-```{r Inference}
-source("R/Inference.R")
-```
-
-### ANOVA
-
-#### Introduction
-Analysis of Variance (ANOVA) is a statistical method used to compare the means of three or more groups. It’s commonly used in experiments where different groups are subjected to different treatments, and the goal is to determine whether any of the treatments lead to significantly different outcomes. This app provides an interactive environment to perform ANOVA tests, allowing you to explore how this technique helps in understanding the differences between groups.
-
-#### Different Contexts and Usage
-ANOVA is widely used in fields like agriculture, medicine, and marketing, where it's essential to compare multiple groups simultaneously. For example, a pharmaceutical company might use ANOVA to compare the effectiveness of different drug dosages. This app allows you to input group data, run ANOVA, and interpret the results through both numerical and graphical outputs. You'll see how the F-statistic is calculated and how it helps in determining whether any of the group means are statistically different f...
-
-#### How to Use
-- **Input Group Data**: Enter the data for each group.
-- **Run ANOVA**: The app calculates the F-statistic and corresponding p-value.
-- **Interpret Results**: The app helps determine whether there are significant differences between group means. The results are displayed in both tabular and graphical formats.
-
-```{r ANOVA}
-source("R/ANOVA.R")
-```
-
-### Chi-Square Test
-
-#### Introduction
-The Chi-Square test is a statistical method used to determine if there is a significant association between two categorical variables. For instance, it can be used to test whether gender is related to voting preference. This app allows you to perform Chi-Square tests interactively, helping you understand how to test for independence between variables and interpret the results.
-
-#### Different Contexts and Usage
-Chi-Square tests are particularly useful in fields like social sciences and market research, where the relationship between categorical variables needs to be assessed. For example, a company might use Chi-Square to see if customer satisfaction is independent of age group. This app provides a hands-on way to conduct these tests, visualize the results, and understand the relationship between variables.
-
-#### How to Use
-- **Input Categorical Data**: Enter the observed frequencies for the categories.
-- **Perform Test**: The app calculates the Chi-Square statistic and p-value.
-- **Visualize Results**: The results are displayed in a table and through visualizations that show the expected vs. observed frequencies, helping you understand the relationship between the variables.
-
-```{r Chi-Sq Test}
-source("R/Chi-sq_Test.R")
-```
-
-### Regression
-
-#### Introduction
-Regression analysis is a powerful statistical tool used to understand the relationship between a dependent variable and one or more independent variables. Imagine trying to predict a person's weight based on their height—regression helps you quantify this relationship. This app allows users to explore linear regression interactively, providing insights into how variables are related and how one can be used to predict the other.
-
-#### Different Contexts and Usage
-Regression analysis is used across various fields, from economics to biology. For instance, economists might use regression to predict consumer spending based on income, while biologists might use it to understand the relationship between environmental factors and species diversity. This app helps you visualize how changes in the independent variable affect the dependent variable, how well the regression model fits the data, and what the key parameters (like the slope and intercept) mean in a practical co...
-
-#### How to Use
-- **Input Data**: Enter the data for the dependent and independent variables.
-- **Fit the Model**: The app fits a linear regression model and provides a summary of the results, including coefficients, R-squared value, and significance levels.
-- **Visualize the Relationship**: The app plots the regression line along with the data points, allowing you to see how well the model fits the data.
-- **Interpret Results**: Use the model summary and plots to understand the strength and direction of the relationship between variables.
-
-```{r Regression}
-source("R/Regression.R")
-```
-
-### Conclusion
-
-The interactive Shiny applications presented in this document are designed to provide hands-on experience with key statistical concepts. By engaging with these tools, users can deepen their understanding of sampling, summary statistics, distributions, inference, ANOVA, Chi-Square tests, and regression analysis. Each app not only illustrates theoretical concepts but also demonstrates practical applications, making statistics more accessible and easier to grasp.
-
-### Closing Note
-
-Statistics is a foundational discipline that impacts a wide range of fields, from science and engineering to economics and social sciences. The interactive tools provided here are just the beginning of your journey into the world of statistics. We encourage you to explore these concepts further, experiment with different datasets, and apply what you've learned to real-world problems. Remember, the more you practice, the more intuitive these concepts will become. Happy learning!
-
+<footer style="margin-top: 50px; text-align: center;">
+  <p style="font-size: 18px;">Author: Arnab Aich</p>
+  <p style="font-size: 16px;">Thanks for exploring statistics with us!</p>
+</footer>

@@ -1,7 +1,4 @@
-library(shiny)
-library(ggplot2)
-library(gt)
-library(BSDA)  # For z-test
+
 
 # UI ----------------------------------------------------------------------
 
@@ -426,5 +423,4 @@ server <- function(input, output, session) {
 
 }
 
-
-shinyApp(ui, server)
+list(ui = ui, server = server)

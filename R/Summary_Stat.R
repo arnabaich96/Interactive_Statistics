@@ -1,10 +1,3 @@
-library(shiny)
-library(plotly)
-library(knitr)
-library(kableExtra)
-library(tibble)
-library(statmod)  # Load the statmod package for rinvgauss
-library(gt)  # Load the gt package for table output
 
 # UI ----------------------------------------------------------------------
 
@@ -289,4 +282,4 @@ server <- function(input, output, session) {
   })
 }
 
-shinyApp(ui, server)
+list(ui = ui, server = server)

@@ -1,8 +1,3 @@
-library(shiny)
-library(ggplot2)
-library(datasets)
-library(gt)
-library(DT)
 
 # Define UI
 ui <- fluidPage(
@@ -188,5 +183,5 @@ server <- function(input, output, session) {
   })
 }
 
-# Run the application
-shinyApp(ui = ui, server = server)
+list(ui = ui, server = server)
+
