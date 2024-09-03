@@ -5,6 +5,6 @@ account: arnab96
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12588146
-bundleId: 9055450
+bundleId: 9055785
 url: https://arnab96.shinyapps.io/interactive_statistics/
 version: 1

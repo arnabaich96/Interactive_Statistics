@@ -1,7 +1,3 @@
-
-
-# UI ----------------------------------------------------------------------
-
 ui <- fluidPage(
   titlePanel(h1("Chi-Square Test of Independence", align = "center")),
 
@@ -53,7 +49,7 @@ ui <- fluidPage(
         ),
 
         # Significance Level and Results Tab (only appears after analysis is run)
-        tabPanel("Significance Level & Results",
+        tabPanel("Analysis Results",
                  conditionalPanel(
                    condition = "input.run_analysis > 0",
                    gt_output("result_table_gt"),
@@ -86,9 +82,9 @@ server <- function(input, output, session) {
   # Load prebuilt dataset
   observeEvent(input$prebuilt_dataset, {
     if (input$prebuilt_dataset == "HairEyeColor") {
-      data$df <- as.data.frame(apply(HairEyeColor, c(1, 2), sum))  # Summarize the 3rd dimension
+      data$df <- as.data.frame(apply(HairEyeColor, c(1, 2), sum)) # Summarize the 3rd dimension
     } else if (input$prebuilt_dataset == "UCBAdmissions") {
-      data$df <- as.data.frame(apply(UCBAdmissions, c(1, 2), sum))  # Summarize the 3rd dimension
+      data$df <- as.data.frame(apply(UCBAdmissions, c(1, 2), sum)) # Summarize the 3rd dimension
     }
   })
 
@@ -154,7 +150,7 @@ server <- function(input, output, session) {
       # Generate x and y values for plotting
       x_vals <- seq(0, x_max * 1.1, length.out = 1000)
       y_vals <- dchisq(x_vals, df = df)
-      max_density <- max(y_vals)  # Find the maximum density value for scaling the lines
+      max_density <- max(y_vals) # Find the maximum density value for scaling the lines
 
       plot <- plot_ly(x = x_vals, y = y_vals, type = 'scatter', mode = 'lines',
                       line = list(color = 'blue', width = 2),
@@ -178,14 +174,14 @@ server <- function(input, output, session) {
 
         # Adding annotations for clarity
         layout(title = 'Chi-Square Distribution with Test Statistic and Critical Value',
-               xaxis = list(title = 'Chi-Square Value', range = c(0, x_max * 1.1)),  # Extended x-axis range
+               xaxis = list(title = 'Chi-Square Value', range = c(0, x_max * 1.1)), # Extended x-axis range
                yaxis = list(title = 'Density'),
                showlegend = TRUE,
-               legend = list(orientation = 'h',   # Horizontal legend
-                             x = 0.5,              # Centered horizontally
-                             y = -0.2,             # Positioned below the plot
-                             xanchor = 'center',   # Anchored at the center
-                             yanchor = 'top'))     # Anchored at the top
+               legend = list(orientation = 'h', # Horizontal legend
+                             x = 0.5, # Centered horizontally
+                             y = -0.2, # Positioned below the plot
+                             xanchor = 'center', # Anchored at the center
+                             yanchor = 'top')) # Anchored at the top
 
       plot
     })
@@ -193,4 +189,3 @@ server <- function(input, output, session) {
 }
 
 list(ui = ui, server = server)
-
