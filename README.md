@@ -1,36 +1,38 @@
 
-# Interactive Statistical Concepts
+# 🧠 **Interactive Statistical Concepts** 🧠
 
-## Overview
+## 🎯 **Overview**
 
-This repository contains an RMarkdown document designed to provide an interactive exploration of key statistical concepts. The document uses Shiny components to allow users to interact with various statistical tools directly within the document. This project is ideal for students, educators, and professionals looking to gain a deeper understanding of statistical methods through hands-on experience.
+This repository contains an interactive statistical document created using **Quarto Markdown**. The document is designed to help users explore fundamental concepts in statistics through **interactive tools**. These tools allow users to experiment with data, visualize outcomes, and gain insights into various statistical concepts, such as **sampling**, **summary statistics**, **distributions**, **inference**, **ANOVA**, and **Chi-Square tests**.
 
-## Contents
+## 📂 **Contents**
 
-- **Interactive_Statistics.Rmd**: The main RMarkdown file that contains the code and content for the interactive statistical concepts.
-- **R/Preliminaries.R**: R script for the preliminaries section.
-- **R/Summary_Stat.R**: R script for the summary statistics section.
-- **R/Distributions.R**: R script for the distributions section.
-- **R/Inference.R**: R script for the inference section.
-- **R/ANOVA.R**: R script for the ANOVA section.
-- **R/Chi-sq_Test.R**: R script for the Chi-Square test section.
+- **Interactive_Statistics.Rmd**: The main R-Markdown file that contains the code and content for the interactive statistical concepts.
+- **Preliminaries.R**: R script for the preliminaries section.
+- **Summary_Stat.R**: R script for the summary statistics section.
+- **Distributions.R**: R script for the distributions section.
+- **Inference.R**: R script for the inference section.
+- **ANOVA.R**: R script for the ANOVA section.
+- **Chi-sq_Test.R**: R script for the Chi-Square test section.
 
-## Prerequisites
+## 🚀 **Getting Started**
+
+### 🔧 **Prerequisites**
 
 To run this project, you need to have the following software installed:
 
 - **R**: The R programming language.
 - **RStudio**: An integrated development environment for R.
-- **Shiny**: A web application framework for R.
-- **Quarto or RMarkdown**: For rendering the document.
+- **Markdown**: A scientific and technical publishing system built on Pandoc.
+- **Shiny**: A web application framework for R (if using interactive components).
 
-## Installation
+### 🛠 **Installation**
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-github-username/interactive_statistics.git
+   git clone https://github.com/arnabaich96/Interactive_Statistics.git
    ```
-
+   
 2. **Navigate to the project directory**:
    ```bash
    cd interactive_statistics
@@ -39,34 +41,85 @@ To run this project, you need to have the following software installed:
 3. **Install the required R packages**:
    Open the R console and run the following:
    ```r
-   install.packages(c("shiny", "plotly", "gtsummary", "gt", "tibble", "shinyjs", "shinyalert", "shinyWidgets", "ggplot2", "datasets", "DT", "BSDA", "knitr", "kableExtra", "statmod"))
+   install.packages(c("shiny", "plotly", "gtsummary", "gt", "tibble", "shinyjs", "shinyalert", "shinyWidgets", "ggplot2", "datasets", "DT", "BSDA"))
    ```
 
-## Rendering the Document
+### 📜 **Instructions for Rendering an RMarkdown Document to HTML**
 
-To render the document and view it interactively:
+#### 1. **Rendering in Bash (Linux/macOS) or Terminal (macOS)**
 
-1. **Open the RMarkdown file** in RStudio.
+##### Step-by-Step Instructions:
 
-2. **Knit the Document**:
-   - Click the "Knit" button in RStudio.
-   - Ensure that the runtime is set to `shiny` to allow the interactive components to function.
+1. **Open Terminal:**
+   - On macOS, open the Terminal app.
+   - On Linux, open your preferred terminal emulator.
 
-3. **View the Output**:
-   - The output will be an HTML document with embedded Shiny apps, allowing you to interact with the statistical tools directly in your browser.
+2. **Navigate to the Directory:**
+   Use the `cd` command to change to the directory where your RMarkdown file is located.
 
-## Usage
+   ```bash
+   cd /path/to/your/rmd/file
+   ```
 
-Once rendered, you can use the interactive elements within the document to explore statistical concepts such as:
+   Replace `/path/to/your/rmd/file` with the actual path to your `.Rmd` file.
 
-- **Sampling and Estimates**: Understand how sample size influences the accuracy of estimates.
-- **Summary Statistics**: Explore key summary statistics like mean, median, and standard deviation.
-- **Probability Distributions**: Manipulate parameters to see how distributions change shape.
-- **Statistical Inference**: Experiment with confidence intervals and hypothesis testing.
-- **ANOVA**: Compare the means of three or more groups.
-- **Chi-Square Tests**: Test the association between categorical variables.
+3. **Render the Markdown Document to HTML:**
+   Use the `Rscript` command to render the RMarkdown file. Here’s the command:
 
-## Contact
+   ```bash
+   Rscript -e "rmarkdown::render('Interactive_Statistics.Rmd', output_format = 'html_document')"
+   ```
+
+   This command will render the `.Rmd` file and produce an HTML file as output.
+
+4. **Check the Output:**
+   The rendered HTML file will be saved in the same directory as the `.Rmd` file.
+
+#### 2. **Rendering in Command Prompt (Windows)**
+
+##### Step-by-Step Instructions:
+
+1. **Open Command Prompt:**
+   - Press `Win + R`, type `cmd`, and press `Enter`.
+
+2. **Navigate to the Directory:**
+   Use the `cd` command to navigate to the directory where your RMarkdown file is located.
+
+   ```cmd
+   cd C:\path\to\your\rmd\file
+   ```
+
+   Replace `C:\path\to\your\rmd\file` with the actual path to your `.Rmd` file.
+
+3. **Render the Markdown Document to HTML:**
+   Use the `Rscript` command to render the RMarkdown file:
+
+   ```cmd
+   Rscript -e "rmarkdown::render('Interactive_Statistics.Rmd', output_format = 'html_document')"
+   ```
+
+   This command will render the `.Rmd` file and produce an HTML file as output.
+
+4. **Check the Output:**
+   The rendered HTML file will be saved in the same directory as the `.Rmd` file.
+
+## 📌 **General Notes for All Platforms:**
+
+- **Dependencies:** Ensure that R, along with the `rmarkdown` package, is installed on your system.
+- **LaTeX for PDF:** If you plan to render to PDF, make sure LaTeX is installed on your system.
+- **File Path:** Use the correct path syntax for your operating system (forward slashes `/` for Linux/macOS, backslashes `\` for Windows).
+
+## 🌐 **Deployment**
+
+The document is already deployed to **ShinyApps.io** for interactive exploration. It can be accessed at the following link:
+
+[**Click here to run the application**](https://arnab96.shinyapps.io/interactive_statistics/)
+
+## 💻 **Usage**
+
+Once running, you can view and interact with the statistical tools directly in your browser. Use the provided interactive sliders, inputs, and visualizations to explore various statistical concepts and see how changes in the data affect the results.
+
+## 📬 **Contact**
 
 For any questions or suggestions, feel free to reach out:
 
