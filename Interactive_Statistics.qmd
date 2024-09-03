@@ -1,25 +1,23 @@
 ---
 title: "Interactive Statistical Concepts"
 author: "Arnab Aich"
-format: 
-  html:
-    embed-resources: true
-
 output:
   html_document:
     self_contained: true
+    runtime: shiny
+format: 
+  html:
+    embed-resources: true
 ---
+Understanding statistics is not just about learning formulas or memorizing definitions—it's about developing a deep intuition for how data behaves and how we can draw meaningful conclusions from it. In our increasingly data-driven world, the ability to interactively explore statistical concepts is invaluable. This document presents a series of interactive Shiny applications designed to bridge the gap between theoretical knowledge and practical understanding. Each app allows you to experiment with data, visualize outcomes, and gain insights that static graphs and numbers alone cannot provide.
 
-This document contains several interactive Shiny applications, each designed to help you understand a specific statistical concept. Use the tabs to switch between the applications.
+These tools are more than just educational—they are gateways to better decision-making in any field where data plays a role. Whether you're a student, a researcher, or a professional, these apps can help you develop the statistical intuition necessary to interpret data accurately and make informed decisions. As you move through each section, take the time to explore the inputs and outputs, consider the implications of the results, and think about how these concepts apply to your own work or studies.
 
-```{r setup, include=FALSE ,echo=FALSE}
-knitr::opts_chunk$set(echo = FALSE,input = FALSE,output = TRUE)
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE, input = FALSE, output = TRUE)
 library(shiny)
 library(plotly)
 library(gtsummary)
-library(gt)
-library(shiny)
-library(plotly)
 library(gt)
 library(tibble)
 library(shinyjs)
@@ -27,166 +25,134 @@ library(shinyalert)
 library(shinyWidgets)
 ```
 
-##  {.tabset .tabset-fade}
+## {.tabset .tabset-fade}
 
 ### Preliminaries
 
-In statistics, **sampling** is the process of selecting a subset of individuals from a **population** to estimate characteristics of the entire population. In this app, we are using a **simulated population** where the **heights** of individuals are [normally distributed]{.underline}. The accuracy of statistical estimates, such as the **sample mean** of heights, is influenced by the **sample size**. Larger samples tend to provide more reliable estimates because they better represent the population. However, even small samples can offer valuable insights, though they may exhibit greater variability. By adjusting the sample size in the app below, you can observe how the **sample mean** of heights fluctuates and compare it to the **true mean** height of the population.
+#### Introduction
+The foundation of statistical analysis is rooted in the concept of sampling. Imagine trying to understand the average height of trees in a forest. Measuring every tree would be impossible, so instead, we measure a sample and use this sample to infer the average height of the entire forest. This app is designed to help you understand how sample size influences the accuracy of your estimates. The app uses a simulated population where the heights of individuals are normally distributed. By adjusting the sample size, you can see how larger samples tend to yield estimates that are closer to the true population mean. However, you'll also notice that smaller samples, while more variable, still provide valuable insights.
 
-```{r, echo=FALSE ,eval=TRUE,message=FALSE,warning=FALSE}
+#### Different Contexts and Usage
+Sampling is a concept that transcends disciplines—from estimating the average income of a country's population to predicting voter behavior in an election. Understanding the relationship between sample size and estimate accuracy is crucial across these contexts. In the app, you can experiment with different sample sizes to see how larger samples provide more stable and reliable estimates. However, you'll also notice that even small samples can offer valuable insights, albeit with greater variability. This interactive approach allows you to experience firsthand how statistical estimates behave in different scenarios.
+
+#### How to Use
+- **Adjust Sample Size**: Use the slider to change the sample size. Observe how the sample mean of heights varies as you increase or decrease the sample size.
+- **Compare to Population Mean**: The app displays the sample mean and compares it with the true population mean. Larger samples typically provide estimates closer to the true mean.
+
+```{r, echo=FALSE ,eval=TRUE, message=FALSE, warning=FALSE}
 source("R/Preliminaries.R")
 ```
 
-In the context of this app, **parameters** and **statistics** are key concepts. A **parameter** is a numerical value that describes a characteristic of the population. For example, the population mean height ($\mu$) is a parameter that represents the average height of all individuals in the population. Since we often do not have access to the entire population, we take a sample and calculate a **statistic**. A **statistic** is a numerical value calculated from the sample data, such as the sample mean height ($\bar{X}$). The sample mean is used as an estimate of the population mean. The difference between the parameter ($\mu$) and the statistic ($\bar{X}$) can vary depending on the sample size ($n$). By using this app, you can explore how closely the sample statistic approximates the population parameter as the sample size changes.
-
 ### Summary Statistics
 
-File Upload: Users can upload a CSV file containing one row of values separated by commas. The app will read this file and use the data for analysis.
-Manual Data Input: Users can still enter data manually in the text input field.
-Random Data Generation: If neither a file is uploaded nor data is manually entered, the app will generate a random sample of size 500.
-Summary Statistics:
-The app calculates and displays the mean, median, standard deviation, IQR, and a user-defined quantile using gtsummary.
-Interactive Visualizations:
-Boxplot: An interactive boxplot using plotly.
-Histogram with Density Curve: An interactive histogram with a density curve, with lines indicating the mean and median using plotly
+#### Introduction
+Summary statistics condense a large dataset into a few key numbers that provide a snapshot of the data's central tendency, variability, and overall distribution. Imagine trying to describe the performance of a class of students on an exam. Instead of listing every student's score, we use statistics like the mean, median, and standard deviation to provide a quick overview. This app allows you to explore these concepts interactively, helping you understand how different statistics reflect different aspects of the data and how they can be used to summarize and compare datasets.
+
+#### Different Contexts and Usage
+Summary statistics are foundational in every field where data is collected. In healthcare, they might be used to summarize patient outcomes; in business, to report quarterly sales figures. This app helps you visualize how these statistics are calculated and what they tell us about the data. For instance, the mean provides a measure of central tendency, while the standard deviation tells us about the spread of the data. By interacting with the app, you can see how changes in the data affect these statistics and what this means for interpreting the results in real-world contexts.
+
+#### How to Use
+- **Select a Dataset**: Choose a dataset to analyze.
+- **Explore Summary Statistics**: The app calculates key statistics such as mean, median, and standard deviation.
+- **Visualize Data**: Use histograms, boxplots, and other visual tools to see the distribution of data. You can interact with the plots to better understand the distribution and outliers.
+
 ```{r Summary Statistics}
 source("R/Summary_Stat.R")
 ```
 
 ### Distributions
 
-Key Features:
-Distribution Selection: Users can select between Normal, Chi-squared, t, and F distributions.
-Dynamic Inputs: Based on the selected distribution, the UI dynamically presents the appropriate input fields (mean, standard deviation, degrees of freedom, etc.).
-Probability Calculation: The app calculates the probability based on the selected point and highlights the corresponding area under the curve.
-Interactive Plots: The distribution curve is plotted using plotly, and the area under the curve is highlighted according to user input (left, right, or both sides).
-Result Display: The calculated probability is displayed beneath the plot.
+#### Introduction
+Probability distributions are the mathematical functions that describe all possible outcomes of a random variable. Think of flipping a coin or rolling a dice—each possible outcome has a probability, and the distribution describes these probabilities for every possible outcome. This app allows you to explore different types of distributions, such as the Normal, Chi-squared, t, and F distributions. By adjusting the parameters, you can see how these distributions change shape and understand their unique characteristics.
+
+#### Different Contexts and Usage
+Distributions are at the heart of statistical modeling and decision-making. In finance, they might be used to model stock returns; in engineering, to assess material failure rates. Understanding distributions allows you to calculate probabilities and make predictions. This app gives you the ability to manipulate parameters like the mean and standard deviation for normal distributions, or degrees of freedom for t-distributions, and see the impact on the shape of the distribution. You’ll also be able to calculate probabilities for specific ranges, visualizing the corresponding area under the curve.
+
+#### How to Use
+- **Select a Distribution**: Choose from Normal, Chi-squared, t, or F distributions.
+- **Adjust Parameters**: Input relevant parameters (e.g., mean, standard deviation, degrees of freedom) based on the selected distribution.
+- **Calculate Probabilities**: The app calculates probabilities for a specified range and highlights the corresponding area under the curve.
+- **Visualize the Distribution**: An interactive plot shows the distribution curve, and the area under the curve is shaded according to user inputs.
+
 ```{r Distributions}
 source("R/Distributions.R")
 ```
 
 ### Inference
 
-Here's how you can implement the Shiny app with the features you've described:
+#### Introduction
+Statistical inference is the process of drawing conclusions about a population based on a sample. It’s like making an educated guess about a book by reading a few pages. This app allows you to explore the core concepts of statistical inference, including confidence intervals and hypothesis tests. By interactively adjusting the sample data, confidence levels, and hypothesis parameters, you can see how these changes affect the conclusions you draw from the data.
 
-Key Features:
-Checkbox for Known Standard Deviation: A checkbox to indicate if the standard deviation (SD) is known. If checked, the user can enter the SD value.
-Confidence Interval Calculation: Automatically perform a Z-test if the SD is known, or a T-test if the SD is unknown, based on a user-specified confidence level.
-Plotting and Table:
-Generate a density plot with a shaded confidence interval and mark the midpoint.
-Print the lower, midpoint, upper bounds, and the interval length.
-Adjust plot and table titles according to the distribution used.
-Hypothesis Testing: Optional hypothesis testing with user-specified mu_0, alpha level, and alternative hypothesis direction (equal, more, less).
-Display the test statistic, p-value, critical region, and decision.
-Highlight areas on the plot based on the alternative hypothesis.
+#### Different Contexts and Usage
+Inference is used in every field that relies on data analysis—from predicting election outcomes to testing the efficacy of new drugs. This app helps you understand how confidence intervals provide a range of plausible values for population parameters, and how hypothesis tests are used to make decisions based on sample data. You’ll learn how to perform Z-tests and T-tests depending on whether the population standard deviation is known, and see how the size of your sample and confidence level affect the re...
+
+#### How to Use
+- **Input Data**: Enter the sample data and specify whether the population standard deviation is known.
+- **Select Confidence Level**: Choose a confidence level for constructing the interval.
+- **Perform Hypothesis Testing**: If desired, enter values for hypothesis testing, including the null hypothesis, alternative hypothesis, and significance level.
+- **Interpret Results**: The app displays the confidence interval, test statistic, p-value, and critical region, along with a plot highlighting the relevant areas.
 
 ```{r Inference}
 source("R/Inference.R")
 ```
 
+### ANOVA
 
-### Statistical Inference Shiny Application
+#### Introduction
+Analysis of Variance (ANOVA) is a statistical method used to compare the means of three or more groups. It’s commonly used in experiments where different groups are subjected to different treatments, and the goal is to determine whether any of the treatments lead to significantly different outcomes. This app provides an interactive environment to perform ANOVA tests, allowing you to explore how this technique helps in understanding the differences between groups.
 
-This Shiny application allows you to perform chi-square tests on categorical data. You can input data in several ways:
+#### Different Contexts and Usage
+ANOVA is widely used in fields like agriculture, medicine, and marketing, where it's essential to compare multiple groups simultaneously. For example, a pharmaceutical company might use ANOVA to compare the effectiveness of different drug dosages. This app allows you to input group data, run ANOVA, and interpret the results through both numerical and graphical outputs. You'll see how the F-statistic is calculated and how it helps in determining whether any of the group means are statistically different f...
 
-- **Import File:** Upload a CSV or TXT file with categorical data.
-- **Manual Entry:** Manually enter the data into a table.
-- **Prebuilt Dataset:** Select from prebuilt datasets such as `HairEyeColor` or `UCBAdmissions`.
+#### How to Use
+- **Input Group Data**: Enter the data for each group.
+- **Run ANOVA**: The app calculates the F-statistic and corresponding p-value.
+- **Interpret Results**: The app helps determine whether there are significant differences between group means. The results are displayed in both tabular and graphical formats.
 
-#### Steps to Use:
-1. **Choose Data Input Type:** Select how you want to input the data (Import File, Manual Entry, Prebuilt Dataset).
-2. **Input Data:**
-   - If importing a file, click "Upload" to load your data.
-   - For manual entry, fill in the table with your data.
-   - For prebuilt datasets, simply choose one from the dropdown.
-3. **View Results:** The app will automatically perform a chi-square test and display the expected values in a table, along with a plot of observed values.
-
-#### Example Workflow:
-1. Select "Prebuilt Dataset" and choose `HairEyeColor`.
-2. The application will load the dataset, perform a chi-square test, and display the results.
-
-This application is useful for quick analysis of categorical data, particularly for contingency table analysis.
-
-```{r Chi-sq_Test}
-source("R/Chi-sq_Test.R")
-```
-
-
-### Regression Analysis
-
-
-```{r Regression Analysis}
-source("R/Regression.R")
-```
-
-# ANOVA Analysis Shiny App
-
-## Overview
-This Shiny app allows users to perform ANOVA (Analysis of Variance) based on their input data. The app supports both One-Way and Two-Way ANOVA, depending on the structure of the dataset. Users can either upload their own data or use prebuilt datasets provided within R.
-
-### Features
-- **Flexible Data Input**: Users can upload CSV/TXT files or select from prebuilt datasets.
-- **Automatic ANOVA Selection**: The app determines whether to perform One-Way or Two-Way ANOVA based on the number of columns in the dataset.
-- **Comprehensive Output**:
-  - **ANOVA Table**: Displays key statistics including degrees of freedom, sum of squares, mean squares, F-value, critical F-value, and p-value.
-  - **Mean Effects**: Calculates and displays the mean effects for each factor in the dataset.
-
-## User Interface
-
-### 1. Sidebar Panel
-- **Data Input Method**: Choose between file upload or prebuilt dataset.
-- **File Upload**: Upload a CSV or TXT file.
-- **Prebuilt Dataset**: Select from prebuilt datasets (`iris` for One-Way ANOVA, `ToothGrowth` for Two-Way ANOVA).
-- **Run Analysis**: Click to perform the ANOVA after selecting input data.
-
-### 2. Main Panel
-- **Data Input Tab**:
-  - Displays the uploaded or selected dataset in a tabular format.
-- **ANOVA Results Tab**:
-  - **ANOVA Table**: Shows the calculated ANOVA table in a visually appealing format.
-  - **Mean Effects**: Provides mean effects for each factor in the analysis.
-
-## Outputs and Interpretation
-
-### 1. ANOVA Table
-
-The ANOVA table is a fundamental output of the analysis and provides the following key information:
-
-| Source | Degrees of Freedom (Df) | Sum of Squares (SS) | Mean Squares (MS) | F Value | Critical F Value | P Value |
-|--------|--------------------------|---------------------|-------------------|---------|-------------------|---------|
-| **Regression** | Df = k - 1 | Sum of squares due to the regression | MS = SS / Df | F statistic calculated as MS_regression / MS_error | Critical value from the F-distribution table | P-value calculated from the F-distribution |
-| **Error** | Df = N - k | Sum of squares due to error (residual) | MS = SS / Df | | | |
-| **Total** | Df = N - 1 | Total sum of squares | | | | |
-
-#### Interpretation:
-- **Degrees of Freedom (Df)**: Represents the number of independent values or quantities that can vary in the analysis.
-- **Sum of Squares (SS)**: Indicates the total variation within the data. It's partitioned into variation due to regression and error.
-- **Mean Squares (MS)**: Calculated by dividing the sum of squares by the corresponding degrees of freedom.
-- **F Value**: The ratio of the mean square of the regression to the mean square of the error. A higher F value indicates that the model explains a significant amount of variance in the response variable.
-- **Critical F Value**: The value from the F-distribution table corresponding to the significance level (e.g., α = 0.05). If the calculated F value exceeds this critical value, the null hypothesis is rejected.
-- **P Value**: Represents the probability that the observed data could have occurred under the null hypothesis. A low p-value (typically < 0.05) indicates that the null hypothesis is unlikely, and we reject it in favor of the alternative hypothesis.
-
-### 2. Mean Effects
-
-The mean effects provide insight into the influence of different factors on the response variable.
-
-#### For One-Way ANOVA:
-- **Mean Effects by Factor**:
-  - The average value of the response variable for each level of the factor. It gives an idea of how the factor levels compare to each other.
-
-#### For Two-Way ANOVA:
-- **Mean Effects by Factor 1 and Factor 2**:
-  - The mean effect of each level of Factor 1 and Factor 2 on the response variable.
-  - Interaction effects between the two factors can also be explored, revealing whether the impact of one factor depends on the level of the other factor.
-
-### Visualization of Tables
-
-To present the ANOVA table and mean effects in a more polished format, consider using the `kable` or `gt` packages in R for table rendering. These packages provide various styling options, including borders, bold headers, and formatted numbers, to enhance the readability and presentation of the results.
-
-Example code snippet for generating a well-formatted table using `kable`:
-
-```{r Anova_Table}
+```{r ANOVA}
 source("R/ANOVA.R")
 ```
 
+### Chi-Square Test
+
+#### Introduction
+The Chi-Square test is a statistical method used to determine if there is a significant association between two categorical variables. For instance, it can be used to test whether gender is related to voting preference. This app allows you to perform Chi-Square tests interactively, helping you understand how to test for independence between variables and interpret the results.
+
+#### Different Contexts and Usage
+Chi-Square tests are particularly useful in fields like social sciences and market research, where the relationship between categorical variables needs to be assessed. For example, a company might use Chi-Square to see if customer satisfaction is independent of age group. This app provides a hands-on way to conduct these tests, visualize the results, and understand the relationship between variables.
+
+#### How to Use
+- **Input Categorical Data**: Enter the observed frequencies for the categories.
+- **Perform Test**: The app calculates the Chi-Square statistic and p-value.
+- **Visualize Results**: The results are displayed in a table and through visualizations that show the expected vs. observed frequencies, helping you understand the relationship between the variables.
+
+```{r Chi-Sq Test}
+source("R/Chi-sq_Test.R")
+```
+
+### Regression
+
+#### Introduction
+Regression analysis is a powerful statistical tool used to understand the relationship between a dependent variable and one or more independent variables. Imagine trying to predict a person's weight based on their height—regression helps you quantify this relationship. This app allows users to explore linear regression interactively, providing insights into how variables are related and how one can be used to predict the other.
+
+#### Different Contexts and Usage
+Regression analysis is used across various fields, from economics to biology. For instance, economists might use regression to predict consumer spending based on income, while biologists might use it to understand the relationship between environmental factors and species diversity. This app helps you visualize how changes in the independent variable affect the dependent variable, how well the regression model fits the data, and what the key parameters (like the slope and intercept) mean in a practical co...
+
+#### How to Use
+- **Input Data**: Enter the data for the dependent and independent variables.
+- **Fit the Model**: The app fits a linear regression model and provides a summary of the results, including coefficients, R-squared value, and significance levels.
+- **Visualize the Relationship**: The app plots the regression line along with the data points, allowing you to see how well the model fits the data.
+- **Interpret Results**: Use the model summary and plots to understand the strength and direction of the relationship between variables.
+
+```{r Regression}
+source("R/Regression.R")
+```
+
+### Conclusion
+
+The interactive Shiny applications presented in this document are designed to provide hands-on experience with key statistical concepts. By engaging with these tools, users can deepen their understanding of sampling, summary statistics, distributions, inference, ANOVA, Chi-Square tests, and regression analysis. Each app not only illustrates theoretical concepts but also demonstrates practical applications, making statistics more accessible and easier to grasp.
+
+### Closing Note
+
+Statistics is a foundational discipline that impacts a wide range of fields, from science and engineering to economics and social sciences. The interactive tools provided here are just the beginning of your journey into the world of statistics. We encourage you to explore these concepts further, experiment with different datasets, and apply what you've learned to real-world problems. Remember, the more you practice, the more intuitive these concepts will become. Happy learning!
 
