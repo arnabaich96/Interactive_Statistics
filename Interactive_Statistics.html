@@ -3119,6 +3119,66 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="distributions">Distributions</h3>
 <p>Key Features: Distribution Selection: Users can select between Normal, Chi-squared, t, and F distributions. Dynamic Inputs: Based on the selected distribution, the UI dynamically presents the appropriate input fields (mean, standard deviation, degrees of freedom, etc.). Probability Calculation: The app calculates the probability based on the selected point and highlights the corresponding area under the curve. Interactive Plots: The distribution curve is plotted using plotly, and the area under the curve is highlighted according to user input (left, right, or both sides). Result Display: The calculated probability is displayed beneath the plot.</p>
 </section>
+<section id="inference" class="level3">
+<h3 class="anchored" data-anchor-id="inference">Inference</h3>
+<p>Here’s how you can implement the Shiny app with the features you’ve described:</p>
+<p>Key Features: Checkbox for Known Standard Deviation: A checkbox to indicate if the standard deviation (SD) is known. If checked, the user can enter the SD value. Confidence Interval Calculation: Automatically perform a Z-test if the SD is known, or a T-test if the SD is unknown, based on a user-specified confidence level. Plotting and Table: Generate a density plot with a shaded confidence interval and mark the midpoint. Print the lower, midpoint, upper bounds, and the interval length. Adjust plot and table titles according to the distribution used. Hypothesis Testing: Optional hypothesis testing with user-specified mu_0, alpha level, and alternative hypothesis direction (equal, more, less). Display the test statistic, p-value, critical region, and decision. Highlight areas on the plot based on the alternative hypothesis.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: &#39;BSDA&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from &#39;package:datasets&#39;:
+
+    Orange</code></pre>
+</div>
+</div>
+</section>
+<section id="statistical-inference-shiny-application" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-inference-shiny-application">Statistical Inference Shiny Application</h3>
+<p>This Shiny application allows you to perform chi-square tests on categorical data. You can input data in several ways:</p>
+<ul>
+<li><strong>Import File:</strong> Upload a CSV or TXT file with categorical data.</li>
+<li><strong>Manual Entry:</strong> Manually enter the data into a table.</li>
+<li><strong>Prebuilt Dataset:</strong> Select from prebuilt datasets such as <code>HairEyeColor</code> or <code>UCBAdmissions</code>.</li>
+</ul>
+<section id="steps-to-use" class="level4">
+<h4 class="anchored" data-anchor-id="steps-to-use">Steps to Use:</h4>
+<ol type="1">
+<li><strong>Choose Data Input Type:</strong> Select how you want to input the data (Import File, Manual Entry, Prebuilt Dataset).</li>
+<li><strong>Input Data:</strong>
+<ul>
+<li>If importing a file, click “Upload” to load your data.</li>
+<li>For manual entry, fill in the table with your data.</li>
+<li>For prebuilt datasets, simply choose one from the dropdown.</li>
+</ul></li>
+<li><strong>View Results:</strong> The app will automatically perform a chi-square test and display the expected values in a table, along with a plot of observed values.</li>
+</ol>
+</section>
+<section id="example-workflow" class="level4">
+<h4 class="anchored" data-anchor-id="example-workflow">Example Workflow:</h4>
+<ol type="1">
+<li>Select “Prebuilt Dataset” and choose <code>HairEyeColor</code>.</li>
+<li>The application will load the dataset, perform a chi-square test, and display the results.</li>
+</ol>
+<p>This application is useful for quick analysis of categorical data, particularly for contingency table analysis.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: &#39;DT&#39;</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from &#39;package:shiny&#39;:
+
+    dataTableOutput, renderDataTable</code></pre>
+</div>
+</div>
+</section>
+</section>
 </section>
 
 </main>

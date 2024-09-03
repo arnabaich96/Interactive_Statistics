@@ -30,6 +30,7 @@ library(shinyWidgets)
 ##  {.tabset .tabset-fade}
 
 ### Preliminaries
+
 In statistics, **sampling** is the process of selecting a subset of individuals from a **population** to estimate characteristics of the entire population. In this app, we are using a **simulated population** where the **heights** of individuals are [normally distributed]{.underline}. The accuracy of statistical estimates, such as the **sample mean** of heights, is influenced by the **sample size**. Larger samples tend to provide more reliable estimates because they better represent the population. However, even small samples can offer valuable insights, though they may exhibit greater variability. By adjusting the sample size in the app below, you can observe how the **sample mean** of heights fluctuates and compare it to the **true mean** height of the population.
 
 ```{r, echo=FALSE ,eval=TRUE,message=FALSE,warning=FALSE}
@@ -64,6 +65,8 @@ Result Display: The calculated probability is displayed beneath the plot.
 source("R/Distributions.R")
 ```
 
+### Inference
+
 Here's how you can implement the Shiny app with the features you've described:
 
 Key Features:
@@ -77,7 +80,7 @@ Hypothesis Testing: Optional hypothesis testing with user-specified mu_0, alpha 
 Display the test statistic, p-value, critical region, and decision.
 Highlight areas on the plot based on the alternative hypothesis.
 
-```{r}
+```{r Inference}
 source("R/Inference.R")
 ```
 
@@ -104,7 +107,7 @@ This Shiny application allows you to perform chi-square tests on categorical dat
 
 This application is useful for quick analysis of categorical data, particularly for contingency table analysis.
 
-```{r}
+```{r Chi-sq_Test}
 source("R/Chi-sq_Test.R")
 ```
 
