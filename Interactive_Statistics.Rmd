@@ -10,55 +10,27 @@ format:
     embed-resources: true
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, input = FALSE, output = TRUE)
-# List of libraries to load
-libraries <- c("shiny", "gtsummary", "gt", "tibble", "shinyjs", "shinyalert", "shinyWidgets", 
-               "ggplot2", "datasets", "DT", "BSDA", "knitr", "kableExtra", "statmod")
-# Install the remotes package if not already installed
-if (!requireNamespace("remotes", quietly = TRUE)) {
-  install.packages("remotes")
-}
-
-# List of packages and their corresponding GitHub repositories or CRAN
-packages <- c("shiny", "gtsummary", "gt", "tibble", "shinyjs", "shinyalert", "shinyWidgets", 
-              "ggplot2", "datasets", "DT", "BSDA", "knitr", "kableExtra", "statmod")
-
-# List of GitHub repositories for packages that need to be installed from GitHub
-# For packages that are available on CRAN, their values are NULL.
-github_repos <- c(
-  shiny = NULL,  # Available on CRAN
-  gtsummary = "ddsjoberg/gtsummary",
-  gt = "rstudio/gt",
-  tibble = NULL,  # Available on CRAN
-  shinyjs = "daattali/shinyjs",
-  shinyalert = "daattali/shinyalert",
-  shinyWidgets = "dreamRs/shinyWidgets",
-  ggplot2 = NULL,  # Available on CRAN
-  datasets = NULL,  # Available on CRAN
-  DT = "rstudio/DT",
-  BSDA = NULL,  # Available on CRAN
-  knitr = NULL,  # Available on CRAN
-  kableExtra = "haozhu233/kableExtra",
-  statmod = NULL  # Available on CRAN
-)
-
-# Function to install a package from CRAN or GitHub
-install_package <- function(pkg, repo) {
-  if (is.null(repo)) {
-    # Install from CRAN
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-      install.packages(pkg)
+ knitr::opts_chunk$set(echo = FALSE, input = FALSE, output = TRUE)
+  
+  # Function to install and load packages
+  install_and_load <- function(packages) {
+    for (pkg in packages) {
+      pkg <- gsub('"', '', pkg)  # Remove quotes from package names if any
+      if (!require(pkg, character.only = TRUE)) {
+        install.packages(pkg, dependencies = TRUE)
+        library(pkg, character.only = TRUE)
+      }
     }
-  } else {
-    # Install from GitHub
-    remotes::install_github(repo)
   }
-}
-
-# Install all the packages
-for (pkg in names(github_repos)) {
-  install_package(pkg, github_repos[[pkg]])
-}
+  
+  # Function to check if FALSE
+  is_false <- function(x) {
+    identical(x, FALSE)
+  }
+  
+  packages <- readLines("packages.txt")
+  # Install and load the packages
+  install_and_load(packages)
 
 ```
 <style>
@@ -118,7 +90,7 @@ Sampling is a universal concept—it applies to various fields, from estimating 
   <li><b>Compare to Population Mean</b>: The tool shows both the sample mean and the true population mean, allowing you to see how close your estimate gets.</li>
 </ul>
 
-```{r, echo=FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+```{r Preliminaries}
 app <- source("R/Preliminaries.R")$value
 shinyApp(ui = app$ui, server = app$server)
 ```
