@@ -82,3 +82,31 @@ source("R/Inference.R")
 ```
 
 
+### Statistical Inference Shiny Application
+
+This Shiny application allows you to perform chi-square tests on categorical data. You can input data in several ways:
+
+- **Import File:** Upload a CSV or TXT file with categorical data.
+- **Manual Entry:** Manually enter the data into a table.
+- **Prebuilt Dataset:** Select from prebuilt datasets such as `HairEyeColor` or `UCBAdmissions`.
+
+#### Steps to Use:
+1. **Choose Data Input Type:** Select how you want to input the data (Import File, Manual Entry, Prebuilt Dataset).
+2. **Input Data:**
+   - If importing a file, click "Upload" to load your data.
+   - For manual entry, fill in the table with your data.
+   - For prebuilt datasets, simply choose one from the dropdown.
+3. **View Results:** The app will automatically perform a chi-square test and display the expected values in a table, along with a plot of observed values.
+
+#### Example Workflow:
+1. Select "Prebuilt Dataset" and choose `HairEyeColor`.
+2. The application will load the dataset, perform a chi-square test, and display the results.
+
+This application is useful for quick analysis of categorical data, particularly for contingency table analysis.
+
+```{r}
+source("R/Chi-sq_Test.R")
+```
+
+
+
