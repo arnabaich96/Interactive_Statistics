@@ -10,27 +10,49 @@ format:
     embed-resources: true
 ---
 ```{r setup, include=FALSE}
- knitr::opts_chunk$set(echo = FALSE, input = FALSE, output = TRUE)
+knitr::opts_chunk$set(echo = FALSE, input = FALSE, output = TRUE)
+
+# Function to install and load packages
+install_and_load <- function(packages) {
+  if (getOption("repos")["CRAN"] == "@CRAN@") {
+    options(repos = c(CRAN = "https://cran.us.r-project.org/"))
+  }
   
-  # Function to install and load packages
-  install_and_load <- function(packages) {
-    for (pkg in packages) {
-      pkg <- gsub('"', '', pkg)  # Remove quotes from package names if any
+  # Ensure devtools is installed
+  if (!requireNamespace("devtools", quietly = TRUE)) {
+    install.packages("devtools", dependencies = TRUE)
+  }
+  library(devtools)
+
+  for (pkg in packages) {
+    pkg <- gsub('"', '', pkg)  # Remove quotes from package names if any
+    if (!require(pkg, character.only = TRUE)) {
+      # Try to install from CRAN
+      install.packages(pkg, dependencies = TRUE)
+      
+      # If the package is not available on CRAN, try GitHub
       if (!require(pkg, character.only = TRUE)) {
-        install.packages(pkg, dependencies = TRUE)
-        library(pkg, character.only = TRUE)
+        message(paste("Package", pkg, "not found on CRAN. Attempting to install from GitHub..."))
+        tryCatch({
+          devtools::install_github(pkg)
+          library(pkg, character.only = TRUE)
+        }, error = function(e) {
+          message(paste("Failed to install package", pkg, "from GitHub"))
+        })
       }
     }
   }
-  
-  # Function to check if FALSE
-  is_false <- function(x) {
-    identical(x, FALSE)
-  }
-  
-  packages <- readLines("packages.txt")
-  # Install and load the packages
-  install_and_load(packages)
+}
+
+# Function to check if FALSE
+is_false <- function(x) {
+  identical(x, FALSE)
+}
+
+packages <- readLines("packages.txt")
+# Install and load the packages
+install_and_load(packages)
+
 
 ```
 <style>
