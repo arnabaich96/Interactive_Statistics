@@ -28,7 +28,7 @@ ui <- fluidPage(
 
       # Manual entry option
       conditionalPanel(
-        condition = "input$data_input_type == 'Manual Entry'",
+        condition = "input.data_input_type == 'Manual Entry'",
         numericInput("rows", "Number of Rows:", 3, min = 1),
         numericInput("cols", "Number of Columns:", 3, min = 1),
         actionButton("generate_table", "Generate Table")
@@ -36,7 +36,7 @@ ui <- fluidPage(
 
       # Prebuilt dataset option
       conditionalPanel(
-        condition = "input$data_input_type == 'Prebuilt Dataset'",
+        condition = "input.data_input_type == 'Prebuilt Dataset'",
         selectInput("prebuilt_dataset", "Select Dataset", choices = c("HairEyeColor", "UCBAdmissions"))
       ),
 

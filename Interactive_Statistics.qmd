@@ -112,4 +112,12 @@ source("R/Chi-sq_Test.R")
 ```
 
 
+### Regression Analysis
+
+
+```{r Regression Analysis}
+source("R/Regression.R")
+```
+
+
 
