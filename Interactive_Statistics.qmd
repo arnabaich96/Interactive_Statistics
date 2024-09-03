@@ -119,5 +119,74 @@ source("R/Chi-sq_Test.R")
 source("R/Regression.R")
 ```
 
+# ANOVA Analysis Shiny App
+
+## Overview
+This Shiny app allows users to perform ANOVA (Analysis of Variance) based on their input data. The app supports both One-Way and Two-Way ANOVA, depending on the structure of the dataset. Users can either upload their own data or use prebuilt datasets provided within R.
+
+### Features
+- **Flexible Data Input**: Users can upload CSV/TXT files or select from prebuilt datasets.
+- **Automatic ANOVA Selection**: The app determines whether to perform One-Way or Two-Way ANOVA based on the number of columns in the dataset.
+- **Comprehensive Output**:
+  - **ANOVA Table**: Displays key statistics including degrees of freedom, sum of squares, mean squares, F-value, critical F-value, and p-value.
+  - **Mean Effects**: Calculates and displays the mean effects for each factor in the dataset.
+
+## User Interface
+
+### 1. Sidebar Panel
+- **Data Input Method**: Choose between file upload or prebuilt dataset.
+- **File Upload**: Upload a CSV or TXT file.
+- **Prebuilt Dataset**: Select from prebuilt datasets (`iris` for One-Way ANOVA, `ToothGrowth` for Two-Way ANOVA).
+- **Run Analysis**: Click to perform the ANOVA after selecting input data.
+
+### 2. Main Panel
+- **Data Input Tab**:
+  - Displays the uploaded or selected dataset in a tabular format.
+- **ANOVA Results Tab**:
+  - **ANOVA Table**: Shows the calculated ANOVA table in a visually appealing format.
+  - **Mean Effects**: Provides mean effects for each factor in the analysis.
+
+## Outputs and Interpretation
+
+### 1. ANOVA Table
+
+The ANOVA table is a fundamental output of the analysis and provides the following key information:
+
+| Source | Degrees of Freedom (Df) | Sum of Squares (SS) | Mean Squares (MS) | F Value | Critical F Value | P Value |
+|--------|--------------------------|---------------------|-------------------|---------|-------------------|---------|
+| **Regression** | Df = k - 1 | Sum of squares due to the regression | MS = SS / Df | F statistic calculated as MS_regression / MS_error | Critical value from the F-distribution table | P-value calculated from the F-distribution |
+| **Error** | Df = N - k | Sum of squares due to error (residual) | MS = SS / Df | | | |
+| **Total** | Df = N - 1 | Total sum of squares | | | | |
+
+#### Interpretation:
+- **Degrees of Freedom (Df)**: Represents the number of independent values or quantities that can vary in the analysis.
+- **Sum of Squares (SS)**: Indicates the total variation within the data. It's partitioned into variation due to regression and error.
+- **Mean Squares (MS)**: Calculated by dividing the sum of squares by the corresponding degrees of freedom.
+- **F Value**: The ratio of the mean square of the regression to the mean square of the error. A higher F value indicates that the model explains a significant amount of variance in the response variable.
+- **Critical F Value**: The value from the F-distribution table corresponding to the significance level (e.g., α = 0.05). If the calculated F value exceeds this critical value, the null hypothesis is rejected.
+- **P Value**: Represents the probability that the observed data could have occurred under the null hypothesis. A low p-value (typically < 0.05) indicates that the null hypothesis is unlikely, and we reject it in favor of the alternative hypothesis.
+
+### 2. Mean Effects
+
+The mean effects provide insight into the influence of different factors on the response variable.
+
+#### For One-Way ANOVA:
+- **Mean Effects by Factor**:
+  - The average value of the response variable for each level of the factor. It gives an idea of how the factor levels compare to each other.
+
+#### For Two-Way ANOVA:
+- **Mean Effects by Factor 1 and Factor 2**:
+  - The mean effect of each level of Factor 1 and Factor 2 on the response variable.
+  - Interaction effects between the two factors can also be explored, revealing whether the impact of one factor depends on the level of the other factor.
+
+### Visualization of Tables
+
+To present the ANOVA table and mean effects in a more polished format, consider using the `kable` or `gt` packages in R for table rendering. These packages provide various styling options, including borders, bold headers, and formatted numbers, to enhance the readability and presentation of the results.
+
+Example code snippet for generating a well-formatted table using `kable`:
+
+```{r Anova_Table}
+source("R/ANOVA.R")
+```
 
 
