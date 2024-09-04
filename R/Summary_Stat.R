@@ -2,32 +2,6 @@
 # UI ----------------------------------------------------------------------
 
 ui <- fluidPage(
-
-  tags$head(tags$style(HTML("
-    .shiny-input-container {
-      margin-bottom: 15px;
-    }
-    .shiny-text-output {
-      margin-top: 10px;
-    }
-    .box {
-      box-shadow: 2px 2px 12px #aaa;
-      padding: 15px;
-      background: #f9f9f9;
-      border-radius: 10px;
-    }
-    .header-box {
-      background: #1f77b4;
-      color: white;
-      padding: 10px;
-      text-align: center;
-      border-radius: 10px;
-    }
-    .content-box {
-      margin-top: 15px;
-    }
-  "))),
-
   sidebarLayout(
     sidebarPanel(
       class = "box",
