@@ -20,9 +20,26 @@ library(shiny)
 ```
 <style>
   body {
+    margin: 0;
+    padding: 0;
     font-family: 'Georgia', serif;
     line-height: 1.6;
     background-color: #FAFAD2; /* Light goldenrod background */
+  }
+  .main-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  .shiny-app-container {
+    height: auto; 
+    min-height: 100vh; 
+  }
+  .plot-output {
+    height: auto; 
   }
   h1, h2, h3 {
     font-family: 'Verdana', sans-serif;
@@ -77,7 +94,7 @@ Sampling is a universal concept—it applies to various fields, from estimating 
 
 ```{r Preliminaries}
 app <- source("R/Preliminaries.R")$value
-shinyApp(ui = app$ui, server = app$server)
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
 ### **Summary Statistics**
@@ -101,7 +118,7 @@ Summary statistics are essential in every field that involves data. They help us
 
 ```{r Summary Statistics}
 app <- source("R/Summary_Stat.R")$value
-shinyApp(ui = app$ui, server = app$server)
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
 ### **Distributions**
@@ -126,7 +143,7 @@ Distributions are fundamental to statistical modeling and decision-making. In fi
 
 ```{r Distributions}
 app <- source("R/Distributions.R")$value
-shinyApp(ui = app$ui, server = app$server)
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
 
@@ -152,7 +169,7 @@ Inference is widely used, from predicting election results to testing new medici
 
 ```{r Inference}
 app <- source("R/Inference.R")$value
-shinyApp(ui = app$ui, server = app$server)
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
 ### **ANOVA**
@@ -176,7 +193,7 @@ ANOVA is widely used in fields like agriculture, medicine, and marketing, where 
 
 ```{r ANOVA}
 app <- source("R/ANOVA.R")$value
-shinyApp(ui = app$ui, server = app$server)
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
 ### **Chi-Square Test**
@@ -200,7 +217,7 @@ Chi-Square tests are particularly useful in fields like social sciences and mark
 
 ```{r Chi-Square}
 app <- source("R/Chi-sq_Test.R")$value
-shinyApp(ui = app$ui, server = app$server)
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
 ## **Conclusion**

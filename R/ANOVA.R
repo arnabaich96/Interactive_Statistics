@@ -1,8 +1,6 @@
 
 # Define UI
 ui <- fluidPage(
-  titlePanel(h1("ANOVA Analysis", align = "center")),
-
   sidebarLayout(
     sidebarPanel(
       width = 4,

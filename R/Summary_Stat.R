@@ -2,7 +2,6 @@
 # UI ----------------------------------------------------------------------
 
 ui <- fluidPage(
-  titlePanel(h1("Statistical Summary", align = "center")),
 
   tags$head(tags$style(HTML("
     .shiny-input-container {

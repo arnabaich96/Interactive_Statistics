@@ -1,8 +1,6 @@
 
 # UI ----------------------------------------------------------------------
 ui <- fluidPage(
-  titlePanel(h1("Regression Analysis", align = "center")),
-
   sidebarLayout(
     sidebarPanel(
       width = 4,

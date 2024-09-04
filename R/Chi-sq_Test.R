@@ -1,5 +1,4 @@
 ui <- fluidPage(
-  titlePanel(h1("Chi-Square Test of Independence", align = "center")),
 
   sidebarLayout(
     sidebarPanel(

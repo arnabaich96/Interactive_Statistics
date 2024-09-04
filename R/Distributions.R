@@ -1,7 +1,7 @@
 
 
 ui <- fluidPage(
-  titlePanel(h1("Probability Distributions", align = "center")),
+
 
   sidebarLayout(
     sidebarPanel(
