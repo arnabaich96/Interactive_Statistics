@@ -1,25 +1,42 @@
-
 # Define the user interface
 ui <- fluidPage(
 
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput("sampleSize",
-                  "Select Sample Size:",
-                  min = 1,
-                  max = 250,
-                  value = 10),
-      h3("Sample Heights (cm)"),
-      tableOutput("sampledValues"),
-      h3(" "),
-      tableOutput("meanTable")
-    ),
+  tags$style(HTML("
+    .main-container {
+      height: auto; /* Set the height for the full app */
+    }
 
-    mainPanel(
+    .plot-output-container {
+      height: auto; /* Adjust height for the plot area */
+    }
 
-      h3(" "),
-      plotOutput("meanPlot")
-    )
+    .sidebar-container {
+      height: 100%;
+    }
+  ")),
+
+  div(class = "main-container",
+      sidebarLayout(
+        sidebarPanel(
+          div(class = "sidebar-container",
+              sliderInput("sampleSize",
+                          "Select Sample Size:",
+                          min = 1,
+                          max = 250,
+                          value = 10),
+              h3("Sample Heights (cm)"),
+              tableOutput("sampledValues"),
+              h3(" "),
+              tableOutput("meanTable")
+          )
+        ),
+        mainPanel(
+          h3(" "),
+          div(class = "plot-output-container",
+              plotOutput("meanPlot", height = "300px") # Set the plot height to 300px
+          )
+        )
+      )
   )
 )
 
@@ -39,14 +56,15 @@ server <- function(input, output, session) {
     if (length(sample_values) > 20) {
       sample_values <- sample_values[1:20]
     }
-    matrix(sample_values, ncol = 3,nrow = 3, byrow = TRUE)
+    matrix(sample_values, ncol = 3, nrow = 3, byrow = TRUE)
   }, rownames = TRUE, colnames = FALSE)
 
   # Display the sample mean and true mean in a table format
   output$meanTable <- renderTable({
     sample_mean <- mean(sample_data())
     true_mean <- mean(population)
-    cbind(c("Sample_size" ,"Sample_Mean" ,"Population_Mean"), c(input$sampleSize,round(sample_mean, 2),  round(true_mean, 2)))
+    cbind(c("Sample_size", "Sample_Mean", "Population_Mean"),
+          c(input$sampleSize, round(sample_mean, 2), round(true_mean, 2)))
   }, colnames  = FALSE)
 
   # Plot the true mean vs sample mean

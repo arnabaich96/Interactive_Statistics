@@ -1,0 +1,183 @@
+---
+title: "Hypothesis Testing: Z-Test and t-Test"
+author: "Your Name"
+output: 
+  html_document:
+    theme: cosmo
+    highlight: tango
+    toc: true
+    toc_float: true
+---
+
+<style>
+  h1, h2, h3 {
+    color: #8B0000;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #F5F5F5;
+  }
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  blockquote {
+    color: #555;
+    background-color: #FAF0E6;
+    padding: 10px;
+    border-left: 5px solid #8B0000;
+    font-style: italic;
+  }
+  .important {
+    background-color: #FFF3CD;
+    padding: 10px;
+    border-left: 5px solid #FFBF00;
+    font-size: 14px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA)
+```
+
+# Introduction to Hypothesis Testing
+
+In this document, we will explore **Z-tests** (for known population standard deviation) and **t-tests** (for unknown population standard deviation), explaining how to calculate the test statistic, p-value, critical value, and power. We will also cover the interpretation of the results.
+
+## Key Concepts
+
+### 1. Null and Alternative Hypothesis
+- **Null Hypothesis (H₀)**: Assumes there is no effect or no difference (e.g., the mean of the population is 170 cm).
+- **Alternative Hypothesis (H₁ or Ha)**: Assumes there is a difference (e.g., the mean is not 170 cm).
+
+### 2. Type I and Type II Errors
+- **Type I Error (α)**: Rejecting the null hypothesis when it is true (false positive). This is the **significance level (α)**, usually set at 0.05 (5%).
+- **Type II Error (β)**: Failing to reject the null hypothesis when it is false (false negative).
+
+### 3. Significance Level (α) and Power (1 - β)
+- **Significance Level (α)**: The probability of committing a Type I error. Commonly set at 0.05.
+- **Power (1 - β)**: The probability of correctly rejecting the null hypothesis when it is false. Higher power (often 0.8 or 80%) means a better chance of detecting an effect.
+
+# Z-Test for Known Standard Deviation
+
+The **Z-test** is used when the population standard deviation (σ) is known, and the sample size is large (n ≥ 30). The Z-test formula is:
+
+$$
+Z = \sqrt{n}\left(\frac{\bar{x} - \mu_0}{\sigma} \right)
+$$
+
+Where:
+- \(\bar{x}\) = sample mean
+- \(\mu_0\) = hypothesized population mean
+- \(\sigma\) = population standard deviation
+- \(n\) = sample size
+
+## Example of Z-Test (Known σ)
+
+Suppose the average height of students is hypothesized to be 170 cm, and we want to test this hypothesis with a sample of 50 students, where the known population standard deviation is 15 cm.
+
+The sample mean is **172 cm**, population standard deviation is **15 cm**, and the sample size is **50**.
+
+```{r}
+# Given data
+sample_mean <- 172
+mu_0 <- 170
+sigma <- 15
+n <- 50
+
+# Calculate Z-test statistic
+z_stat <- (sample_mean - mu_0) / (sigma / sqrt(n))
+```
+
+The calculated Z-statistic is **`r round(z_stat, 2)`**, which indicates the number of standard deviations the sample mean is from the hypothesized population mean.
+
+### Plot of the Z-Test:
+
+```{r}
+# Plot the normal distribution and Z-statistic
+x <- seq(-3, 3, length=100)
+y <- dnorm(x)
+
+plot(x, y, type="l", main="Z-Test Distribution", xlab="Z-Statistic", ylab="Density")
+abline(v = z_stat, col = "red", lwd = 2)
+legend("topright", legend=paste("Z =", round(z_stat, 2)), col="red", lwd=2)
+```
+
+### Interpretation:
+- **Z-Statistic**: The calculated Z-statistic shows how far the sample mean is from the hypothesized mean in terms of standard deviations.
+- **Critical Value**: For a significance level of α = 0.05, the critical values are ±1.96 for a two-tailed test. If the Z-statistic exceeds these values, we reject the null hypothesis.
+
+### Calculating the p-value:
+To find the p-value, we can use the Z-distribution:
+
+```{r}
+# Calculate the p-value
+p_value <- 2 * (1 - pnorm(abs(z_stat)))
+```
+
+The p-value for this test is **`r round(p_value, 4)`**. If **p-value < α**, reject the null hypothesis. Otherwise, fail to reject it.
+
+---
+
+# t-Test for Unknown Standard Deviation
+
+When the population standard deviation is unknown and the sample size is small (n < 30), we use the **t-test**. The t-test formula is:
+ 
+$$T = \left ( \sqrt{n} \frac{\bar{x} - \mu_0}{s} 
+\right )$$
+
+Where:
+- \(ar{x}\) = sample mean
+- \(\mu_0\) = hypothesized population mean
+- \(s\) = sample standard deviation
+- \(n\) = sample size
+
+## Example of t-Test (Unknown σ)
+
+Let’s assume we do not know the population standard deviation, and we have the following data on the heights of 10 students:
+
+```{r}
+# Sample data: Heights of 10 students
+heights <- c(160, 165, 170, 175, 180, 165, 170, 172, 168, 178)
+
+# Perform a one-sample t-test to compare the mean height to 170 cm
+t_test_result <- t.test(heights, mu = 170)
+t_stat <- t_test_result$statistic
+```
+
+The observation values used for this t-test are: **`r paste(heights, collapse = ", ")`**.
+
+The calculated t-statistic is **`r round(t_stat, 2)`**, and the degrees of freedom for this test are **`r t_test_result$parameter`**.
+
+### Plot of the t-Test:
+
+```{r}
+# Plot the t-distribution and test statistic
+df <- t_test_result$parameter  # Degrees of freedom
+curve(dt(x, df), from=-4, to=4, main="t-Test Distribution", xlab="t-Statistic", ylab="Density")
+abline(v = t_stat, col = "red", lwd = 2)
+legend("topright", legend=paste("t =", round(t_stat, 2)), col="red", lwd=2)
+```
+
+### Calculating the p-value for the t-test:
+
+```{r}
+# Extract p-value from the t-test result
+p_value_t <- t_test_result$p.value
+```
+
+The p-value for this t-test is **`r round(p_value_t, 4)`**. If **p-value < α**, reject the null hypothesis. Otherwise, fail to reject it.
+
+---
+
+# Conclusion
+
+- **Z-tests** are used when the population standard deviation is known and the sample size is large.
+- **t-tests** are used when the population standard deviation is unknown and the sample size is small.
+- Both tests help determine whether the sample mean significantly differs from the hypothesized population mean.
+
+## Practice Questions
+
+1. **Z-Test**: A manufacturer claims that the average weight of a product is 50 grams. You collect a sample of 40 products, with a mean weight of 51 grams and a known population standard deviation of 4 grams. Perform a Z-test to determine if the true mean weight is different from 50 grams.
+2. **t-Test**: A professor claims that the average score on a final exam is 75. You collect data from 8 students, with scores: 78, 74, 80, 73, 77, 79, 72, and 76. Perform a t-test to determine if the true mean score is different from 75.
+

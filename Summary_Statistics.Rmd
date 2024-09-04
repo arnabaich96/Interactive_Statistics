@@ -1,0 +1,452 @@
+---
+title: "Statistical Measures and Graphical Techniques"
+author: "**Arnab Aich**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    css: |
+      .center-plot {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .table-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+      table {
+        margin-right: 30px;
+        font-size: 16px;
+      }
+       body {
+        font-size: 18px; /* Adjust this value for your preferred font size */
+      margin-left: 10px;
+      margin-right: 10px;
+           }
+
+      .container-fluid {
+        max-width: 90%; /* Ensures that the content takes up the full page width */
+      }
+
+---
+<style>
+  body {
+    font-size: 18px; /* Adjust this value for your preferred font size */
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .container-fluid {
+    max-width: 90%; /* Ensures that the content takes up the full page width */
+  }
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+library(ggplot2)
+library(kableExtra)  # For better HTML table visuals
+library(patchwork)
+
+```
+## Mean
+
+The **mean** is the average of a set of numbers, calculated by dividing the sum of the values by the total number of values.
+
+### Steps to Calculate:
+1. **Sum all data points**: Add together all the values in the dataset.
+2. **Divide by the total number of data points**: Count how many values are in the dataset and divide the total sum by this count.
+
+### Example:
+Consider the values: 5, 8, 12, 15, 18.
+
+1. Add all the values: \(5 + 8 + 12 + 15 + 18 = 58\).
+2. Divide by the number of values (5): \(58 / 5 = 11.6\).
+
+So, the mean is **11.6**.
+
+---
+
+## Median
+
+The **median** is the middle value of a dataset when the numbers are arranged in order. If the dataset has an odd number of values, the median is the central value. If the dataset has an even number of values, the median is the average of the two middle values.
+
+### Steps to Calculate:
+1. **Arrange the data in ascending order**.
+2. **Identify the middle value**:
+   - If there is an odd number of values, the median is the middle number.
+   - If there is an even number of values, calculate the average of the two middle numbers.
+
+### Example (Odd Number of Values):
+For the dataset: 3, 7, 9, 12, 18.
+
+1. Arrange in order: 3, 7, 9, 12, 18.
+2. The middle value is 9, so the median is **9**.
+
+### Example (Even Number of Values):
+For the dataset: 3, 7, 9, 12.
+
+1. Arrange in order: 3, 7, 9, 12.
+2. The two middle values are 7 and 9. Their average is \((7 + 9) / 2 = 8\).
+
+So, the median is **8**.
+
+---
+
+## Quantile
+
+A **quantile** divides the dataset into equal parts. The most common quantiles are quartiles, which split the data into four parts:
+- The 25th percentile (first quartile, Q1),
+- The 50th percentile (second quartile, Q2, or the median),
+- The 75th percentile (third quartile, Q3).
+
+### Steps to Calculate:
+1. **Arrange the data in ascending order**.
+2. **Determine the desired quantile** (e.g., Q1 is the 25th percentile, Q3 is the 75th percentile).
+3. **Find the value at that position**:
+   - For Q1, find the value at the 25th percentile position.
+   - For Q3, find the value at the 75th percentile position.
+
+### Example:
+For the dataset: 2, 5, 7, 9, 12, 15, 18.
+
+1. Arrange in order: 2, 5, 7, 9, 12, 15, 18.
+2. Q1 is the value at the 25th percentile (approximately the second value in the sorted list), which is **5**.
+3. Q3 is the value at the 75th percentile (approximately the sixth value in the sorted list), which is **15**.
+
+---
+
+## Range
+
+The **range** is the difference between the largest and smallest values in the dataset.
+
+### Steps to Calculate:
+1. **Find the minimum value** in the dataset.
+2. **Find the maximum value** in the dataset.
+3. **Subtract the minimum from the maximum** to get the range.
+
+### Example:
+For the dataset: 3, 7, 12, 18, 22.
+
+1. Minimum value is 3.
+2. Maximum value is 22.
+3. The range is \(22 - 3 = 19\).
+
+So, the range is **19**.
+
+---
+
+## Interquartile Range (IQR)
+
+The **interquartile range (IQR)** is the difference between the first quartile (Q1) and the third quartile (Q3). It measures the spread of the middle 50% of the data.
+
+## Steps to Calculate Quartiles (Q1 and Q3)
+
+1. **Arrange the data in ascending order**.
+2. **Find the median** (Q2), which divides the dataset in half.
+3. **Q1**: This is the median of the first half of the dataset (for an odd number of observations, exclude the median).
+4. **Q3**: This is the median of the second half of the dataset (for an odd number of observations, exclude the median).
+
+---
+
+### For 9 Observations:
+
+Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25
+
+1. Arrange in order: 2, 5, 7, 9, 12, 15, 18, 21, 25.
+2. Median (Q2) is 12 (5th value).
+3. First half: 2, 5, 7, 9 → Q1 = (5 + 7) / 2 = 6.
+4. Second half: 15, 18, 21, 25 → Q3 = (18 + 21) / 2 = 19.5.
+
+---
+
+### For 10 Observations:
+
+Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25, 28
+
+1. Arrange in order: 2, 5, 7, 9, 12, 15, 18, 21, 25, 28.
+2. Median (Q2) is (12 + 15) / 2 = 13.5 (average of 5th and 6th values).
+3. First half: 2, 5, 7, 9, 12 → Q1 = 7.
+4. Second half: 15, 18, 21, 25, 28 → Q3 = 21.
+
+---
+
+## Standard Deviation (SD)
+
+The **standard deviation** measures how spread out the values are in a dataset. It is the square root of the variance, which represents the average squared differences from the mean.
+
+### Steps to Calculate:
+1. **Find the mean** of the dataset.
+2. **Subtract the mean from each data point**, then square the result.
+3. **Sum all the squared differences**.
+4. **Divide the sum by the number of data points** (for a sample, divide by \(n - 1\)).
+5. **Take the square root** of the result.
+
+### Example:
+For the dataset: 6, 8, 10, 12.
+
+1. Mean is \((6 + 8 + 10 + 12) / 4 = 9\).
+2. Subtract the mean from each data point: 
+   - \(6 - 9 = -3\), \(8 - 9 = -1\), \(10 - 9 = 1\), \(12 - 9 = 3\).
+3. Square each result: 
+   - \((-3)^2 = 9\), \((-1)^2 = 1\), \(1^2 = 1\), \(3^2 = 9\).
+4. Sum the squares: \(9 + 1 + 1 + 9 = 20\).
+5. Divide by the number of data points (4): \(20 / 4 = 5\).
+6. Take the square root: \(\sqrt{5} \approx 2.24\).
+
+So, the standard deviation is approximately **2.24**.
+
+---
+
+## Z-Score
+
+The **z-score** is a measure of how many standard deviations a data point is from the mean. It is useful for comparing values from different datasets.
+
+### Steps to Calculate:
+1. **Find the mean** of the dataset.
+2. **Find the standard deviation** of the dataset.
+3. **Subtract the mean from the value of interest**.
+4. **Divide the result by the standard deviation**.
+
+### Example:
+For a dataset with a mean of 10 and a standard deviation of 2, and a value of 14:
+
+1. Subtract the mean from 14: \(14 - 10 = 4\).
+2. Divide by the standard deviation: \(4 / 2 = 2\).
+
+So, the z-score is **2**.
+```{r}
+# Generate random heights using a normal distribution
+set.seed(123)  # Set seed for reproducibility
+heights_cm <- rnorm(100, mean = 170, sd = 10)  # 100 heights in cm with a mean of 170 and SD of 10
+heights_in <- heights_cm / 2.54  # Convert cm to inches
+heights_ft <- heights_cm / 30.48  # Convert cm to feet
+
+h = cbind(heights_cm, heights_in, heights_ft)
+h[1:5,] %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+```
+
+
+```{r}
+# Summary Measures Function
+summary_measures <- function(data) {
+  list(
+    Mean = round(mean(data), 2),
+    Median = round(median(data), 2),
+    Variance = round(var(data), 2),
+    SD = round(sd(data), 2),
+    Range = c(min(data), max(data)),
+    IQR = round(IQR(data), 2)
+  )
+}
+
+# Summary for Heights in cm, inches, and feet
+summary_cm <- summary_measures(heights_cm)
+summary_in <- summary_measures(heights_in)
+summary_ft <- summary_measures(heights_ft)
+
+# Combine summary statistics in a table with formatted range
+summary_table <- data.frame(
+  Measure = c("Mean", "Median", "Variance", "Standard Deviation", "Range (Min)", "Range (Max)", "Interquartile Range (IQR)"),
+  Height_cm =round( c(summary_cm$Mean, summary_cm$Median, summary_cm$Variance, summary_cm$SD, summary_cm$Range[1], summary_cm$Range[2], summary_cm$IQR),3),
+  Height_in = round( c(summary_in$Mean, summary_in$Median, summary_in$Variance, summary_in$SD, summary_in$Range[1], summary_in$Range[2], summary_in$IQR),3),
+  Height_ft = round( c(summary_ft$Mean, summary_ft$Median, summary_ft$Variance, summary_ft$SD, summary_ft$Range[1], summary_ft$Range[2], summary_ft$IQR),3)
+)
+
+# Z-Score Calculation Function
+z_score <- function(value, mean_value, sd_value) {
+  round((value - mean_value) / sd_value, 2)
+}
+
+# Z-Scores for selected heights
+z_scores_cm <- z_score(c(160, 170, 180), summary_cm$Mean, summary_cm$SD)
+z_scores_in <- z_score(c(160, 170, 180) / 2.54, summary_in$Mean, summary_in$SD)  # Convert to inches
+z_scores_ft <- z_score(c(160, 170, 180) / 30.48, summary_ft$Mean, summary_ft$SD)  # Convert to feet
+
+# Combine Z-score calculations into a table
+z_score_table <- data.frame(
+  Height_Value = c(160, 170, 180),
+  Z_Score_cm = z_scores_cm,
+  Z_Score_in = z_scores_in,
+  Z_Score_ft = z_scores_ft
+)
+
+# Use HTML to align two tables side by side
+cat('<div class="table-container">')
+
+# Print the summary table
+summary_table %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
+# Print the Z-score table
+z_score_table %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+
+cat('</div>')
+
+```
+
+
+
+## Bar Plot
+
+A **bar plot** displays categorical data with rectangular bars, where the length of each bar represents the frequency or value of that category.
+
+### Steps to Draw a Bar Plot:
+1. **Collect categorical data**.
+2. **Identify the categories** to be displayed.
+3. **Count the frequency** of each category or use given values.
+4. **Draw bars** for each category:
+   - The x-axis represents the categories.
+   - The y-axis represents the frequency or value.
+   - The height of each bar corresponds to the frequency or value of that category.
+
+---
+
+```{r}
+# Setting up the plotting area for 1x3 bar plots
+par(mfrow = c(1, 3))
+
+# Bar Plot 1: Category A, B, C
+data_bar1 <- c(A = 10, B = 15, C = 7)
+barplot(data_bar1, main = "Bar Plot 1", col = "lightblue", ylim = c(0, 20))
+
+# Bar Plot 2: Category D, E, F
+data_bar2 <- c(D = 12, E = 9, F = 18)
+barplot(data_bar2, main = "Bar Plot 2", col = "lightcoral", ylim = c(0, 20))
+
+# Bar Plot 3: Category G, H, I
+data_bar3 <- c(G = 14, H = 11, I = 6)
+barplot(data_bar3, main = "Bar Plot 3", col = "lightgreen", ylim = c(0, 20))
+
+# Combine data into a data frame for the table
+data_combined <- data.frame(
+  Category = c("A", "B", "C", "D", "E", "F", "G", "H", "I"),
+  `Bar Plot 1` = c(10, 15, 7, NA, NA, NA, NA, NA, NA),
+  `Bar Plot 2` = c(NA, NA, NA, 12, 9, 18, NA, NA, NA),
+  `Bar Plot 3` = c(NA, NA, NA, NA, NA, NA, 14, 11, 6)
+)
+
+# Print the data as an HTML table
+kable(data_combined, format = "html", table.attr = "style='width:100%;'", align = 'c')
+```
+
+
+## Pie Chart
+
+A **pie chart** is a circular chart divided into sectors, each representing a proportion of the whole.
+
+### Steps to Draw a Pie Chart:
+1. **Collect categorical data** and **calculate proportions**.
+2. **Convert the proportions** to angles (in degrees):
+   - Each proportion is multiplied by 360°.
+3. **Draw a circle** and divide it into sectors based on the calculated angles.
+4. **Label each sector** with the category name and its proportion.
+
+---
+
+```{r}
+# Setting up the plotting area for 1x3 pie charts
+par(mfrow = c(1, 3))
+
+
+# Pie Chart 1: Category A, B, C
+data_pie1 <- c(A = 10, B = 15, C = 7)
+labels_pie1 <- paste(names(data_pie1), data_pie1)
+pie(data_pie1, labels = labels_pie1, main = "Pie Chart 1", col = c("lightblue", "lightcoral", "lightgreen"))
+
+# Pie Chart 2: Category D, E, F
+data_pie2 <- c(D = 12, E = 9, F = 18)
+labels_pie2 <- paste(names(data_pie2), data_pie2)
+pie(data_pie2, labels = labels_pie2, main = "Pie Chart 2", col = c("lightgoldenrod", "lightpink", "lightcyan"))
+
+# Pie Chart 3: Category G, H, I
+data_pie3 <- c(G = 14, H = 11, I = 6)
+labels_pie3 <- paste(names(data_pie3), data_pie3)
+pie(data_pie3, labels = labels_pie3, main = "Pie Chart 3", col = c("lightskyblue", "lightyellow", "lightgray"))
+
+# Combine data into a data frame for the table
+data_combined_pie <- data.frame(
+  Category = c("A", "B", "C", "D", "E", "F", "G", "H", "I"),
+  `Pie Chart 1` = c(10, 15, 7, NA, NA, NA, NA, NA, NA),
+  `Pie Chart 2` = c(NA, NA, NA, 12, 9, 18, NA, NA, NA),
+  `Pie Chart 3` = c(NA, NA, NA, NA, NA, NA, 14, 11, 6)
+)
+
+# Print the data as an HTML table
+kable(data_combined_pie, format = "html", table.attr = "style='width:100%;'", align = 'c')
+```
+
+## Histogram
+
+A **histogram** is a graphical representation of the distribution of numerical data. It displays data by grouping them into bins or intervals and shows the frequency of values within each bin.
+
+### Steps to Draw a Histogram:
+1. **Collect numerical data**.
+2. **Divide the range of data into intervals** (called bins).
+3. **Count the frequency** of data points that fall into each bin.
+4. **Draw bars** for each bin, where the height of each bar represents the frequency of data points in that bin.
+   - The x-axis represents the intervals (bins).
+   - The y-axis represents the frequency or count.
+
+```{r , fig.height=6 , fig.width=7}
+# Setting up the plotting area for 2x2 plots
+par(mfrow = c(2, 2))
+
+# Symmetric Bell Curve (Normal Distribution)
+set.seed(123)
+data_symmetric <- rnorm(100, mean = 0, sd = 1)
+hist(data_symmetric, breaks = 20, main = "Symmetric (Bell Curve)", xlab = "Values", col = "lightblue", border = "black")
+
+# Skewed Right (Positive Skew)
+data_skewed_right <- rexp(100, rate = 1)
+hist(data_skewed_right, breaks = 20, main = "Skewed Right", xlab = "Values", col = "lightcoral", border = "black")
+
+# Skewed Left (Negative Skew)
+data_skewed_left <- -rexp(100, rate = 1)
+hist(data_skewed_left, breaks = 20, main = "Skewed Left", xlab = "Values", col = "lightgreen", border = "black")
+
+# Uniform Distribution
+data_uniform <- runif(100, min = 0, max = 1)
+hist(data_uniform, breaks = 20, main = "Uniform Distribution", xlab = "Values", col = "lightgoldenrod", border = "black")
+```
+
+
+
+## Box Plot
+
+A **box plot** (or box-and-whisker plot) visualizes the distribution of data by showing the minimum, first quartile (Q1), median (Q2), third quartile (Q3), and maximum.
+
+### Steps to Draw a Box Plot:
+1. **Arrange the data in ascending order**.
+2. **Calculate Q1, Q2 (median), and Q3**.
+3. **Draw a rectangular box** from Q1 to Q3.
+4. **Draw a line inside the box at Q2** (the median).
+5. **Draw whiskers** extending from the box to the minimum and maximum values.
+6. **Plot outliers** (if any), which are data points that fall significantly outside the whiskers.
+
+
+```{r}
+# Setting up the plotting area for 1x3 vertical plots
+par(mfrow = c(1, 3))
+
+# Symmetric (Normal Distribution)
+set.seed(123)
+data_symmetric <- rnorm(100, mean = 0, sd = 1)
+boxplot(data_symmetric, main = "Symmetric (Bell Curve)", col = "lightblue", vertical = TRUE)
+
+# Skewed Right (Positive Skew)
+data_skewed_right <- rexp(100, rate = 1)
+boxplot(data_skewed_right, main = "Skewed Right", col = "lightcoral", vertical = TRUE)
+
+# Skewed Left (Negative Skew)
+data_skewed_left <- -rexp(100, rate = 1)
+boxplot(data_skewed_left, main = "Skewed Left", col = "lightgreen", vertical = TRUE)
+```
+
