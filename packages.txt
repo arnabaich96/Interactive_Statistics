@@ -1,6 +1,5 @@
 "MASS"
 "Matrix"
-"PKI"
 "R6"
 "RColorBrewer"
 "Rcpp"

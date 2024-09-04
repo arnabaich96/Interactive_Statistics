@@ -1,6 +1,5 @@
 ---
-title: |
-    <h1 style="text-align: center; font-size: 40px; font-weight: bold;">Interactive Statistical Concepts</h1>
+title: "Interactive Statistical Concepts"
 output:
   html_document:
     self_contained: true
@@ -10,8 +9,7 @@ format:
     embed-resources: true
 ---
 ```{r setup, include=FALSE}
-#load all package in package.txt
-library(plotly)
+knitr::opts_chunk$set(echo = FALSE)
 packages <- read.table("packages.txt")
 packages <- as.character(packages$V1)
 lapply(packages, library, character.only = TRUE )
