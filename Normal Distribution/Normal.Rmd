@@ -1,0 +1,307 @@
+---
+title: "**Normal Distribution Detailed Overview**"
+author: "**Arnab Aich**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: cerulean
+---
+
+<style>
+  body {
+    font-size: 18px; /* Adjust this value for your preferred font size */
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #f9e79f;
+  }
+  
+  /* Center the title and author */
+  .title {
+    color: #7C0A02;
+    text-align: center;
+    font-size: 36px;
+  }
+  
+  .author {
+    text-align: center;
+    font-size: 24px;
+    color: #7C0A02;
+  }
+
+  TOC {
+    color: #7C0A02;
+    font-size: 10px;
+  }
+
+  .container-fluid {
+    max-width: 90%; 
+  }
+
+  /* Assign the same color to all level 2 headings (## in markdown) */
+  h2 {
+    color: #7C0A02;
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, message = FALSE,warning = FALSE)
+library(ggplot2)
+```
+
+## Properties:
+
+The **Normal Distribution** is a continuous probability distribution that is symmetric about its mean. It has the following key properties:
+
+- **PDF**: The probability density function (PDF) of a normal distribution is given by:
+  $$ f(x | \mu, \sigma^2) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} $$
+  where:
+  - \( \mu \) is the mean
+  - \( \sigma^2 \) is the variance
+  - \( x \) is the variable of interest
+
+- **Range**: The range of the normal distribution is from \( -\infty \) to \( +\infty \).
+
+- **Parameters**: The two parameters that define a normal distribution are:
+  - \( \mu \) (mean): Determines the location of the center of the distribution
+  - \( \sigma \) (standard deviation): Determines the spread or dispersion of the distribution
+
+- **Symmetry**: The normal distribution is symmetric around the mean, with 50% of the data falling below the mean and 50% above the mean.
+
+---
+
+## Normal $(X)$ $\to$ Standard Normal $(Z)$:
+
+Let's assume the **monthly coffee consumption** of an individual follows a normal distribution with a mean of 10 liters and a standard deviation of 2 liters. This can be written as:
+
+$$ X \sim N(10, 2^2) $$
+
+If **X** follows a normal distribution, then we can standardize the distribution using the Z-score transformation:
+
+$$ Z = \frac{X - \mu}{\sigma} $$
+
+The standardized normal distribution is called the **Standard Normal Distribution** and has a mean of 0 and a standard deviation of 1. Standard normal probabilities are well-known and can be easily obtained from standard normal tables or software.
+
+---
+
+## Empirical Rule (68-95-99.7 Rule):
+
+The empirical rule provides a quick way to understand the spread of data in a normal distribution:
+- 68% of data lies within 1 standard deviation of the mean
+- 95% of data lies within 2 standard deviations of the mean
+- 99.7% of data lies within 3 standard deviations of the mean
+
+Let’s visualize this rule by drawing lines at ±1, ±2, and ±3 standard deviations from the mean on the curve, using different colors.
+
+```{r empirical-rule-plot}
+library(ggplot2)
+
+mean <- 0
+sd <- 1
+x <- seq(-4, 4, length = 100)
+y <- dnorm(x, mean = mean, sd = sd)
+
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "blue") +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "green") +
+  geom_vline(xintercept = c(-2, 2), linetype = "dashed", color = "orange") +
+  geom_vline(xintercept = c(-3, 3), linetype = "dashed", color = "red") +
+  
+  # Adding the annotations below the x-axis for coordinates
+  annotate("text", x = 1, y = -0.02, label = "(1, 0)", color = "green", vjust = 1) +
+  annotate("text", x = 2, y = -0.02, label = "(2, 0)", color = "orange", vjust = 1) +
+  annotate("text", x = 3, y = -0.02, label = "(3, 0)", color = "red", vjust = 1) +
+  annotate("text", x = -1, y = -0.02, label = "(-1, 0)", color = "green", vjust = 1) +
+  annotate("text", x = -2, y = -0.02, label = "(-2, 0)", color = "orange", vjust = 1) +
+  annotate("text", x = -3, y = -0.02, label = "(-3, 0)", color = "red", vjust = 1) +
+  
+  # Adding the annotations for SD above the lines
+  annotate("text", x = 1, y = 0.05, label = "+1 SD", color = "green", vjust = -1) +
+  annotate("text", x = 2, y = 0.05, label = "+2 SD", color = "orange", vjust = -1) +
+  annotate("text", x = 3, y = 0.05, label = "+3 SD", color = "red", vjust = -1) +
+  
+  labs(title = "Empirical Rule with ±1, ±2, and ±3 Standard Deviations", 
+       x = "X", y = "Density") +
+  theme_minimal()
+
+```
+
+---
+
+## Tail Probabilities:
+
+In normal distribution problems, we often calculate probabilities for values in the upper or lower tails. Let's consider an example where we find the upper and lower tail probabilities. We will calculate the probabilities for the upper and lower tails of the standard normal distribution and plot them side by side.
+
+```{r tail-probabilities-plot, fig.width=10, fig.height=5}
+library(ggplot2)
+library(gridExtra)
+
+x <- seq(-4, 4, length = 100)
+y <- dnorm(x)
+
+# Lower tail probability (Z < -1.645)
+lower_tail <- ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue", size = 1) +
+  geom_area(data = subset(data.frame(x, y), x < -1.645), aes(x, y), fill = "lightblue") +
+  annotate("text", x = -0.5, y = 0.06, label = expression(bold(Z[0.95]) ~ "=" ~ -1.645), 
+           size = 5, vjust = 1.5, hjust = 1.2) +
+  geom_segment(aes(x = -1.645, y = 0.03, xend = -1.645, yend = 0), 
+               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
+  annotate("text", x = -1.2, y = 0.15, label = "Area = \n 0.05", size = 5, vjust = 1.5, hjust = 1) +
+  labs(title = "Lower Tail Probability", x = "Z-Score", y = "Density") +
+  theme_minimal()
+
+# Upper tail probability (Z > 1.645)
+upper_tail <- ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue", size = 1) +
+  geom_area(data = subset(data.frame(x, y), x > 1.645), aes(x, y), fill = "pink") +
+  annotate("text", x = 0.2, y = 0.06, label = expression(bold(Z[0.05]) ~ "=" ~ 1.645), 
+           size = 5, vjust = 1.5, hjust = -0.2) +
+  geom_segment(aes(x = 1.645, y = 0.03, xend = 1.645, yend = 0), 
+               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
+  annotate("text", x = 1.2, y = 0.15, label = "Area = \n  0.05", size = 5, vjust = 1.5, hjust = -0.5) +
+  labs(title = "Upper Tail Probability", x = "Z-Score", y = "Density") +
+  theme_minimal()
+
+# Combine the two plots side by side
+gridExtra::grid.arrange(lower_tail, upper_tail, ncol = 2)
+
+```
+
+## Value to Probabilty (Monthly Coffee Consumption in Liters):
+
+Consider the population monthly coffee consumption in liters follows a normal distribution with a mean of 10 liters and a standard deviation of 2 liters.
+
+### What percentage of people drink more than 12 liters of coffee per month?
+We can convert the value to a z-score and find the upper tail probability.
+
+```{r more-than-13-liters}
+mean_coffee <- 10
+sd_coffee <- 2
+consumption <- 13
+z <- (consumption - mean_coffee) / sd_coffee
+
+# Plotting the probability
+x <- seq(mean_coffee - 4 * sd_coffee, mean_coffee + 4 * sd_coffee, length = 100)
+y <- dnorm(x, mean = mean_coffee, sd = sd_coffee)
+
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue") +
+  geom_area(data = subset(data.frame(x, y), x > consumption), aes(x, y), fill = "pink") +
+  annotate("text", x = 13, y = 0.02, label = expression(bold(Z) ~ "=" ~ 1.5), size = 5, vjust = 1.5, hjust = 1.2) +
+  labs(title = "Probability of Coffee Consumption > 13 liters", x = "Consumption (liters)", y = "Density") +
+  theme_minimal()
+
+```
+
+**Solution**: The z-score for 12 liters is:
+
+$$ Z = \frac{13 - 10}{2} = 1.5 $$
+
+From the standard normal table, the probability of a z-score greater than 1 is 0.0668. Therefore, approximately **6.68%** of people drink more than 12 liters of coffee per month.
+
+---
+
+###  What percentage of people drink less than 8 liters of coffee per month?
+
+We can convert the value to a z-score and find the lower tail probability.
+
+```{r less-than-6.5-liters}
+consumption <- 6.5
+z <- (consumption - mean_coffee) / sd_coffee
+
+# Plotting the probability
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue") +
+  geom_area(data = subset(data.frame(x, y), x < consumption), aes(x, y), fill = "lightblue") +
+  annotate("text", x = 6.5, y = 0.02, label = expression(bold(Z) ~ "=" ~ -1.75), size = 5, vjust = 1.5, hjust = 1.2) +
+  labs(title = "Probability of Coffee Consumption < 6.5 liters", x = "Consumption (liters)", y = "Density") +
+  theme_minimal()
+
+```
+
+**Solution**: The z-score for 8 liters is:
+
+$$ Z = \frac{6.5 - 10}{2} = -1.75 $$
+
+From the standard normal table, the probability of a z-score less than -1 is 0.04. Therefore, approximately **4%** of people drink less than 8 liters of coffee per month.
+
+---
+
+### What percentage of people drink between 9 and 12 liters of coffee per month?
+
+This is the area between the two z-scores: \( Z = -0.5 \) and \( Z = 1 \).
+
+```{r between-8-and-12-liters}
+# Plotting the probability
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue") +
+  geom_area(data = subset(data.frame(x, y), x > 9 & x < 12), aes(x, y), fill = "lightgreen") +
+  annotate("text", x = 9, y = 0.02, label = expression(bold(Z) ~ "=" ~ -0.5), size = 5, vjust = 1.5, hjust = 1.2) +
+  annotate("text", x = 12, y = 0.02, label = expression(bold(Z) ~ "=" ~ 1), size = 5, vjust = 1.5, hjust = 1.2) +
+  labs(title = "Probability of Coffee Consumption between 9 and 12 liters", x = "Consumption (liters)", y = "Density") +
+  theme_minimal()
+
+```
+
+**Solution**: The area between \( Z = -0.5 \) and \( Z = 1 \) is approximately **54%** .
+
+## Key Points and Conclusions
+
+- The normal distribution is fully described by its mean and standard deviation.
+- The standard normal distribution (Z-distribution) is used to standardize values from any normal distribution.
+- The empirical rule helps visualize how much of the data lies within 1, 2, and 3 standard deviations from the mean.
+- Tail probabilities can be easily computed using z-scores.
+
+
+
+---
+
+## Question and Answer Section
+
+1. **What is the probability of drinking more than 12 liters of coffee per month?**
+   
+   **Answer**: Approximately **15.87%** of people drink more than 12 liters of coffee per month.
+
+2. **What is the probability of drinking less than 8 liters of coffee per month?**
+   
+   **Answer**: Approximately **15.87%** of people drink less than 8 liters of coffee per month.
+
+3. **What is the probability of drinking between 8 and 12 liters of coffee per month?**
+   
+   **Answer**: Approximately **68%** of people drink between 8 and 12 liters of coffee per month.
+
+4. **What is the z-score formula?**
+   
+   **Answer**: The z-score is calculated as \( Z = \frac{X - \mu}{\sigma} \), where \( X \) is the data point, \( \mu \) is the mean, and \( \sigma \) is the standard deviation.
+
+5. **How do you use z-scores to find probabilities?**
+   
+   **Answer**: Z-scores standardize data points. Once a z-score is calculated, probabilities can be found using the standard normal distribution table.
+
+6. **How do you calculate the percentage of people in the tails of a normal distribution?**
+   
+   **Answer**: You can calculate the area in the upper or lower tail using the z-score and finding the corresponding probability from the standard normal distribution table.
+
+7. **How does the empirical rule help estimate probabilities in a normal distribution?**
+   
+   **Answer**: The empirical rule states that approximately 68% of data falls within 1 standard deviation of the mean, 95% falls within 2, and 99.7% falls within 3 standard deviations. This helps quickly estimate probabilities.
+
+8. **What is the probability of drinking between 6 and 14 liters of coffee per month?**
+   
+   **Answer**: Using the empirical rule, we can estimate that almost **95%** of people fall within this range (2 standard deviations from the mean).
+
+9. **What percentage of people drink less than 6 liters of coffee per month?**
+   
+   **Answer**: This is in the lower tail, corresponding to a z-score of -2, and the probability is approximately **2.28%**.
+
+10. **What percentage of people drink more than 14 liters of coffee per month?**
+    
+    **Answer**: This is in the upper tail, corresponding to a z-score of 2, and the probability is approximately **2.28%**.
+
+---
