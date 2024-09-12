@@ -3,10 +3,12 @@ title: "**Probability and Distributions**"
 author: "**Arnab Aich**"
 output: 
   html_document:
+    self_contained: yes
     toc: true
     toc_float: true
     toc_depth: 3
     theme: cerulean
+    interactivity: shiny
 runtime: shiny
 ---
 
@@ -22,38 +24,13 @@ runtime: shiny
     font-size: 24px;
   color: #7C0A02;
   }
-
-  /* Change TOC font color to garnet and hide title/author from TOC */
-  #TOC a {
-    color: #7C0A02;
-  }
-  #TOC li:nth-child(1),
-  #TOC li:nth-child(2) {
-    display: none;  /* Hide the title and author from TOC */
-  }
-</style>
-
-
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
-library(shiny)
-library(kableExtra)
-```
-
-<style>
-/* Adjusting table of contents font size */
-#TOC {
+  body {
+ background-color: #f9e79f;
+  font-size: 16px;
+}
+TOC {
   font-size: 12px;
 }
-
-/* Increasing font size for body content */
-body {
- background-color: #f9e79f;
-  font-size: 18px;
-}
-
-/* Centering tables and styling */
 .table-container {
   text-align: center;
   margin-left: auto;
@@ -67,7 +44,13 @@ table {
 }
 </style>
 
-# <span style="color:#7C0A02;">Introduction:</span>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+library(shiny)
+library(kableExtra)
+```
+
+## <span style="color:#7C0A02;">Introduction:</span>
 
 - A **random experiment** is an action or process that leads to one of several possible outcomes.
     - Example: Flipping a coin or rolling a die.
@@ -78,7 +61,7 @@ table {
 
 ---
 
-# <span style="color:#7C0A02;;">Probability and Distributions: </span>
+## <span style="color:#7C0A02;">Probability and Distributions: </span>
 
 - **Probability** measures the likelihood that an event will occur.
 - **Properties:** 
@@ -96,7 +79,7 @@ table {
 
 ---
 
-# <span style="color:#7C0A02;">Discrete Distribution: </span>
+## <span style="color:#7C0A02;">Discrete Distribution: </span>
 
 - A biased die is tossed **1000** times, and the number of times each face value appears is recorded.
 - The frequency and relative frequency of each outcome will be calculated.
@@ -128,7 +111,7 @@ biased_die_df %>%
 
 ---
 
-# <span style="color:#7C0A02;">Barplot for Discrete PD: </span>
+## <span style="color:#7C0A02;">Barplot for Discrete PD: </span>
 
 ```{r, echo=FALSE}
 # Creating a ggplot bar chart for frequency
@@ -140,7 +123,7 @@ ggplot(as.data.frame(biased_freq_table), aes(x=biased_die_rolls, y=Freq)) +
 
 ---
 
-# <span style="color:#7C0A02;">Continuous Distribution:</span>
+## <span style="color:#7C0A02;">Continuous Distribution:</span>
 
 - An experiment was conducted at a university and IQ scores of 1000 undergraduate students were recorded.
 - The table below shows the frequency and relative frequency of IQ ranges.
@@ -170,7 +153,7 @@ iq_df %>%
 
 ---
 
-# <span style="color:#7C0A02;">Histogram for Cont. PD:</span>
+## <span style="color:#7C0A02;">Histogram for Cont. PD:</span>
 
 - Use the slider below to change the number of bins in the histogram of IQ scores (between 5 and 100).
 
@@ -196,7 +179,7 @@ shinyApp(ui = ui, server = server)
 
 ---
 
-# <span style="color:#7C0A02;">Remarks:</span>
+## <span style="color:#7C0A02;">Remarks:</span>
 
 - **Relative frequency** measures how often an event occurs, relative to the total number of trials.
 - As the number of trials increases, the relative frequency approaches the **true probability** of the event.
@@ -205,7 +188,7 @@ shinyApp(ui = ui, server = server)
 
 ---
 
-# <span style="color:#7C0A02;">Q&A Session</span>
+## <span style="color:#7C0A02;">Q&A Session</span>
 
 ### Question 1: What is a random experiment? Can you give an example?
 

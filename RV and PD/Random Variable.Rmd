@@ -1,21 +1,52 @@
-
 ---
-title: "<span style='color:garnet; font-size:32px;'><strong><center>Random Variables: Definition and Example</center></strong></span>"
-author: "<span style='color:garnet; font-size:24px;'><center><i>Arnab Aich</i></center></span>"
+title: "**Random Variables**"
+author: "**Arnab Aich**"
 output: 
   html_document:
     toc: true
     toc_float: true
-runtime: shiny
+    toc_depth: 3
+    theme: cerulean
 ---
+<style>
+  /* Center the title and author */
+  .title {
+    color: #7C0A02;
+    text-align: center;
+    font-size: 36px;
+  }
+  .author {
+    text-align: center;
+    font-size: 24px;
+  color: #7C0A02;
+  }
+  body {
+ background-color: #f9e79f;
+  font-size: 16px;
+}
+TOC {
+  font-size: 12px;
+}
+.table-container {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+library(shiny)
+library(kableExtra)
 ```
 
-<div style="background-color:lightgold; padding: 10px;">
-
-# <span style="color:garnet; font-size:15px;"><i>Random Variable: Definition and Example</i></span>
+## <span style="color:#7C0A02;"><i>Definition and Example</i></span>
 
 - A **random variable** (RV) is a variable whose possible values are outcomes of a random experiment.
   - *Example*: Rolling a six-sided die.
@@ -26,9 +57,9 @@ knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FAL
 
 ---
 
-# <span style="color:garnet; font-size:15px;"><i>Die Example: Calculating Probability</i></span>
+## <span style="color:#7C0A02; "><i>Discrete Random Variable</i></span>
 
-- Suppose we roll a six-sided die.
+- Suppose we roll a six-sided die $1000$ times and record the results. Let us consider $X$ be a random variable indicating the 
   - We will now calculate probabilities and show the frequency and relative frequency tables.
 
 ```{r, echo=FALSE}
@@ -41,9 +72,10 @@ biased_freq_table <- table(biased_die_rolls)
 biased_rel_freq_table <- prop.table(biased_freq_table)
 
 # Displaying the frequency table with improved visualization and centered alignment
-biased_die_df <- data.frame("Die Face" = names(biased_freq_table), 
+biased_die_df <- data.frame("Face" = names(biased_freq_table), 
                             "Frequency" = as.vector(biased_freq_table), 
-                            "Relative Frequency" = as.vector(biased_rel_freq_table))
+                            "Rel_Freq" = as.vector(biased_rel_freq_table))
+
 
 # Displaying table with knitr
 library(knitr)
@@ -56,23 +88,25 @@ biased_die_df %>%
 
 ---
 
-# <span style="color:garnet; font-size:15px;"><i>Calculating Probabilities: P(X ≤ 2) and P(X > 4)</i></span>
+Calculating Probabilities of the following events:
 
-- **P(X ≤ 2)** is calculated as:
+- Probabity of obtaining a face value less than or equal to $2$ is calculated as:
   - $P(X \leq 2) = P(X = 1) + P(X = 2)$
   - Using relative frequencies from the table:
-  - P(X = 1) = 0.15, P(X = 2) = 0.15
-  - **$P(X \leq 2) = 0.15 + 0.15 = 0.30$**
+  - $P(X = 1) = 0.17, P(X = 2) = 0.163$
+  - **$P(X \leq 2) = 0.17 + 0.163 = 0.363$**
 
-- **P(X > 4)** is calculated as:
+- Probabity of obtaining a face value more than $4$ is calculated as:
   - $P(X > 4) = P(X = 5) + P(X = 6)$
   - Using relative frequencies from the table:
-  - P(X = 5) = 0.10, P(X = 6) = 0.05
-  - **$P(X > 4) = 0.10 + 0.05 = 0.15$**
+  - $P(X = 5) = 0.10, P(X = 6) = 0.05$
+  - **$P(X > 4) = 0.117 + 0.06 = 0.123$**
+- Probability of obtaining an even face value ?
+- Probability of obtaining a prime face value ?
 
 ---
 
-# <span style="color:garnet; font-size:15px;"><i>Mean, Variance, and Standard Deviation of a Discrete Random Variable</i></span>
+## <span style="color:#7C0A02;"><i>Summary Statistics of a Discrete Random Variable</i></span>
 
 - **Mean (Expected Value)** of a discrete random variable X is given by:
   - *$E(X) = \Sigma [x \cdot P(X = x)]$*
@@ -109,59 +143,52 @@ biased_die_df %>%
 
 ---
 
-# <span style="color:garnet; font-size:15px;"><i>IQ Example: Visualizing Probability (Area Under Curve)</i></span>
+## <span style="color:#7C0A02; "><i>Continuous Random Variable (Area Under Curve)</i></span>
 
-- Visualizing the probability for IQ scores:
-  1. **Less than 85**
-  2. **Greater than 115**
-  3. **Between 85 and 115**
+Let’s consider a continuous random variable representing **heights of adult males** in a given population. We have collected heights of $1000$ individuals. We sort them in a frequency table and draw a histogram. A **Density curve** can be obtained by joining the middle point of each bin.
+
+We are interested in calculating the following probabilities using this hypothetical data:
+
+**P(height < 165 cm)**: The probability of selecting an individual shorter than 165 cm.
+
+**P(height > 185 cm)**: The probability of selecting an individual taller than 185 cm.
+
+**P(165 cm ≤ height ≤ 185 cm)**: The probability of selecting an individual whose height falls between 165 cm and 185 cm.
+These probabilities can be idenfied using the area under the density curve.
+```{r, echo=FALSE}
+# Simulating height data (dynamically generated based on seed)
+height_data <- rnorm(1000, mean=175, sd=10)
+
+# Dynamic histogram and density plot
+hist(height_data, breaks=20, prob=TRUE, col="lightblue", main="Height Distribution: Histogram and Density", xlab="Height (cm)", border="white")
+lines(density(height_data), col="darkblue", lwd=2)
+```
 
 ```{r, echo=FALSE}
-# Simulating IQ data
-set.seed(123)
-iq_scores <- rnorm(1000, mean=100, sd=15)
+# Dynamic density plot with highlighted areas
 
-# Plotting less than 85
-par(mfrow=c(1, 1))
-hist(iq_scores, breaks=20, prob=TRUE, col="lightblue", main="P(IQ < 85)", xlab="IQ Score", border="white")
-lines(density(iq_scores), col="darkblue", lwd=2)
-polygon(c(min(iq_scores), seq(min(iq_scores), 85, length=100), 85), 
-        c(0, dnorm(seq(min(iq_scores), 85, length=100), mean=100, sd=15), 0), 
+# P(height < 165)
+plot(density(height_data), col="darkblue", lwd=2, main="P(Height < 165 cm)", xlab="Height (cm)")
+polygon(c(min(height_data), seq(min(height_data), 165, length=100), 165), 
+        c(0, dnorm(seq(min(height_data), 165, length=100), mean=175, sd=10), 0), 
         col=rgb(0.2, 0.8, 0.5, 0.3), border=NA)
 
-# Plotting greater than 115
-hist(iq_scores, breaks=20, prob=TRUE, col="lightblue", main="P(IQ > 115)", xlab="IQ Score", border="white")
-lines(density(iq_scores), col="darkblue", lwd=2)
-polygon(c(115, seq(115, max(iq_scores), length=100)), 
-        c(0, dnorm(seq(115, max(iq_scores), length=100), mean=100, sd=15)), 
+# P(height > 185)
+plot(density(height_data), col="darkblue", lwd=2, main="P(Height > 185 cm)", xlab="Height (cm)")
+polygon(c(185, seq(185, max(height_data), length=100)), 
+        c(0, dnorm(seq(185, max(height_data), length=100), mean=175, sd=10)), 
         col=rgb(0.8, 0.2, 0.5, 0.3), border=NA)
 
-# Plotting between 85 and 115
-hist(iq_scores, breaks=20, prob=TRUE, col="lightblue", main="P(85 ≤ IQ ≤ 115)", xlab="IQ Score", border="white")
-lines(density(iq_scores), col="darkblue", lwd=2)
-polygon(c(85, seq(85, 115, length=100), 115), 
-        c(0, dnorm(seq(85, 115, length=100), mean=100, sd=15), 0), 
+# P(165 ≤ height ≤ 185)
+plot(density(height_data), col="darkblue", lwd=2, main="P(165 cm ≤ Height ≤ 185 cm)", xlab="Height (cm)")
+polygon(c(165, seq(165, 185, length=100), 185), 
+        c(0, dnorm(seq(165, 185, length=100), mean=175, sd=10), 0), 
         col=rgb(0.2, 0.5, 0.8, 0.3), border=NA)
 ```
 
-</div>
-
 ---
 
-# <span style="color:garnet; font-size:15px;"><i>Hypothetical Continuous Data: Description and Calculation</i></span>
-
-Let’s consider a continuous random variable representing **heights of adult males** in a given population. Heights are normally distributed with a mean of 175 cm and a standard deviation of 10 cm. 
-
-We are interested in calculating the following probabilities using this hypothetical data:
-- **P(height < 165 cm)**: The probability of selecting an individual shorter than 165 cm.
-- **P(height > 185 cm)**: The probability of selecting an individual taller than 185 cm.
-- **P(165 cm ≤ height ≤ 185 cm)**: The probability of selecting an individual whose height falls between 165 cm and 185 cm.
-
-We will use the properties of the normal distribution to calculate these probabilities.
-
----
-
-# <span style="color:garnet; font-size:15px;"><i>Question and Answer Section</i></span>
+## <span style="color:#7C0A02; font-size:20px;"><i>Question and Answer </i></span>
 
 1. **What is a random variable?**
    - A random variable is a variable that takes on different values based on the outcome of a random experiment.

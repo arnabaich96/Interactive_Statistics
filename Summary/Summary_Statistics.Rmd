@@ -1,6 +1,6 @@
 ---
-title: "<span style='color:garnet; font-size:36px;'><strong><center>Summary Statistics</center></strong></span>"
-author: "<span style='color:garnet; font-size:28px;'><center><i>Arnab Aich</i></center></span>"
+title: "**Summary Statistics**"
+author: "**Arnab Aich**"
 output: 
   html_document:
     toc: true
@@ -69,7 +69,7 @@ library(kableExtra)  # For better HTML table visuals
 library(patchwork)
 
 ```
-## Mean
+## <span style="color:#7C0A02;">Mean:</span>
 
 The **mean** is the average of a set of numbers, calculated by dividing the sum of the values by the total number of values.
 
@@ -87,7 +87,7 @@ So, the mean is **11.6**.
 
 ---
 
-## Median
+## <span style="color:#7C0A02;">Median:</span>
 
 The **median** is the middle value of a dataset when the numbers are arranged in order. If the dataset has an odd number of values, the median is the central value. If the dataset has an even number of values, the median is the average of the two middle values.
 
@@ -113,7 +113,7 @@ So, the median is **8**.
 
 ---
 
-## Quantile
+## <span style="color:#7C0A02;">Quantile:</span>
 
 A **quantile** divides the dataset into equal parts. The most common quantiles are quartiles, which split the data into four parts:
 - The 25th percentile (first quartile, Q1),
@@ -136,7 +136,7 @@ For the dataset: 2, 5, 7, 9, 12, 15, 18.
 
 ---
 
-## Range
+## <span style="color:#7C0A02;">Range:</span>
 
 The **range** is the difference between the largest and smallest values in the dataset.
 
@@ -156,11 +156,11 @@ So, the range is **19**.
 
 ---
 
-## Interquartile Range (IQR)
+## <span style="color:#7C0A02;">Interquartile Range (IQR):</span>
 
 The **interquartile range (IQR)** is the difference between the first quartile (Q1) and the third quartile (Q3). It measures the spread of the middle 50% of the data.
 
-## Steps to Calculate Quartiles (Q1 and Q3)
+### Steps to Calculate Quartiles (Q1 and Q3)
 
 1. **Arrange the data in ascending order**.
 2. **Find the median** (Q2), which divides the dataset in half.
@@ -191,7 +191,7 @@ Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25, 28
 
 ---
 
-## Standard Deviation (SD)
+## <span style="color:#7C0A02;">Standard Deviation (SD):</span>
 
 The **standard deviation** measures how spread out the values are in a dataset. It is the square root of the variance, which represents the average squared differences from the mean.
 
@@ -218,7 +218,7 @@ So, the standard deviation is approximately **2.24**.
 
 ---
 
-## Z-Score
+## <span style="color:#7C0A02;">Z Score:</span>
 
 The **z-score** is a measure of how many standard deviations a data point is from the mean. It is useful for comparing values from different datasets.
 
@@ -312,7 +312,7 @@ cat('</div>')
 
 
 
-## Bar Plot
+## <span style="color:#7C0A02;">Bar Plot:</span>
 
 A **bar plot** displays categorical data with rectangular bars, where the length of each bar represents the frequency or value of that category.
 
@@ -356,7 +356,7 @@ kable(data_combined, format = "html", table.attr = "style='width:100%;'", align 
 ```
 
 
-## Pie Chart
+## <span style="color:#7C0A02;">Pie Chart:</span>
 
 A **pie chart** is a circular chart divided into sectors, each representing a proportion of the whole.
 
@@ -401,7 +401,7 @@ data_combined_pie <- data.frame(
 kable(data_combined_pie, format = "html", table.attr = "style='width:100%;'", align = 'c')
 ```
 
-## Histogram
+## <span style="color:#7C0A02;">Histogram:</span>
 
 A **histogram** is a graphical representation of the distribution of numerical data. It displays data by grouping them into bins or intervals and shows the frequency of values within each bin.
 
@@ -437,7 +437,7 @@ hist(data_uniform, breaks = 20, main = "Uniform Distribution", xlab = "Values", 
 
 
 
-## Box Plot
+## <span style="color:#7C0A02;">Boxplot:</span>
 
 A **box plot** (or box-and-whisker plot) visualizes the distribution of data by showing the minimum, first quartile (Q1), median (Q2), third quartile (Q3), and maximum.
 
