@@ -9,6 +9,10 @@ output:
     toc_depth: 3
     theme: cerulean
     interactivity: shiny
+<<<<<<< HEAD
+=======
+    css: style.css
+>>>>>>> 289cf71dacee2872e564f8198d20fef402c5355d
 runtime: shiny
 ---
 
