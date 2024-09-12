@@ -1,10 +1,11 @@
 ---
-title: "Statistical Measures and Graphical Techniques"
-author: "**Arnab Aich**"
+title: "<span style='color:garnet; font-size:36px;'><strong><center>Summary Statistics</center></strong></span>"
+author: "<span style='color:garnet; font-size:28px;'><center><i>Arnab Aich</i></center></span>"
 output: 
   html_document:
     toc: true
     toc_float: true
+    theme: cerulean
     css: |
       .center-plot {
         display: flex;
@@ -21,7 +22,7 @@ output:
         font-size: 16px;
       }
        body {
-        font-size: 18px; /* Adjust this value for your preferred font size */
+        font-size: 18px; /* Adjust this value for your preferred font size */     
       margin-left: 10px;
       margin-right: 10px;
            }
@@ -36,6 +37,23 @@ output:
     font-size: 18px; /* Adjust this value for your preferred font size */
     margin-left: 10px;
     margin-right: 10px;
+    background-color: #f9e79f;
+  }
+  /* Center the title and author */
+  .title {
+    color: #7C0A02;
+    text-align: center;
+    font-size: 36px;
+  }
+  .author {
+    text-align: center;
+    font-size: 24px;
+  color: #7C0A02;
+  }
+
+  /* Change TOC font color to garnet and hide title/author from TOC */
+  #TOC a {
+    color: #7C0A02;
   }
 
   .container-fluid {
