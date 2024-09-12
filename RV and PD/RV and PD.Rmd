@@ -1,0 +1,58 @@
+---
+title: "Random Variables and Probability Distributions"
+output: beamer_presentation
+author: "Your Name"
+date: "September 2024"
+---
+
+# What is a Random Variable?
+
+- A **random variable** is like a game of chance.
+- Imagine flipping a coin or rolling a die. The result is uncertain, but you know the possible outcomes.
+- A random variable represents these outcomes in a structured way.
+
+### Examples:
+- **Flipping a coin**: Random variable could be Heads = 1, Tails = 0.
+- **Rolling a die**: Random variable could be the number on the die (1 to 6).
+
+---
+
+# What is a Probability Distribution?
+
+- A **probability distribution** is like a map that tells us how likely each outcome is.
+- It shows the probability (chance) of each possible result of a random variable.
+
+### Examples:
+- **Flipping a coin**: Both Heads and Tails have a 50% chance, so the probability distribution is:
+  - P(Heads = 1) = 0.5
+  - P(Tails = 0) = 0.5
+
+- **Rolling a die**: Each number (1 to 6) has an equal chance, so:
+  - P(1) = 1/6, P(2) = 1/6, ..., P(6) = 1/6.
+
+---
+
+# Why is this Important?
+
+- Probability distributions help us understand real-world uncertainty.
+- They can be used in all sorts of situations, like predicting weather, stock prices, or the outcome of sports games.
+
+---
+
+# Fun Example: Weather Prediction
+
+- Imagine you’re predicting rain tomorrow. You can think of it as a random variable:
+  - Rain = 1
+  - No rain = 0
+
+- Based on historical data, you might say:
+  - P(Rain) = 0.3 (30% chance of rain)
+  - P(No rain) = 0.7 (70% chance of no rain)
+
+---
+
+# Conclusion
+
+- Random variables represent uncertain outcomes.
+- Probability distributions tell us how likely each outcome is.
+- This helps us make better decisions under uncertainty.

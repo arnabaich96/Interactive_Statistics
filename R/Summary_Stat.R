@@ -19,17 +19,13 @@ ui <- fluidPage(
       # Conditional panel for manual data entry
       conditionalPanel(
         condition = "input.data_entry_type == 'Manual Input'",
-        textInput("data", "Enter Numbers Separated by Commas:", "")
-      ),
-
-      # Conditional panel for data generation (default option)
-      fluidRow(
-        column(6, selectInput("dist_type", "Distribution:",
-                              choices = c("Normal", "Gamma", "Inverse Gaussian", "t-distribution",
-                                          "Chi-squared", "F-distribution", "Binomial", "Uniform"))),
-        column(6, numericInput("sample_size", "Sample Size:", value = 500, min = 1))
-      ),
-
+        textInput("data", "Enter Numbers Separated by Commas:", "")),
+      conditionalPanel(
+        condition = "input.data_entry_type == 'Generate Data'",
+        numericInput("sample_size", "Sample Size:", value = 100, min = 1),
+        selectInput("dist_type", "Select Distribution:",
+                    choices = c("Normal", "Gamma", "Inverse Gaussian", "t-distribution",
+                                "Chi-squared", "F-distribution", "Binomial", "Uniform")),
         fluidRow(
           column(6,
                  conditionalPanel(
@@ -64,7 +60,10 @@ ui <- fluidPage(
                    condition = "input.dist_type == 'Uniform'",
                    numericInput("uniform_min", "Minimum:", value = 0)
                  )
-          ),
+          )
+      )
+      ,
+
           column(6,
                  conditionalPanel(
                    condition = "input.dist_type == 'Normal'",
@@ -256,3 +255,4 @@ server <- function(input, output, session) {
 }
 
 list(ui = ui, server = server)
+# runApp(list(ui = ui, server = server))
