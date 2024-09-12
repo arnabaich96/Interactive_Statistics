@@ -112,29 +112,59 @@ Calculating Probabilities of the following events:
   - *$E(X) = \Sigma [x \cdot P(X = x)]$*
   - The calculation for the biased die example:
 
-| Die Face (X) | P(X = x) | X * P(X = x) |
-|:-------------|:---------|:-------------|
-| 1            | 0.15     | 0.15         |
-| 2            | 0.15     | 0.30         |
-| 3            | 0.35     | 1.05         |
-| 4            | 0.10     | 0.40         |
-| 5            | 0.10     | 0.50         |
-| 6            | 0.05     | 0.30         |
+```{r}
+# Load required library
+library(kableExtra)
+
+# First table data
+biased_die_table_1 <- data.frame(
+  `Die Face (X)` = 1:6,
+  `P(X = x)` = c(0.15, 0.15, 0.35, 0.10, 0.10, 0.05),
+  `X * P(X = x)` = c(0.15, 0.30, 1.05, 0.40, 0.50, 0.30)
+)
+
+# Display the table with center alignment and garnet header
+kable(biased_die_table_1, align = "c", row.names = FALSE,col.names = c("Value","Prob","Value*prob")) %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(biased_die_table_1), background = "#f9e79f")
+
+
+```
 
 - **E(X) = 0.15 + 0.30 + 1.05 + 0.40 + 0.50 + 0.30 = 2.70**
 
 - **Variance** of a discrete random variable X is given by:
   - *$Var(X) = \Sigma [(x - E(X))^2 \cdot P(X = x)]$*
   - The calculation for the biased die example:
+```{r}
+# Load required library
+library(kableExtra)
 
-| Die Face (X) | P(X = x) | (X - E(X))^2 | (X - E(X))^2 * P(X = x) |
-|:-------------|:---------|:-------------|:------------------------|
-| 1            | 0.15     | 2.89         | 0.43                    |
-| 2            | 0.15     | 0.49         | 0.07                    |
-| 3            | 0.35     | 0.09         | 0.03                    |
-| 4            | 0.10     | 1.69         | 0.17                    |
-| 5            | 0.10     | 5.29         | 0.53                    |
-| 6            | 0.05     | 10.89        | 0.54                    |
+# Second table for variance calculation
+biased_die_table_2 <- data.frame(
+  `Die Face (X)` = 1:6,
+  `P(X = x)` = c(0.15, 0.15, 0.35, 0.10, 0.10, 0.05),
+  `(X - E(X))^2` = c(2.89, 0.49, 0.09, 1.69, 5.29, 10.89),
+  `(X - E(X))^2 * P(X = x)` = c(0.43, 0.07, 0.03, 0.17, 0.53, 0.54)
+)
+
+# Proper LaTeX expressions for headers
+colnames(biased_die_table_2) <- c(
+  "Die Face (X)", 
+  "P(X = x)", 
+  "(X - E(X))^2", 
+  "$(X - E(X))^2 * P(X = x)$"
+)
+
+# Display the table with center alignment, proper LaTeX, and garnet header
+kable(biased_die_table_2, align = "c", row.names = FALSE, escape = FALSE) %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(biased_die_table_2), background = "#f9e79f")
+
+```
+
 
 - **$Var(X) = 0.43 + 0.07 + 0.03 + 0.17 + 0.53 + 0.54 = 1.77$**
 

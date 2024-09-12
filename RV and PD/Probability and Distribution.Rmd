@@ -8,12 +8,6 @@ output:
     toc_float: true
     toc_depth: 3
     theme: cerulean
-    interactivity: shiny
-<<<<<<< HEAD
-=======
-    css: style.css
->>>>>>> 289cf71dacee2872e564f8198d20fef402c5355d
-runtime: shiny
 ---
 
 <style>
@@ -52,6 +46,8 @@ table {
 knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
 library(shiny)
 library(kableExtra)
+library(ggplot2)
+library(patchwork)
 ```
 
 ## <span style="color:#7C0A02;">Introduction:</span>
@@ -159,26 +155,45 @@ iq_df %>%
 
 ## <span style="color:#7C0A02;">Histogram for Cont. PD:</span>
 
-- Use the slider below to change the number of bins in the histogram of IQ scores (between 5 and 100).
+- Use the slider below to change the number of bins in the histogram of IQ scores (between 10 and 100).
 
 ```{r, echo=FALSE}
-# Creating a shiny app to control histogram bins
-ui <- fluidPage(
-  sliderInput("bins", "Number of Bins:", min = 5, max = 100, value = 10),
-  plotOutput("histPlot")
-)
 
-server <- function(input, output) {
-  output$histPlot <- renderPlot({
-    ggplot(data.frame(iq_scores), aes(x=iq_scores)) +
-      geom_histogram(bins=input$bins, fill="lightblue", color="black", aes(y=..density..)) +
-      geom_density(color="blue", size=1) +
-      labs(title="IQ Score Distribution with Adjustable Bins", x="IQ Score", y="Density") +
-      theme_minimal()
-  })
-}
+# Generate some sample data for IQ scores (Normal distribution)
+set.seed(123)
+iq_scores <- rnorm(1000, mean = 100, sd = 15)
 
-shinyApp(ui = ui, server = server)
+# Create individual plots with different bin sizes
+plot1 <- ggplot(data.frame(iq_scores), aes(x = iq_scores)) +
+  geom_histogram(bins = 10, fill = "lightblue", color = "black", aes(y = ..density..)) +
+  geom_density(color = "purple", size = 1) +
+  labs(title = "10 Bins", x = "IQ Score", y = "Density") +
+  theme_minimal()
+
+plot2 <- ggplot(data.frame(iq_scores), aes(x = iq_scores)) +
+  geom_histogram(bins = 25, fill = "lightgreen", color = "black", aes(y = ..density..)) +
+  geom_density(color = "purple", size = 1) +
+  labs(title = "25 Bins", x = "IQ Score", y = "Density") +
+  theme_minimal()
+
+plot3 <- ggplot(data.frame(iq_scores), aes(x = iq_scores)) +
+  geom_histogram(bins = 50, fill = "lightpink", color = "black", aes(y = ..density..)) +
+  geom_density(color = "purple", size = 1) +
+  labs(title = "50 Bins", x = "IQ Score", y = "Density") +
+  theme_minimal()
+
+plot4 <- ggplot(data.frame(iq_scores), aes(x = iq_scores)) +
+  geom_histogram(bins = 100, fill = "lightyellow", color = "black", aes(y = ..density..)) +
+  geom_density(color = "purple", size = 1) +
+  labs(title = "100 Bins", x = "IQ Score", y = "Density") +
+  theme_minimal()
+
+# Combine plots into a 2x2 grid using patchwork
+combined_plot <- (plot1 | plot2) / (plot3 | plot4)
+
+# Display the combined plot
+print(combined_plot)
+
 ```
 
 ---
