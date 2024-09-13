@@ -102,7 +102,7 @@ Summary statistics boil down a large dataset into a few key numbers that offer a
 
 #### **Different Contexts and Usage**
 <p>
-Summary statistics are essential in every field that involves data. They help us quickly understand and compare information. This tool illustrates how statistics like the mean, median, and standard deviation give us different insights into a dataset. By interacting with the tool, you’ll see how changes in the data affect these statistics and what that means for real-world interpretation.[Notes](Summary/Summary_Statistics.html)
+Summary statistics are essential in every field that involves data. They help us quickly understand and compare information. This tool illustrates how statistics like the mean, median, and standard deviation give us different insights into a dataset. By interacting with the tool, you’ll see how changes in the data affect these statistics and what that means for real-world interpretation.
 </p>
 
 #### **How to Use**

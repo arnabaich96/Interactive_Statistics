@@ -74,6 +74,49 @@ The **Normal Distribution** is a continuous probability distribution that is sym
 - **Symmetry**: The normal distribution is symmetric around the mean, with 50% of the data falling below the mean and 50% above the mean.
 
 ---
+---
+
+## Tail Probabilities:
+
+In normal distribution problems, we often calculate probabilities for values in the upper or lower tails. Let's consider an example where we find the upper and lower tail probabilities. We will calculate the probabilities for the upper and lower tails of the standard normal distribution and plot them side by side.
+
+```{r tail-probabilities-plot, fig.width=10, fig.height=5}
+library(ggplot2)
+library(gridExtra)
+
+x <- seq(-4, 4, length = 100)
+y <- dnorm(x)
+
+# Lower tail probability (Z < -1.645)
+lower_tail <- ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue", size = 1) +
+  geom_area(data = subset(data.frame(x, y), x < -1.645), aes(x, y), fill = "lightblue") +
+  annotate("text", x = -0.5, y = 0.06, label = expression(bold(Z[0.95]) ~ "=" ~ -1.645), 
+           size = 5, vjust = 1.5, hjust = 1.2) +
+  geom_segment(aes(x = -1.645, y = 0.03, xend = -1.645, yend = 0), 
+               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
+  annotate("text", x = -1.2, y = 0.15, label = "Area = \n 0.05", size = 5, vjust = 1.5, hjust = 1) +
+  labs(title = "Lower Tail Probability", x = "Z-Score", y = "Density") +
+  theme_minimal()
+
+# Upper tail probability (Z > 1.645)
+upper_tail <- ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue", size = 1) +
+  geom_area(data = subset(data.frame(x, y), x > 1.645), aes(x, y), fill = "pink") +
+  annotate("text", x = 0.2, y = 0.06, label = expression(bold(Z[0.05]) ~ "=" ~ 1.645), 
+           size = 5, vjust = 1.5, hjust = -0.2) +
+  geom_segment(aes(x = 1.645, y = 0.03, xend = 1.645, yend = 0), 
+               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
+  annotate("text", x = 1.2, y = 0.15, label = "Area = \n  0.05", size = 5, vjust = 1.5, hjust = -0.5) +
+  labs(title = "Upper Tail Probability", x = "Z-Score", y = "Density") +
+  theme_minimal()
+
+# Combine the two plots side by side
+gridExtra::grid.arrange(lower_tail, upper_tail, ncol = 2)
+
+```
+
+---
 
 ## Normal $(X)$ $\to$ Standard Normal $(Z)$:
 
@@ -132,46 +175,6 @@ ggplot(data.frame(x, y), aes(x, y)) +
 ```
 
 ---
-
-## Tail Probabilities:
-
-In normal distribution problems, we often calculate probabilities for values in the upper or lower tails. Let's consider an example where we find the upper and lower tail probabilities. We will calculate the probabilities for the upper and lower tails of the standard normal distribution and plot them side by side.
-
-```{r tail-probabilities-plot, fig.width=10, fig.height=5}
-library(ggplot2)
-library(gridExtra)
-
-x <- seq(-4, 4, length = 100)
-y <- dnorm(x)
-
-# Lower tail probability (Z < -1.645)
-lower_tail <- ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue", size = 1) +
-  geom_area(data = subset(data.frame(x, y), x < -1.645), aes(x, y), fill = "lightblue") +
-  annotate("text", x = -0.5, y = 0.06, label = expression(bold(Z[0.95]) ~ "=" ~ -1.645), 
-           size = 5, vjust = 1.5, hjust = 1.2) +
-  geom_segment(aes(x = -1.645, y = 0.03, xend = -1.645, yend = 0), 
-               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
-  annotate("text", x = -1.2, y = 0.15, label = "Area = \n 0.05", size = 5, vjust = 1.5, hjust = 1) +
-  labs(title = "Lower Tail Probability", x = "Z-Score", y = "Density") +
-  theme_minimal()
-
-# Upper tail probability (Z > 1.645)
-upper_tail <- ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue", size = 1) +
-  geom_area(data = subset(data.frame(x, y), x > 1.645), aes(x, y), fill = "pink") +
-  annotate("text", x = 0.2, y = 0.06, label = expression(bold(Z[0.05]) ~ "=" ~ 1.645), 
-           size = 5, vjust = 1.5, hjust = -0.2) +
-  geom_segment(aes(x = 1.645, y = 0.03, xend = 1.645, yend = 0), 
-               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
-  annotate("text", x = 1.2, y = 0.15, label = "Area = \n  0.05", size = 5, vjust = 1.5, hjust = -0.5) +
-  labs(title = "Upper Tail Probability", x = "Z-Score", y = "Density") +
-  theme_minimal()
-
-# Combine the two plots side by side
-gridExtra::grid.arrange(lower_tail, upper_tail, ncol = 2)
-
-```
 
 ## Value to Probabilty (Monthly Coffee Consumption in Liters):
 
@@ -251,57 +254,294 @@ ggplot(data.frame(x, y), aes(x, y)) +
 
 **Solution**: The area between \( Z = -0.5 \) and \( Z = 1 \) is approximately **54%** .
 
-## Key Points and Conclusions
+## Probabilty to Value (Daily Screen Time in Hours):
 
-- The normal distribution is fully described by its mean and standard deviation.
-- The standard normal distribution (Z-distribution) is used to standardize values from any normal distribution.
-- The empirical rule helps visualize how much of the data lies within 1, 2, and 3 standard deviations from the mean.
-- Tail probabilities can be easily computed using z-scores.
+Consider the population daily screen time in hours follows a normal distribution with a mean of 6 hours and a standard deviation of 1.5 hours.
 
+### Find the screen time that separates the top 10% of the population
 
+Given that daily screen time follows a normal distribution with a mean of 6 hours and a standard deviation of 1.5 hours, we need to find the screen time value above which the top 10% of people spend on screens.
+
+Explanation:
+- To find the screen time value that corresponds to the top 10%, we use the 90th percentile, as 10% of the population is in the upper tail.
+- The z-score corresponding to the 90th percentile from a standard normal distribution is approximately **1.28**.
+- We convert this z-score back to a screen time value using the formula:
+
+\[
+X = \mu + Z \cdot \sigma
+\]
+
+where \( \mu \) is the mean (6 hours), \( Z \) is the z-score (1.28), and \( \sigma \) is the standard deviation (1.5 hours).
+
+Calculation:
+
+\[
+X = 6 + 1.28 \cdot 1.5 = 6 + 1.92 = 7.92 	\text{hours}
+\]
+
+Thus, the top 10% of people spend more than approximately **7.92 hours** per day on screens.
+
+```{r}
+mean_time <- 6
+sd_time <- 1.5
+screen_time_90th <- mean_time + 1.28 * sd_time
+
+x <- seq(mean_time - 4 * sd_time, mean_time + 4 * sd_time, length = 100)
+y <- dnorm(x, mean = mean_time, sd = sd_time)
+
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue") +
+  geom_area(data = subset(data.frame(x, y), x > screen_time_90th), aes(x, y), fill = "pink") +
+  annotate("text", x = screen_time_90th, y = 0.05, label = expression(bold("90th Percentile")), size = 5, vjust = -1) +
+  labs(title = "Top 10% of Daily Screen Time", x = "Screen Time (hours)", y = "Density") +
+  theme_minimal()
+```
 
 ---
 
-## Question and Answer Section
+### Find the screen time that separates the bottom 25% of the population
 
-1. **What is the probability of drinking more than 12 liters of coffee per month?**
-   
-   **Answer**: Approximately **15.87%** of people drink more than 12 liters of coffee per month.
+We need to find the screen time value below which the bottom 25% of people spend on screens.
 
-2. **What is the probability of drinking less than 8 liters of coffee per month?**
-   
-   **Answer**: Approximately **15.87%** of people drink less than 8 liters of coffee per month.
+Explanation:
+- To find the screen time value that corresponds to the bottom 25%, we use the 25th percentile.
+- The z-score corresponding to the 25th percentile from a standard normal distribution is approximately **-0.674**.
+- We convert this z-score back to a screen time value using the formula:
 
-3. **What is the probability of drinking between 8 and 12 liters of coffee per month?**
-   
-   **Answer**: Approximately **68%** of people drink between 8 and 12 liters of coffee per month.
+\[
+X = \mu + Z \cdot \sigma
+\]
 
-4. **What is the z-score formula?**
-   
-   **Answer**: The z-score is calculated as \( Z = \frac{X - \mu}{\sigma} \), where \( X \) is the data point, \( \mu \) is the mean, and \( \sigma \) is the standard deviation.
+Calculation:
 
-5. **How do you use z-scores to find probabilities?**
-   
-   **Answer**: Z-scores standardize data points. Once a z-score is calculated, probabilities can be found using the standard normal distribution table.
+\[
+X = 6 + (-0.674) 	\cdot 1.5 = 6 - 1.011 = 4.99 	\text{ hours}
+\]
 
-6. **How do you calculate the percentage of people in the tails of a normal distribution?**
-   
-   **Answer**: You can calculate the area in the upper or lower tail using the z-score and finding the corresponding probability from the standard normal distribution table.
+Thus, the bottom 25% of people spend less than approximately **4.99 hours** per day on screens.
 
-7. **How does the empirical rule help estimate probabilities in a normal distribution?**
-   
-   **Answer**: The empirical rule states that approximately 68% of data falls within 1 standard deviation of the mean, 95% falls within 2, and 99.7% falls within 3 standard deviations. This helps quickly estimate probabilities.
 
-8. **What is the probability of drinking between 6 and 14 liters of coffee per month?**
-   
-   **Answer**: Using the empirical rule, we can estimate that almost **95%** of people fall within this range (2 standard deviations from the mean).
+```{r}
+screen_time_25th <- mean_time + (-0.674) * sd_time
 
-9. **What percentage of people drink less than 6 liters of coffee per month?**
-   
-   **Answer**: This is in the lower tail, corresponding to a z-score of -2, and the probability is approximately **2.28%**.
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue") +
+  geom_area(data = subset(data.frame(x, y), x < screen_time_25th), aes(x, y), fill = "lightblue") +
+  annotate("text", x = screen_time_25th, y = 0.05, label = expression(bold("25th Percentile")), size = 5, vjust = -1) +
+  labs(title = "Bottom 25% of Daily Screen Time", x = "Screen Time (hours)", y = "Density") +
+  theme_minimal()
+```
 
-10. **What percentage of people drink more than 14 liters of coffee per month?**
-    
-    **Answer**: This is in the upper tail, corresponding to a z-score of 2, and the probability is approximately **2.28%**.
+---
+
+### What is the range of screen time for the middle 80% of the population?
+
+We need to find the screen time values that correspond to the 10th and 90th percentiles, as the middle 80% is the range between these two percentiles.
+
+Explanation:
+- The z-score for the **10th percentile** is approximately **-1.28**, and the z-score for the **90th percentile** is approximately **1.28**.
+- We convert these z-scores back to screen time values using the formula:
+
+\[
+X = \mu + Z \cdot \sigma
+\]
+
+#### Calculation for the 10th percentile:
+
+\[
+X = 6 + (-1.28) \cdot 1.5 = 6 - 1.92 = 4.08 	\text{ hours}
+\]
+
+#### Calculation for the 90th percentile:
+
+\[
+X = 6 + 1.28 	\cdot 1.5 = 6 + 1.92 = 7.92 	\text{ hours}
+\]
+
+Thus, the middle 80% of people spend between approximately **4.08 hours** and **7.92 hours** per day on screens.
+
+
+```{r}
+screen_time_10th <- mean_time + (-1.28) * sd_time
+
+ggplot(data.frame(x, y), aes(x, y)) +
+  geom_line(color = "darkblue") +
+  geom_area(data = subset(data.frame(x, y), x > screen_time_10th & x < screen_time_90th), aes(x, y), fill = "lightgreen") +
+  annotate("text", x = screen_time_10th, y = 0.05, label = expression(bold("10th Percentile")), size = 5, vjust = -1) +
+  annotate("text", x = screen_time_90th, y = 0.05, label = expression(bold("90th Percentile")), size = 5, vjust = -1) +
+  labs(title = "Middle 80% of Daily Screen Time", x = "Screen Time (hours)", y = "Density") +
+  theme_minimal()
+```
+
+## Recap
+
+The **Normal Distribution** is one of the most important probability distributions in statistics. It is a continuous distribution that is symmetric around its mean. Some key properties and concepts covered include:
+
+- **Probability Density Function (PDF)**:
+  The PDF of the normal distribution is given by:
+  \[
+  f(x | \mu, \sigma^2) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+  \]
+  where \( \mu \) is the mean and \( \sigma^2 \) is the variance.
+
+- **Z-score Transformation**: 
+  The Z-score standardizes a normal distribution, converting it to the standard normal distribution \( Z \sim N(0, 1) \). The Z-score is calculated as:
+  \[
+  Z = \frac{X - \mu}{\sigma}
+  \]
+
+- **Empirical Rule** (68-95-99.7 Rule):
+  The empirical rule describes how data is distributed in a normal distribution:
+  - 68% of the data lies within 1 standard deviation of the mean.
+  - 95% of the data lies within 2 standard deviations.
+  - 99.7% of the data lies within 3 standard deviations.
+
+- **Tail Probabilities**:
+  Tail probabilities help us understand the likelihood of data falling into the extreme ends (tails) of the distribution. These are useful for finding areas under the curve beyond a certain Z-score.
+
+---
+
+## Q&A Section
+
+### Question 1: 
+**What is the probability that a randomly selected value from a normal distribution is greater than 1.5 standard deviations from the mean?**
+
+**Solution**:
+- First, calculate the Z-score:
+  \[
+  Z = 1.5
+  \]
+- Using a standard normal table or calculator, find the probability for \( Z > 1.5 \):
+  \[
+  P(Z > 1.5) \approx 0.0668
+  \]
+Thus, the probability is approximately **6.68%**.
+
+---
+
+### Question 2:
+**What percentage of people have a height less than 160 cm, assuming heights follow a normal distribution with a mean of 170 cm and a standard deviation of 10 cm?**
+
+**Solution**:
+- Find the Z-score:
+  \[
+  Z = \frac{160 - 170}{10} = -1
+  \]
+- Using a standard normal table, find the probability for \( Z < -1 \):
+  \[
+  P(Z < -1) \approx 0.1587
+  \]
+Thus, approximately **15.87%** of people have a height less than 160 cm.
+
+---
+
+### Question 3:
+**Find the Z-score that corresponds to the top 5% of a standard normal distribution.**
+
+**Solution**:
+- For the top 5%, you need the Z-score corresponding to the 95th percentile.
+  Using the inverse normal function:
+  \[
+  Z = 1.645
+  \]
+Thus, the Z-score is **1.645**.
+
+---
+
+### Question 4:
+**If the daily screen time follows a normal distribution with a mean of 6 hours and a standard deviation of 1.5 hours, what percentage of people spend less than 4.5 hours per day on screens?**
+
+**Solution**:
+- Find the Z-score:
+  \[
+  Z = \frac{4.5 - 6}{1.5} = -1
+  \]
+- Using a standard normal table, find the probability for \( Z < -1 \):
+  \[
+  P(Z < -1) = 0.1587
+  \]
+Thus, approximately **15.87%** of people spend less than 4.5 hours per day on screens.
+
+---
+
+### Question 5:
+**What is the probability that a value is within 2 standard deviations of the mean in a normal distribution?**
+
+**Solution**:
+- Using the empirical rule, we know that:
+  \[
+  P(-2 < Z < 2) \approx 0.95
+  \]
+Thus, the probability is **95%**.
+
+---
+
+### Question 6:
+**Given a normal distribution with a mean of 50 and a standard deviation of 5, find the probability that a randomly selected value is between 45 and 55.**
+
+**Solution**:
+- First, calculate the Z-scores for 45 and 55:
+  \[
+  Z_1 = \frac{45 - 50}{5} = -1, \quad Z_2 = \frac{55 - 50}{5} = 1
+  \]
+- Using a standard normal table:
+  \[
+  P(-1 < Z < 1) \approx 0.6826
+  \]
+Thus, the probability is **68.26%**.
+
+---
+
+### Question 7:
+**What Z-score corresponds to the 10th percentile in a standard normal distribution?**
+
+**Solution**:
+- Using the inverse normal function, the Z-score for the 10th percentile is:
+  \[
+  Z = -1.28
+  \]
+Thus, the Z-score is **-1.28**.
+
+---
+
+### Question 8:
+**In a normal distribution with a mean of 100 and a standard deviation of 15, what is the probability of selecting a value between 85 and 115?**
+
+**Solution**:
+- First, calculate the Z-scores for 85 and 115:
+  \[
+  Z_1 = \frac{85 - 100}{15} = -1, \quad Z_2 = \frac{115 - 100}{15} = 1
+  \]
+- Using a standard normal table:
+  \[
+  P(-1 < Z < 1) \approx 0.6826
+  \]
+Thus, the probability is **68.26%**.
+
+---
+
+### Question 9:
+**Find the Z-score that separates the bottom 25% of a standard normal distribution.**
+
+**Solution**:
+- For the 25th percentile, use the inverse normal function:
+  \[
+  Z = -0.674
+  \]
+Thus, the Z-score is **-0.674**.
+
+---
+
+### Question 10:
+**What percentage of data in a normal distribution falls within 1 standard deviation of the mean?**
+
+**Solution**:
+- Using the empirical rule:
+  \[
+  P(-1 < Z < 1) \approx 0.68
+  \]
+Thus, **68%** of data falls within 1 standard deviation of the mean.
+
+
 
 ---
