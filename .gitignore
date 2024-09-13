@@ -4,4 +4,4 @@
 .Ruserdata
 rsconnect/
 .Rprofile
-*.html
+.html
