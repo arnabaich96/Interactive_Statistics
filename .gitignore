@@ -6,9 +6,5 @@
 .Ruserdata
 rsconnect/
 .Rprofile
-# Ignore all .Rmd files
-*.Rmd
 
-# Ignore all .R files
-*.R
 

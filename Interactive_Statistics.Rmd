@@ -1,0 +1,239 @@
+---
+title: "Interactive Statistical Concepts"
+output:
+  html_document:
+    self_contained: true
+runtime: shiny
+format: 
+  html:
+    embed-resources: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(remotes)
+remotes::install_github("rstudio/DT")
+remotes::install_github("ropensci/plotly")
+library(plotly)
+library(gt)
+library(DT)
+library(shiny)
+```
+
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+    background-color: #FAFAD2; 
+  }
+  .main-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  .shiny-app-container {
+    height: auto;
+  }
+  .plot-output {
+    height: auto; 
+  }
+  h1, h2, h3 {
+    font-family: 'Verdana', sans-serif;
+    font-weight: bold;
+  }
+  p {
+    font-size: 18px;
+    color: #212121;
+  }
+  ul {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #616161;
+  }
+  a {
+    color: #FF5722;
+  }
+  .tabset li.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+</style>
+
+
+<p style="color: #2E86C1; font-size: 18px;">
+Welcome! This document is designed to help you explore fundamental concepts in statistics through interactive tools. Understanding statistics goes beyond formulas—it's about getting a feel for how data works and making smart decisions based on it. The tools provided here will guide you through practical, hands-on experiences to deepen your intuition for statistical analysis.
+</p>
+
+<p style="color: #2E4053; font-size: 18px;">
+These tools are straightforward and engaging, making it easier to grasp key statistical ideas. Whether you're new to the subject or just refreshing your knowledge, you'll find these tools helpful in learning how to analyze and interpret data effectively. Let's start exploring!
+</p>
+
+## {.tabset .tabset-fade}
+
+### **Preliminaries**
+
+#### **Introduction**
+<p>
+Imagine you're trying to determine the average height of trees in a vast forest. Measuring every single tree would be impossible, so instead, you measure a few—this is your sample. You then use this sample to estimate the average height of all the trees. This tool helps you understand how the size of your sample affects the accuracy of your estimates. By adjusting the sample size, you can see how larger samples generally yield more reliable estimates, while smaller samples can still offer valuable insights.
+</p>
+
+#### **Different Contexts and Usage**
+<p>
+Sampling is a universal concept—it applies to various fields, from estimating a country's average income to predicting voter behavior. Understanding the link between sample size and estimate accuracy is crucial. With this tool, you can experiment with different sample sizes to see how larger samples provide more stable and reliable estimates, yet even small samples can be insightful, though with more variability.
+</p>
+
+#### **How to Use**
+<ul>
+  <li><b>Adjust the Sample Size</b>: Use the slider to change the sample size. Watch how the sample mean of heights changes as you adjust the sample size.</li>
+  <li><b>Compare to Population Mean</b>: The tool shows both the sample mean and the true population mean, allowing you to see how close your estimate gets.</li>
+</ul>
+
+```{r Preliminaries}
+app <- source("R/Preliminaries.R")$value
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
+```
+
+### **Summary Statistics**
+
+#### **Introduction**
+<p>
+Summary statistics boil down a large dataset into a few key numbers that offer a snapshot of the data's main features. Think of it like summarizing a book with a few sentences. This tool allows you to explore these summary statistics and understand how they represent different aspects of the data.
+</p>
+
+#### **Different Contexts and Usage**
+<p>
+Summary statistics are essential in every field that involves data. They help us quickly understand and compare information. This tool illustrates how statistics like the mean, median, and standard deviation give us different insights into a dataset. By interacting with the tool, you’ll see how changes in the data affect these statistics and what that means for real-world interpretation.
+</p>
+
+#### **How to Use**
+<ul>
+  <li><b>Select a Dataset</b>: Choose a dataset to analyze.</li>
+  <li><b>Explore Summary Statistics</b>: The tool calculates key statistics, such as mean, median, and standard deviation.</li>
+  <li><b>Visualize the Data</b>: Use histograms, boxplots, and other visualizations to see how the data is distributed. Interact with the plots to better understand the distribution and identify outliers.</li>
+</ul>
+
+```{r Summary Statistics}
+app <- source("R/Summary_Stat.R")$value
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
+```
+
+### **Distributions**
+
+#### **Introduction**
+<p>
+Probability distributions describe all possible outcomes of a random variable and the likelihood of each outcome. Imagine flipping a coin or rolling a dice—each outcome has a probability, and the distribution shows these probabilities for every possible outcome. This tool lets you explore different types of distributions and see how they change when you adjust the parameters.
+</p>
+
+#### **Different Contexts and Usage**
+<p>
+Distributions are fundamental to statistical modeling and decision-making. In finance, they might model stock returns; in engineering, they could assess material failure rates. Understanding distributions allows us to calculate probabilities and make informed predictions. This tool enables you to manipulate parameters like mean and standard deviation for normal distributions, or degrees of freedom for t-distributions, and see how these changes impact the shape of the distribution.
+</p>
+
+#### **How to Use**
+<ul>
+  <li><b>Select a Distribution</b>: Choose from Normal, Chi-squared, t, or F distributions.</li>
+  <li><b>Adjust Parameters</b>: Modify relevant parameters (e.g., mean, standard deviation, degrees of freedom) based on the selected distribution.</li>
+  <li><b>Calculate Probabilities</b>: The tool calculates probabilities for a specified range and highlights the corresponding area under the curve.</li>
+  <li><b>Visualize the Distribution</b>: An interactive plot shows the distribution curve, with shaded areas based on user inputs.</li>
+</ul>
+
+```{r Distributions}
+app <- source("R/Distributions.R")$value
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
+```
+
+
+### **Inference**
+
+#### **Introduction**
+<p>
+Statistical inference is about drawing conclusions about a population based on a sample. It's like making an educated guess about a book by reading a few pages. This tool helps you explore the key ideas of statistical inference, including confidence intervals and hypothesis testing. By interacting with data, you can see how changing sample sizes or confidence levels affects the conclusions you draw.
+</p>
+
+#### **Different Contexts and Usage**
+<p>
+Inference is widely used, from predicting election results to testing new medicines. This tool allows you to experiment with confidence intervals and hypothesis tests, helping you see how data can be used to make informed decisions. You'll also learn about Z-tests and T-tests, depending on whether the population standard deviation is known.
+</p>
+
+#### **How to Use**
+<ul>
+  <li><b>Input Data</b>: Enter your sample data and specify whether the population standard deviation is known.</li>
+  <li><b>Select Confidence Level</b>: Choose a confidence level for constructing the interval.</li>
+  <li><b>Perform Hypothesis Testing</b>: If desired, enter values for hypothesis testing, including the null hypothesis, alternative hypothesis, and significance level.</li>
+  <li><b>Interpret Results</b>: The tool displays the confidence interval, test statistic, p-value, and critical region, with a plot highlighting the relevant areas.</li>
+</ul>
+
+```{r Inference}
+app <- source("R/Inference.R")$value
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
+```
+
+### **ANOVA**
+
+#### **Introduction**
+<p>
+Analysis of Variance (ANOVA) is a statistical method used to compare the means of three or more groups. It’s commonly used in experiments where different groups are subjected to different treatments, and the goal is to determine whether any of the treatments lead to significantly different outcomes. This tool provides an interactive environment to perform ANOVA tests, helping you understand how this technique helps in identifying differences between groups.
+</p>
+
+#### **Different Contexts and Usage**
+<p>
+ANOVA is widely used in fields like agriculture, medicine, and marketing, where it's essential to compare multiple groups simultaneously. For example, a pharmaceutical company might use ANOVA to compare the effectiveness of different drug dosages. This tool lets you input group data, run ANOVA, and interpret the results through both numerical and graphical outputs.
+</p>
+
+#### **How to Use**
+<ul>
+  <li><b>Input Group Data</b>: Enter the data for each group you want to compare.</li>
+  <li><b>Run ANOVA</b>: The tool calculates the F-statistic and p-value.</li>
+  <li><b>Interpret Results</b>: The tool helps determine whether there are significant differences between group means. The results are displayed in both tabular and graphical formats.</li>
+</ul>
+
+```{r ANOVA}
+app <- source("R/ANOVA.R")$value
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
+```
+
+### **Chi-Square Test**
+
+#### **Introduction**
+<p>
+The Chi-Square test is a statistical method used to determine if there is a significant association between two categorical variables. For instance, it can be used to test whether gender is related to voting preference. This tool allows you to perform Chi-Square tests interactively, helping you understand how to test for independence between variables and interpret the results.
+</p>
+
+#### **Different Contexts and Usage**
+<p>
+Chi-Square tests are particularly useful in fields like social sciences and market research, where the relationship between categorical variables needs to be assessed. For example, a company might use Chi-Square to see if customer satisfaction is independent of age group. This tool provides a hands-on way to conduct these tests, visualize the results, and understand the relationship between variables.
+</p>
+
+#### **How to Use**
+<ul>
+  <li><b>Input Categorical Data</b>: Enter the observed frequencies for each category.</li>
+  <li><b>Perform the Test</b>: The tool calculates the Chi-Square statistic and p-value.</li>
+  <li><b>Interpret Results</b>: See the relationship between the variables visually.</li>
+</ul>
+
+```{r Chi-Square}
+app <- source("R/Chi-sq_Test.R")$value
+div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
+```
+
+## **Conclusion**
+
+<p style="color: #2E86C1; font-size: 18px;">
+We hope these interactive tools have made statistical concepts more accessible and engaging. Statistics is all about understanding data to make better decisions. The more you practice, the more comfortable you will become with these concepts. Keep exploring, keep learning, and remember that every dataset has a story to tell.
+</p>
+
+<p style="color: #2E4053; font-size: 18px;">
+Whether you're using these tools to support your studies or for practical applications, the skills you develop here will serve you well. Continue to experiment with different datasets and scenarios, and apply what you’ve learned to real-world problems. Happy exploring!
+</p>
+
+<footer style="margin-top: 50px; text-align: center;">
+  <p style="font-size: 20px;">Thank you for diving into statistics with us!</p>
+  <p style="font-size: 16px;">Author: Arnab Aich</p>
+  <p style="font-size: 12px;">
+    Email: [<a href="mailto:arnab.aich99@gmail.com">please click here</a>] |
+    GitHub: [<a href="https://github.com/arnabaich96" target="_blank">please click here</a>]
+  </p>
+</footer>
+
