@@ -18,6 +18,7 @@ library(gt)
 library(DT)
 library(shiny)
 ```
+
 <style>
   body {
     margin: 0;

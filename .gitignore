@@ -1,7 +1,14 @@
+
+# ignore Project files
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 rsconnect/
 .Rprofile
-.html
+# Ignore all .Rmd files
+*.Rmd
+
+# Ignore all .R files
+*.R
+
