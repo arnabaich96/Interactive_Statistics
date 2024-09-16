@@ -5,17 +5,18 @@ ui <- fluidPage(
     sidebarPanel(
       width = 4,
       radioButtons("data_input_type", "Choose Data Input Method:",
-                   choices = c("Upload File", "Prebuilt Dataset")),
+                   choices = c("Upload File", "Prebuilt Dataset"),
+                   selected = "Prebuilt Dataset"),
 
       # File upload option
       conditionalPanel(
-        condition = "input$data_input_type != 'Prebuilt Dataset'",
+        condition = "input.data_input_type != 'Prebuilt Dataset'",
         fileInput("file", "Upload CSV or TXT File")
       ),
 
       # Prebuilt dataset option
       conditionalPanel(
-        condition = "input$data_input_type != 'Upload File'",
+        condition = "input.data_input_type != 'Upload File'",
         selectInput("prebuilt_dataset", "Select Dataset",
                     choices = c("mtcars (Multiple Regression)",
                                 "faithful (Simple Regression)"))

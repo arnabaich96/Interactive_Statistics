@@ -151,7 +151,7 @@ app <- source("Summary/Summary_Stat.R")$value
 div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
-### **Normal Distributions**{#distributions}
+### **Normal and related Distributions $\left(\mathbf{\chi^2_n , t_{n-1} , F_{n_1,n_2}}\right)$**{#distributions}
 
 #### **Introduction:**
 <p>
