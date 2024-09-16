@@ -92,7 +92,10 @@ Welcome! This document is designed to help you explore fundamental concepts in s
 These tools are straightforward and engaging, making it easier to grasp key statistical ideas. Whether you're new to the subject or just refreshing your knowledge, you'll find these tools helpful in learning how to analyze and interpret data effectively. You can use the table of contents to open desired section. Let's start exploring!
 </p>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(remotes)
@@ -138,7 +141,11 @@ Summary statistics boil down a large dataset into a few key numbers that offer a
 Summary statistics are essential in every field that involves data. They help us quickly understand and compare information. This tool illustrates how statistics like the mean, median, and standard deviation give us different insights into a dataset. By interacting with the tool, you’ll see how changes in the data affect these statistics and what that means for real-world interpretation.
 </p>
 
+<<<<<<< HEAD
 #### **How to Use:**<a id="summary"></a>
+=======
+#### **How to Use:**{#summary}
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 <ul>
   <li><b>Select a Dataset</b>: Choose a dataset to analyze.</li>
   <li><b>Explore Summary Statistics</b>: The tool calculates key statistics, such as mean, median, and standard deviation.</li>
@@ -162,7 +169,11 @@ Probability distributions describe all possible outcomes of a random variable an
 Distributions are fundamental to statistical modeling and decision-making. In finance, they might model stock returns; in engineering, they could assess material failure rates. Understanding distributions allows us to calculate probabilities and make informed predictions. This tool enables you to manipulate parameters like mean and standard deviation for normal distributions, or degrees of freedom for t-distributions, and see how these changes impact the shape of the distribution.
 </p>
 
+<<<<<<< HEAD
 #### **How to Use:**<a id="distributions"></a>
+=======
+#### **How to Use:**{#distributions}
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 <ul>
   <li><b>Select a Distribution</b>: Choose from Normal, Chi-squared, t, or F distributions.</li>
   <li><b>Adjust Parameters</b>: Modify relevant parameters (e.g., mean, standard deviation, degrees of freedom) based on the selected distribution.</li>
@@ -188,7 +199,11 @@ Statistical inference is about drawing conclusions about a population based on a
 Inference is widely used, from predicting election results to testing new medicines. This tool allows you to experiment with confidence intervals and hypothesis tests, helping you see how data can be used to make informed decisions. You'll also learn about Z-tests and T-tests, depending on whether the population standard deviation is known.
 </p>
 
+<<<<<<< HEAD
 #### **How to Use:**<a id="inference"></a>
+=======
+#### **How to Use:**{#inference}
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 <ul>
   <li><b>Input Data</b>: Enter your sample data and specify whether the population standard deviation is known.</li>
   <li><b>Select Confidence Level</b>: Choose a confidence level for constructing the interval.</li>
@@ -213,7 +228,11 @@ The Chi-Square test is a statistical method used to determine if there is a sign
 Chi-Square tests are particularly useful in fields like social sciences and market research, where the relationship between categorical variables needs to be assessed. For example, a company might use Chi-Square to see if customer satisfaction is independent of age group. This tool provides a hands-on way to conduct these tests, visualize the results, and understand the relationship between variables.
 </p>
 
+<<<<<<< HEAD
 #### **How to Use:** <a id="chisq"></a>
+=======
+#### **How to Use:**{#chisq}
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 <ul>
   <li><b>Input Categorical Data</b>: Enter the observed frequencies for each category.</li>
   <li><b>Perform the Test</b>: The tool calculates the Chi-Square statistic and p-value.</li>
@@ -225,7 +244,11 @@ app <- source("Chi-sq Test/Chi-sq_Test.R")$value
 div(class = "shiny-app-container", shinyApp(ui = app$ui, server = app$server))
 ```
 
+<<<<<<< HEAD
 ### **Analysis of Variance** 
+=======
+### **Analysis of Variance**
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 
 
 #### **Introduction:**
@@ -238,7 +261,11 @@ Analysis of Variance (ANOVA) is a statistical method used to compare the means o
 ANOVA is widely used in fields like agriculture, medicine, and marketing, where it's essential to compare multiple groups simultaneously. For example, a pharmaceutical company might use ANOVA to compare the effectiveness of different drug dosages. This tool lets you input group data, run ANOVA, and interpret the results through both numerical and graphical outputs.
 </p>
 
+<<<<<<< HEAD
 #### **How to Use:**<a id="anova"></a>
+=======
+#### **How to Use:**{#anova}
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 <ul>
   <li><b>Input Group Data</b>: Enter the data for each group you want to compare.</li>
   <li><b>Run ANOVA</b>: The tool calculates the F-statistic and p-value.</li>
@@ -266,7 +293,11 @@ Regression analysis is widely used across fields like economics, medicine, envir
 Both methods are essential for understanding relationships between variables, predicting future trends, and making data-driven decisions. This tool enables you to experiment with real or simulated datasets and analyze how changes in the predictor variables affect the outcome.
 </p>
 
+<<<<<<< HEAD
 #### **How to Use:**<a id="regression"></a>
+=======
+#### **How to Use:**{#regression}
+>>>>>>> 2eeea4febccfaa433dc626c149ca74e77b3ca2bf
 <ul>
   <li><b>Select Data Input Method</b>: You can either upload your own dataset (CSV or TXT) or use a prebuilt dataset available within the app.</li>
 
