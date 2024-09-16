@@ -3,7 +3,6 @@
 # UI ----------------------------------------------------------------------
 
 ui <- fluidPage(
-  titlePanel(h1("Statistical Inference", align = "center")),
 
   sidebarLayout(
     sidebarPanel(
