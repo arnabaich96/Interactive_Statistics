@@ -3,7 +3,7 @@
 
 ## 🎯 **Overview**
 
-This repository contains an interactive statistical document created using **Quarto Markdown**. The document is designed to help users explore fundamental concepts in statistics through **interactive tools**. These tools allow users to experiment with data, visualize outcomes, and gain insights into various statistical concepts, such as **sampling**, **summary statistics**, **distributions**, **inference**, **ANOVA**, and **Chi-Square tests**.
+This repository contains an interactive statistical document created using *RMarkdown**. The document is designed to help users explore fundamental concepts in statistics through **interactive tools**. These tools allow users to experiment with data, visualize outcomes, and gain insights into various statistical concepts, such as **sampling**, **summary statistics**, **distributions**, **inference**, **ANOVA**, and **Chi-Square tests**.
 
 ## 📂 **Contents**
 
@@ -12,8 +12,9 @@ This repository contains an interactive statistical document created using **Qua
 - **Summary_Stat.R**: R script for the summary statistics section.
 - **Distributions.R**: R script for the distributions section.
 - **Inference.R**: R script for the inference section.
+- - **Chi-sq_Test.R**: R script for the Chi-Square test section.
 - **ANOVA.R**: R script for the ANOVA section.
-- **Chi-sq_Test.R**: R script for the Chi-Square test section.
+- **Regression Analysis**: R script for Regression section.
 
 ## 🚀 **Getting Started**
 
@@ -118,6 +119,10 @@ The document is already deployed to **ShinyApps.io** for interactive exploration
 ## 💻 **Usage**
 
 Once running, you can view and interact with the statistical tools directly in your browser. Use the provided interactive sliders, inputs, and visualizations to explore various statistical concepts and see how changes in the data affect the results.
+
+## 🌍 **Wiki and Documentation**
+
+Detailed documentation and additional resources are on [Wiki page](https://github.com/arnabaich96/Interactive_Statistics/wiki).
 
 ## 📬 **Contact**
 
