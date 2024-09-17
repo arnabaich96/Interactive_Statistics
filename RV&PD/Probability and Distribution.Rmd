@@ -76,6 +76,9 @@ library(patchwork)
   - <span style="background-color:yellow;">0</span> means the event will **not happen**.
   - <span style="background-color:yellow;">1</span> means the event **will definitely happen**.
   - The sum of the probabilities for all possible outcomes in a sample space is always equal to **1**.
+  - The Probability of an event $A$ is denoted as $P(A)$ and Probability of compliment of event $A$ is denoted as $P(A^c)$. We always have
+  $$P(A) + P(A^c) = 1$$
+  
 - There are two types of probability distributions:
   - <span style="background-color:yellow;">**Discrete**</span>: Consists of distinct, countable outcomes.
   

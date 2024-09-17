@@ -1,5 +1,5 @@
 ---
-title: "**Summary Statistics**"
+title: "**Summary Measures**"
 author: "**Arnab Aich**"
 output: 
   html_document:
@@ -69,7 +69,7 @@ library(kableExtra)  # For better HTML table visuals
 library(patchwork)
 
 ```
-## <span style="color:#7C0A02;">Mean:</span>
+## Mean:
 
 The **mean** is the average of a set of numbers, calculated by dividing the sum of the values by the total number of values.
 
@@ -87,7 +87,7 @@ So, the mean is **11.6**.
 
 ---
 
-## <span style="color:#7C0A02;">Median:</span>
+##      Median:        
 
 The **median** is the middle value of a dataset when the numbers are arranged in order. If the dataset has an odd number of values, the median is the central value. If the dataset has an even number of values, the median is the average of the two middle values.
 
@@ -113,7 +113,7 @@ So, the median is **8**.
 
 ---
 
-## <span style="color:#7C0A02;">Quantile:</span>
+##      Quantile:        
 
 A **quantile** divides the dataset into equal parts. The most common quantiles are quartiles, which split the data into four parts:
 - The 25th percentile (first quartile, Q1),
@@ -136,7 +136,7 @@ For the dataset: 2, 5, 7, 9, 12, 15, 18.
 
 ---
 
-## <span style="color:#7C0A02;">Range:</span>
+##      Range:        
 
 The **range** is the difference between the largest and smallest values in the dataset.
 
@@ -156,7 +156,7 @@ So, the range is **19**.
 
 ---
 
-## <span style="color:#7C0A02;">Interquartile Range (IQR):</span>
+##      Interquartile Range (IQR):        
 
 The **interquartile range (IQR)** is the difference between the first quartile (Q1) and the third quartile (Q3). It measures the spread of the middle 50% of the data.
 
@@ -191,7 +191,7 @@ Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25, 28
 
 ---
 
-## <span style="color:#7C0A02;">Standard Deviation (SD):</span>
+##      Standard Deviation (SD):        
 
 The **standard deviation** measures how spread out the values are in a dataset. It is the square root of the variance, which represents the average squared differences from the mean.
 
@@ -218,7 +218,7 @@ So, the standard deviation is approximately **2.24**.
 
 ---
 
-## <span style="color:#7C0A02;">Z Score:</span>
+##      Z Score:        
 
 The **z-score** is a measure of how many standard deviations a data point is from the mean. It is useful for comparing values from different datasets.
 
@@ -306,165 +306,53 @@ z_score_table %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
 
-cat('</div>')
 
 ```
+## Recap
+
+This document explored key statistical measures used to describe and analyze data sets. We discussed:
+
+- **Mean:** The arithmetic average of a dataset, providing a measure of the central tendency.
+- **Median:** The middle value that separates the higher half from the lower half of the data set, useful in skewed distributions.
+- **Quantiles:** Points in the data that partition it into quantiles, with quartiles being the most common, dividing the data into four equal parts.
+- **Range:** The difference between the maximum and minimum values, giving a sense of the spread.
+- **Interquartile Range (IQR):** The range between the first and third quartiles, providing a measure of statistical dispersion.
+- **Standard Deviation:** A measure of the amount of variation or dispersion in a set of values.
+- **Z-Score:** Indicates how many standard deviations an element is from the mean.
+
+Each measure offers unique insights and, when used together, can provide a comprehensive understanding of the data's behavior.
+
+## Questions and Answers
+
+### Q1: What is the primary use of the mean in data analysis?
+**A1:** The mean is used to find the average value of a dataset, indicating the central point of the data distribution.
+
+### Q2: How does the median differ from the mean in terms of data representation?
+**A2:** The median represents the middle value and is less affected by outliers and skewed data than the mean.
+
+### Q3: What is the purpose of calculating quantiles in a dataset?
+**A3:** Quantiles, including quartiles, divide the data into equal parts, helping to understand the distribution and variability of data.
+
+### Q4: Why is the range important in statistics?
+**A4:** The range provides a quick sense of the spread of the data, highlighting the difference between the highest and lowest values.
+
+### Q5: What does the interquartile range tell us that the range does not?
+**A5:** The IQR focuses on the middle 50% of the data, providing a clearer picture of the data's central tendency without the influence of outliers.
+
+### Q6: How is the standard deviation useful compared to the mean?
+**A6:** While the mean provides a central value, the standard deviation quantifies the variation of the data points from the mean, indicating how spread out the data is.
+
+### Q7: What does a high standard deviation indicate about a dataset?
+**A7:** A high standard deviation indicates that the data points are spread widely around the mean, showing high variability.
+
+### Q8: How do you interpret a Z-score in terms of data analysis?
+**A8:** A Z-score indicates how many standard deviations a data point is from the mean. A Z-score of 0 represents a point at the mean.
+
+### Q9: In what scenario might you prefer to use the median over the mean?
+**A9:** The median is preferred over the mean in datasets with outliers or when the data is highly skewed.
+
+### Q10: How can the concept of quantiles be used to compare two different data distributions?
+**A10:** Quantiles can be used to compare the relative standing of data points within different distributions, even if the scales of the datasets differ.
 
 
-
-## <span style="color:#7C0A02;">Bar Plot:</span>
-
-A **bar plot** displays categorical data with rectangular bars, where the length of each bar represents the frequency or value of that category.
-
-### Steps to Draw a Bar Plot:
-1. **Collect categorical data**.
-2. **Identify the categories** to be displayed.
-3. **Count the frequency** of each category or use given values.
-4. **Draw bars** for each category:
-   - The x-axis represents the categories.
-   - The y-axis represents the frequency or value.
-   - The height of each bar corresponds to the frequency or value of that category.
-
----
-
-```{r}
-# Setting up the plotting area for 1x3 bar plots
-par(mfrow = c(1, 3))
-
-# Bar Plot 1: Category A, B, C
-data_bar1 <- c(A = 10, B = 15, C = 7)
-barplot(data_bar1, main = "Bar Plot 1", col = "lightblue", ylim = c(0, 20))
-
-# Bar Plot 2: Category D, E, F
-data_bar2 <- c(D = 12, E = 9, F = 18)
-barplot(data_bar2, main = "Bar Plot 2", col = "lightcoral", ylim = c(0, 20))
-
-# Bar Plot 3: Category G, H, I
-data_bar3 <- c(G = 14, H = 11, I = 6)
-barplot(data_bar3, main = "Bar Plot 3", col = "lightgreen", ylim = c(0, 20))
-
-# Combine data into a data frame for the table
-data_combined <- data.frame(
-  Category = c("A", "B", "C", "D", "E", "F", "G", "H", "I"),
-  `Bar Plot 1` = c(10, 15, 7, NA, NA, NA, NA, NA, NA),
-  `Bar Plot 2` = c(NA, NA, NA, 12, 9, 18, NA, NA, NA),
-  `Bar Plot 3` = c(NA, NA, NA, NA, NA, NA, 14, 11, 6)
-)
-
-# Print the data as an HTML table
-kable(data_combined, format = "html", table.attr = "style='width:100%;'", align = 'c')
-```
-
-
-## <span style="color:#7C0A02;">Pie Chart:</span>
-
-A **pie chart** is a circular chart divided into sectors, each representing a proportion of the whole.
-
-### Steps to Draw a Pie Chart:
-1. **Collect categorical data** and **calculate proportions**.
-2. **Convert the proportions** to angles (in degrees):
-   - Each proportion is multiplied by 360°.
-3. **Draw a circle** and divide it into sectors based on the calculated angles.
-4. **Label each sector** with the category name and its proportion.
-
----
-
-```{r}
-# Setting up the plotting area for 1x3 pie charts
-par(mfrow = c(1, 3))
-
-
-# Pie Chart 1: Category A, B, C
-data_pie1 <- c(A = 10, B = 15, C = 7)
-labels_pie1 <- paste(names(data_pie1), data_pie1)
-pie(data_pie1, labels = labels_pie1, main = "Pie Chart 1", col = c("lightblue", "lightcoral", "lightgreen"))
-
-# Pie Chart 2: Category D, E, F
-data_pie2 <- c(D = 12, E = 9, F = 18)
-labels_pie2 <- paste(names(data_pie2), data_pie2)
-pie(data_pie2, labels = labels_pie2, main = "Pie Chart 2", col = c("lightgoldenrod", "lightpink", "lightcyan"))
-
-# Pie Chart 3: Category G, H, I
-data_pie3 <- c(G = 14, H = 11, I = 6)
-labels_pie3 <- paste(names(data_pie3), data_pie3)
-pie(data_pie3, labels = labels_pie3, main = "Pie Chart 3", col = c("lightskyblue", "lightyellow", "lightgray"))
-
-# Combine data into a data frame for the table
-data_combined_pie <- data.frame(
-  Category = c("A", "B", "C", "D", "E", "F", "G", "H", "I"),
-  `Pie Chart 1` = c(10, 15, 7, NA, NA, NA, NA, NA, NA),
-  `Pie Chart 2` = c(NA, NA, NA, 12, 9, 18, NA, NA, NA),
-  `Pie Chart 3` = c(NA, NA, NA, NA, NA, NA, 14, 11, 6)
-)
-
-# Print the data as an HTML table
-kable(data_combined_pie, format = "html", table.attr = "style='width:100%;'", align = 'c')
-```
-
-## <span style="color:#7C0A02;">Histogram:</span>
-
-A **histogram** is a graphical representation of the distribution of numerical data. It displays data by grouping them into bins or intervals and shows the frequency of values within each bin.
-
-### Steps to Draw a Histogram:
-1. **Collect numerical data**.
-2. **Divide the range of data into intervals** (called bins).
-3. **Count the frequency** of data points that fall into each bin.
-4. **Draw bars** for each bin, where the height of each bar represents the frequency of data points in that bin.
-   - The x-axis represents the intervals (bins).
-   - The y-axis represents the frequency or count.
-
-```{r , fig.height=6 , fig.width=7}
-# Setting up the plotting area for 2x2 plots
-par(mfrow = c(2, 2))
-
-# Symmetric Bell Curve (Normal Distribution)
-set.seed(123)
-data_symmetric <- rnorm(100, mean = 0, sd = 1)
-hist(data_symmetric, breaks = 20, main = "Symmetric (Bell Curve)", xlab = "Values", col = "lightblue", border = "black")
-
-# Skewed Right (Positive Skew)
-data_skewed_right <- rexp(100, rate = 1)
-hist(data_skewed_right, breaks = 20, main = "Skewed Right", xlab = "Values", col = "lightcoral", border = "black")
-
-# Skewed Left (Negative Skew)
-data_skewed_left <- -rexp(100, rate = 1)
-hist(data_skewed_left, breaks = 20, main = "Skewed Left", xlab = "Values", col = "lightgreen", border = "black")
-
-# Uniform Distribution
-data_uniform <- runif(100, min = 0, max = 1)
-hist(data_uniform, breaks = 20, main = "Uniform Distribution", xlab = "Values", col = "lightgoldenrod", border = "black")
-```
-
-
-
-## <span style="color:#7C0A02;">Boxplot:</span>
-
-A **box plot** (or box-and-whisker plot) visualizes the distribution of data by showing the minimum, first quartile (Q1), median (Q2), third quartile (Q3), and maximum.
-
-### Steps to Draw a Box Plot:
-1. **Arrange the data in ascending order**.
-2. **Calculate Q1, Q2 (median), and Q3**.
-3. **Draw a rectangular box** from Q1 to Q3.
-4. **Draw a line inside the box at Q2** (the median).
-5. **Draw whiskers** extending from the box to the minimum and maximum values.
-6. **Plot outliers** (if any), which are data points that fall significantly outside the whiskers.
-
-
-```{r}
-# Setting up the plotting area for 1x3 vertical plots
-par(mfrow = c(1, 3))
-
-# Symmetric (Normal Distribution)
-set.seed(123)
-data_symmetric <- rnorm(100, mean = 0, sd = 1)
-boxplot(data_symmetric, main = "Symmetric (Bell Curve)", col = "lightblue", vertical = TRUE)
-
-# Skewed Right (Positive Skew)
-data_skewed_right <- rexp(100, rate = 1)
-boxplot(data_skewed_right, main = "Skewed Right", col = "lightcoral", vertical = TRUE)
-
-# Skewed Left (Negative Skew)
-data_skewed_left <- -rexp(100, rate = 1)
-boxplot(data_skewed_left, main = "Skewed Left", col = "lightgreen", vertical = TRUE)
-```
 
