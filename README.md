@@ -12,7 +12,7 @@ This repository contains an interactive statistical document created using *RMar
 - **Summary_Stat.R**: R script for the summary statistics section.
 - **Distributions.R**: R script for the distributions section.
 - **Inference.R**: R script for the inference section.
-- - **Chi-sq_Test.R**: R script for the Chi-Square test section.
+- **Chi-sq_Test.R**: R script for the Chi-Square test section.
 - **ANOVA.R**: R script for the ANOVA section.
 - **Regression Analysis**: R script for Regression section.
 
