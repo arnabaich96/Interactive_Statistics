@@ -1,0 +1,345 @@
+---
+title: "**Summary Graphs and Charts**"
+author: "**Arnab Aich**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+    css: |
+      .center-plot {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .table-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+      table {
+        margin-right: 30px;
+        font-size: 16px;
+      }
+       body {
+        font-size: 18px; /* Adjust this value for your preferred font size */     
+      margin-left: 10px;
+      margin-right: 10px;
+           }
+
+      .container-fluid {
+        max-width: 90%; /* Ensures that the content takes up the full page width */
+      }
+
+---
+<style>
+  body {
+    font-size: 18px; /* Adjust this value for your preferred font size */
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #f9e79f;
+  }
+  /* Center the title and author */
+  .title {
+    color: #7C0A02;
+    text-align: center;
+    font-size: 36px;
+  }
+  .author {
+    text-align: center;
+    font-size: 24px;
+  color: #7C0A02;
+  }
+
+  /* Change TOC font color to garnet and hide title/author from TOC */
+  #TOC a {
+    color: #7C0A02;
+  }
+
+  .container-fluid {
+    max-width: 90%; /* Ensures that the content takes up the full page width */
+  }
+</style>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+library(ggplot2)
+library(kableExtra)  # For better HTML table visuals
+library(patchwork)
+
+```
+
+## Frequency Distribution and Barplot
+
+A **frequency distribution** for categorical data shows how often each category appears in the dataset. It is usually visualized using a bar plot where each category is represented by a bar, and the height of the bar represents the frequency of that category.
+
+### Steps to Make a Frequency Table:
+1. **Collect data** on the variable of interest.
+2. **List each category** that appears in the data.
+3. **Tally the frequency** of each category.
+4. **Calculate relative frequencies** (optional): Divide each category's frequency by the total number of observations.
+
+### Steps to Draw a Frequency Distribution Bar Plot:
+1. **Collect categorical data**.
+2. **Identify distinct categories**.
+3. **Count the frequency** of each category.
+4. **Represent frequencies** using bars in a plot:
+   - The x-axis lists the categories.
+   - The y-axis represents the frequency of each category.
+
+### Example: Survey of Favorite Fruit
+Here's a simple survey result from 25 participants on their favorite fruit:
+
+```{r fruit-survey-plot, echo=FALSE}
+fruit_data <- data.frame(
+  Fruit = c("Apple", "Banana", "Cherry", "Date", "Elderberry"),
+  Frequency = c(5, 7, 6, 3, 4)
+)
+
+# Adding a column for relative frequency
+fruit_data$RelativeFrequency <- fruit_data$Frequency / sum(fruit_data$Frequency)
+
+# Displaying the frequency table with relative frequency
+fruit_data %>%
+  kable(format = "html", table.attr = "style='width:100%;'", align = 'c') %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02")
+
+
+# Creating a ggplot bar chart for frequency
+ggplot(fruit_data, aes(x=Fruit, y=Frequency, fill=Fruit)) +
+  geom_bar(stat="identity") +
+  theme_minimal() +
+  labs(title="Favorite Fruit Survey", y="Frequency", x="")
+```
+
+##      Pie Chart:        
+
+A **pie chart** is a circular chart divided into sectors, each representing a proportion of the whole.
+
+### Steps to Draw a Pie Chart:
+1. **Collect categorical data** and **calculate proportions**.
+2. **Convert the proportions** to angles (in degrees):
+   - Each proportion is multiplied by 360°.
+3. **Draw a circle** and divide it into sectors based on the calculated angles.
+4. **Label each sector** with the category name and its proportion.
+
+```{r}
+# Setting up the plotting area for 1x3 pie charts
+par(mfrow = c(1, 3))
+
+
+# Pie Chart 1: Category A, B, C
+data_pie1 <- c(A = 10, B = 15, C = 7)
+labels_pie1 <- paste(names(data_pie1), data_pie1)
+pie(data_pie1, labels = labels_pie1, main = "Pie Chart 1", col = c("lightblue", "lightcoral", "lightgreen"))
+
+# Pie Chart 2: Category D, E, F
+data_pie2 <- c(D = 12, E = 9, F = 18)
+labels_pie2 <- paste(names(data_pie2), data_pie2)
+pie(data_pie2, labels = labels_pie2, main = "Pie Chart 2", col = c("lightgoldenrod", "lightpink", "lightcyan"))
+
+# Pie Chart 3: Category G, H, I
+data_pie3 <- c(G = 14, H = 11, I = 6)
+labels_pie3 <- paste(names(data_pie3), data_pie3)
+pie(data_pie3, labels = labels_pie3, main = "Pie Chart 3", col = c("lightskyblue", "lightyellow", "lightgray"))
+
+# Combine data into a data frame for the table
+data_combined_pie <- data.frame(
+  Category = c("A", "B", "C", "D", "E", "F", "G", "H", "I"),
+  `Pie Chart 1` = c(10, 15, 7, NA, NA, NA, NA, NA, NA),
+  `Pie Chart 2` = c(NA, NA, NA, 12, 9, 18, NA, NA, NA),
+  `Pie Chart 3` = c(NA, NA, NA, NA, NA, NA, 14, 11, 6)
+)
+
+# Print the data as an HTML table
+kable(data_combined_pie, format = "html", table.attr = "style='width:100%;'", align = 'c')
+```
+
+
+## Grouped Frequency Distribution and Histogram
+
+Grouped frequency distribution is used for continuous data by dividing the data range into intervals, known as bins. It is typically visualized using a histogram.
+
+### Steps to Make a Grouped Frequency Table:
+1. **Collect continuous data**.
+2. **Define the range of data** and **determine suitable intervals** (bins).
+3. **Assign each data point to an interval**.
+4. **Count the number of observations** in each interval.
+5. **Calculate relative frequencies** for each interval (optional).
+
+### Steps to Draw a Grouped Frequency Distribution Histogram:
+1. **Collect continuous data**.
+2. **Divide data into intervals** (bins).
+3. **Count the number of observations** in each bin.
+4. **Draw bars** for each bin, where the height represents the number of observations:
+   - The x-axis represents the bins.
+   - The y-axis represents the frequency of observations in each bin.
+
+### Example: Daily Temperatures
+Here's a histogram of daily temperatures recorded over a month (30 days):
+
+```{r temperature-histogram, echo=FALSE}
+set.seed(123)  # For reproducibility
+temperature_data <- rnorm(50, mean = 20, sd = 10)  # Simulated daily temperatures
+
+# Define the breaks with a buffer on both ends
+range_buffer <- range(temperature_data) + c(-1, 1)  # Adding/subtracting 1 to ensure full coverage
+breaks <- seq(from = floor(range_buffer[1]), to = ceiling(range_buffer[2]), by = 5)
+
+# Check if breaks adequately cover the range of the data
+if (min(temperature_data) < min(breaks) || max(temperature_data) > max(breaks)) {
+    # Adjust breaks if they do not cover all data
+    breaks <- pretty(range(c(min(temperature_data), breaks, max(temperature_data))), n = length(breaks))
+}
+
+# Create a histogram object to capture frequency per bin
+hist_info <- hist(temperature_data, breaks = breaks, plot = FALSE)
+
+# Ensuring all bins are counted, including those with zero counts
+bin_counts <- table(cut(temperature_data, breaks = breaks, include.lowest = TRUE))
+
+# Creating a data frame for the intervals and their frequencies
+temperature_table <- data.frame(
+  Interval = names(bin_counts),
+  Frequency = as.integer(bin_counts),
+  RelativeFrequency = as.integer(bin_counts) / sum(bin_counts)
+)
+
+# Display the grouped frequency table
+temperature_table %>%
+  kable(format = "html", table.attr = "style='width:100%;'", align = 'c') %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02")
+
+# Plotting the histogram with grouped frequency distribution
+ggplot(temperature_table, aes(x = Interval, y = Frequency)) +
+  geom_bar(stat = "identity", fill = "blue") +
+  theme_minimal() +
+  labs(title = "Daily Temperature Distribution", x = "Temperature (°C)", y = "Frequency")
+
+
+```
+
+### Types of Histogram:        
+
+A **histogram** is a graphical representation of the distribution of numerical data. It displays data by grouping them into bins or intervals and shows the frequency of values within each bin.
+
+```{r , fig.height=6 , fig.width=7}
+# Setting up the plotting area for 2x2 plots
+par(mfrow = c(2, 2))
+
+# Symmetric Bell Curve (Normal Distribution)
+set.seed(123)
+data_symmetric <- rnorm(100, mean = 0, sd = 1)
+hist(data_symmetric, breaks = 20, main = "Symmetric (Bell Curve)", xlab = "Values", col = "lightblue", border = "black")
+
+# Skewed Right (Positive Skew)
+data_skewed_right <- rexp(100, rate = 1)
+hist(data_skewed_right, breaks = 20, main = "Skewed Right", xlab = "Values", col = "lightcoral", border = "black")
+
+# Skewed Left (Negative Skew)
+data_skewed_left <- -rexp(100, rate = 1)
+hist(data_skewed_left, breaks = 20, main = "Skewed Left", xlab = "Values", col = "lightgreen", border = "black")
+
+# Uniform Distribution
+data_uniform <- runif(100, min = 0, max = 1)
+hist(data_uniform, breaks = 20, main = "Uniform Distribution", xlab = "Values", col = "lightgoldenrod", border = "black")
+```
+
+
+
+##      Boxplot:        
+
+A **box plot** (or box-and-whisker plot) visualizes the distribution of data by showing the minimum, first quartile (Q1), median (Q2), third quartile (Q3), and maximum.
+
+### Steps to Draw a Box Plot:
+1. **Arrange the data in ascending order**.
+2. **Calculate Q1, Q2 (median), and Q3**.
+3. **Draw a rectangular box** from Q1 to Q3.
+4. **Draw a line inside the box at Q2** (the median).
+5. **Draw whiskers** extending from the box to the minimum and maximum values.
+6. **Plot outliers** (if any), which are data points that fall significantly outside the whiskers.
+
+
+```{r}
+# Setting up the plotting area for 1x3 vertical plots
+par(mfrow = c(1, 3))
+
+# Symmetric (Normal Distribution)
+set.seed(123)
+data_symmetric <- rnorm(100, mean = 0, sd = 1)
+boxplot(data_symmetric, main = "Symmetric (Bell Curve)", col = "lightblue", vertical = TRUE)
+
+# Skewed Right (Positive Skew)
+data_skewed_right <- rexp(100, rate = 1)
+boxplot(data_skewed_right, main = "Skewed Right", col = "lightcoral", vertical = TRUE)
+
+# Skewed Left (Negative Skew)
+data_skewed_left <- -rexp(100, rate = 1)
+boxplot(data_skewed_left, main = "Skewed Left", col = "lightgreen", vertical = TRUE)
+```
+
+## Recap
+
+In this document, we explored various graphical techniques used to represent data, understanding the application and construction of each type:
+
+- **Frequency Distributions and Bar Plots:** We examined how to visually represent the frequency of categorical data using bar plots, highlighting the importance of understanding the distribution of categories within a dataset.
+
+- **Pie Charts:** We discussed the use of pie charts to depict the proportions of categories, emphasizing their effectiveness in presentations where visual representation of parts to a whole is necessary.
+
+- **Histograms:** We delved into histograms for continuous data, illustrating how data can be segmented into bins to show distribution patterns, such as skewness or uniformity. This is crucial for analyzing the spread and central tendencies in data.
+
+- **Box Plots:** We explained box plots, which summarize data through their quartiles and highlight outliers. These plots are invaluable for depicting the range and distribution of data in a concise format.
+
+Throughout the document, we covered:
+- **Steps to construct each type of graph**, ensuring a practical understanding of data visualization techniques.
+- **Common uses** for each type of plot, aiding in selecting the appropriate graphical representation based on the data and the analysis goals.
+- **Potential pitfalls and best practices**, such as avoiding misinterpretation of pie charts with too many similar segments or ensuring histograms have appropriately sized bins.
+
+### Key Takeaways:
+1. **Choice of Graph Depends on Data Type and Desired Insight:** Categorical data often uses bar charts and pie charts, while continuous data is better suited for histograms and box plots.
+2. **Visual Clarity Is Paramount:** Ensure that the graphical representations used do not mislead the audience and are appropriate for the data being represented.
+3. **Understand Your Audience:** Tailor the complexity and style of the graphs to the knowledge level and needs of your audience to maximize comprehension and impact.
+
+## Questions and Answers
+
+This section includes a set of questions designed to test your understanding of the graphs and charts discussed in this document. Answers are provided immediately after each question for quick feedback.
+
+### Question 1: What purpose does a frequency distribution serve in data analysis?
+**Answer:** Frequency distributions are used to visualize how often each value in a dataset occurs, helping to identify patterns such as the central tendency, dispersion, and skewness of the data.
+
+### Question 2: How is relative frequency calculated from a frequency distribution?
+**Answer:** Relative frequency is calculated by dividing the frequency of each data point by the total number of data points. This measure provides a proportion that shows the percentage of the total represented by each category.
+
+### Question 3: What distinguishes a bar chart from a histogram?
+**Answer:** Bar charts represent categorical data with discrete bars, whereas histograms are used for continuous data, displaying data in contiguous intervals or bins.
+
+### Question 4: Why might one choose to use a pie chart in a presentation?
+**Answer:** Pie charts are particularly effective for illustrating the proportions of different categories in a whole, making them useful for showing market share, survey results, or any proportional data.
+
+### Question 5: What information does the box in a box plot represent?
+**Answer:** The box in a box plot encloses the interquartile range (IQR), which includes the middle 50% of the data between the first and third quartiles. The median of the dataset is also marked within the box.
+
+### Question 6: Describe the steps to construct a histogram for a grouped frequency distribution.
+**Answer:** To construct a histogram:
+1. Collect and sort the continuous data.
+2. Choose appropriate intervals or bins.
+3. Tally how many data points fall into each bin.
+4. Draw the histogram with bin intervals on the x-axis and frequency counts on the y-axis.
+
+### Question 7: What does the height of a bar in a histogram represent?
+**Answer:** The height of a bar in a histogram represents the frequency of data points that fall within the corresponding interval.
+
+### Question 8: When should you use a histogram instead of a pie chart?
+**Answer:** Use a histogram for displaying the distribution of numerical data over a continuous interval, which is suitable for understanding variations in data ranges. A pie chart, on the other hand, should be used for categorical data when you need to show proportions in a whole.
+
+### Question 9: What are the potential drawbacks of using pie charts?
+**Answer:** Pie charts can be misleading if used with too many categories or with proportions that are too similar, as small differences can be difficult to discern visually.
+
+### Question 10: How can one ensure accuracy when plotting a box plot?
+**Answer:** Ensure accuracy in a box plot by carefully calculating the quartiles, median, and identifying any outliers. The range and outliers should be clearly marked to provide a true representation of the data distribution.
+
+
+

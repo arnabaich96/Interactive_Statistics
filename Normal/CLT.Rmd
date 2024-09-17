@@ -1,14 +1,55 @@
-
 ---
-title: "Detailed Statistical Concepts"
-author: "Your Name"
-date: "`r format(Sys.Date(), '%B %d, %Y')`"
-output:
+title: "**Central Limit Theorem**"
+author: "**Arnab Aich**"
+output: 
   html_document:
     toc: true
     toc_float: true
-    theme: paper
+    toc_depth: 3
+    theme: cerulean
+editor_options: 
+  chunk_output_type: console
 ---
+
+<style>
+  body {
+    font-size: 18px; /* Adjust this value for your preferred font size */
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #f9e79f;
+  }
+  
+  /* Center the title and author */
+  .title {
+    color: #7C0A02;
+    text-align: center;
+    font-size: 36px;
+  }
+  
+  .author {
+    text-align: center;
+    font-size: 24px;
+    color: #7C0A02;
+  }
+
+  TOC {
+    color: #7C0A02;
+    font-size: 10px;
+  }
+
+  .container-fluid {
+    max-width: 90%; 
+  }
+
+  /* Assign the same color to all level 2 headings (## in markdown) */
+  h2 {
+    color: #7C0A02;
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+</style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
@@ -44,7 +85,7 @@ The rule of thumb for the minimum sample size needed to approximate the distribu
 
 The Central Limit Theorem (CLT) is one of the most powerful and well-known results in all of statistics. It states that the distribution of sample means approximates a normal distribution as the sample size becomes large, regardless of the population's distribution, provided the population has a finite variance.
 
-### Derivation of the Central Limit Theorem
+**Derivation of the Central Limit Theorem**
 
 Let \(X_1, X_2, ..., X_n\) be a random sample of size \(n\) drawn from a population with mean \(\mu\) and variance \(\sigma^2\). The sample mean \(\bar{X}\) can be expressed as:
 
@@ -68,18 +109,235 @@ $$
 
 approaches a standard normal distribution. The term $\frac{\sigma}{\sqrt{n}}$ is known as **standard error** of sample mean.
 
+## Value to Probability Problems
 
-## Practice Questions
+Using the Central Limit Theorem, we can solve problems where we know the value and need to find the corresponding probability. Let's consider the context of test scores in a school. Suppose test scores are normally distributed with a mean of 500 and a standard deviation of 100.
 
-1. What is simple random sampling?
-2. Why are larger sample sizes beneficial in statistical studies?
-3. Explain the Central Limit Theorem.
-4. How does the sample size affect the accuracy of the estimated mean?
-5. Describe a real-life example where simple random sampling could be applied.
-6. What are the consequences of using a small sample size in a survey?
-7. Calculate the probability of obtaining a sample mean within one standard deviation of the population mean for a normally distributed population.
-8. How does the shape of the population distribution affect the sample mean's distribution as sample size increases?
+### Left-tailed problem:
+What is the probability that the average test score from a random sample of 40 students is less than 485?
 
-# Conclusion
+```{r left-tail, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+mu <- 500
+sigma <- 100
+n <- 40
+x <- 485
+z <- (x - mu) / (sigma / sqrt(n))
+p <- pnorm(z)
+# Plot
+ggplot() +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1), geom="area", fill="blue", xlim=c(-4, z)) + xlim(-4, 4) +
+  geom_density(data = data.frame(x = rnorm(1e6, 0, 1)), aes(x=x), alpha=0.5, linewidth = 0.75) +
+  labs(x="Z Score", y="Density") +
+  geom_vline(xintercept=z, color="red", linetype="dashed", linewidth = 0.75) +
+  annotate("text", x=z, y=0.1, label=paste("Z =", round(z, 2), "
+Prob =", round(p, 4)), color="red")
+```
 
-Understanding these principles is crucial for accurate data analysis and making informed decisions based on statistical findings.
+### Right-tailed problem: 
+What is the probability that the average test score is greater than 520?
+
+```{r right-tail, echo=FALSE, message=FALSE, warning=FALSE}
+x <- 520
+z <- (x - mu) / (sigma / sqrt(n))
+p <- 1 - pnorm(z)
+# Plot
+ggplot() +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1), geom="area", fill="blue", xlim=c(z, 4)) + xlim(-4, 4) +
+  geom_density(data = data.frame(x = rnorm(1e6, 0, 1)), aes(x=x), alpha=0.5, linewidth = 0.75) +
+  labs(x="Z Score", y="Density") +
+  geom_vline(xintercept=z, color="red", linetype="dashed", linewidth = 0.75) +
+  annotate("text", x=0, y=0.1, label=paste("Z =", round(z, 2), "
+Prob =", round(p, 4)), color="red")
+```
+
+### Both-tailed problem:
+What is the probability that the average falls between 490 and 510?
+
+```{r both-tail, echo=FALSE, message=FALSE, warning=FALSE}
+x1 <- 490
+x2 <- 510
+z1 <- (x1 - mu) / (sigma / sqrt(n))
+z2 <- (x2 - mu) / (sigma / sqrt(n))
+p <- pnorm(z2) - pnorm(z1)
+# Plot
+ggplot() +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1), geom="area", fill="blue", xlim=c(z1, z2)) + xlim(-4, 4) +
+  geom_density(data = data.frame(x = rnorm(1e6, 0, 1)), aes(x=x), alpha=0.5, linewidth = 0.75) +
+  labs(x="Z Score", y="Density") +
+  geom_vline(xintercept=z1, color="red", linetype="dashed", linewidth = 0.75) +
+  geom_vline(xintercept=z2, color="red", linetype="dashed", linewidth = 0.75) +
+  annotate("text", x=-2.2, y=0.2, label=paste("Z1 =", round(z1, 2), "Z2 =", round(z2, 2), "
+Prob =", round(p, 4)), color="red")
+```
+
+## Probability to Value Problems
+
+Using the Central Limit Theorem, we can solve problems where we know the probability and need to find the corresponding value. Let's consider the context of daily sales at a retail store. Suppose sales are normally distributed with a mean of $3000 and a standard deviation of $500. We'll find specific sales values corresponding to certain probabilities.
+
+### Left-tailed problem:
+Find the sales amount below which the bottom 10% of days fall.
+
+```{r left-tail-value, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+mu <- 3000
+sigma <- 500
+n <- 30
+p <- 0.10
+z <- qnorm(p)
+x <- mu + z * (sigma / sqrt(n))
+# Plot
+ggplot() +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1 ), geom="area", fill="blue", xlim=c(-4, z)) + xlim(-4, 4) +
+  geom_density(data = data.frame(x = rnorm(1e6, 0, 1)), aes(x=x), alpha=0.5,linewidth = 0.75) +
+  labs( x="Daily Sales", y="Density") +
+  geom_vline(xintercept=z, color="red", linetype="dashed",linewidth = 0.75) +
+  annotate("text", x=0, y=0.1, label=paste("Z =", round(z, 2), "\n Sales =", round(x, 2)), color="red")
+```
+
+**Calculations**
+
+For the left-tailed problem, we find the sales amount below which the bottom 10% of days fall. The calculation is as follows:
+
+1. **Determine Z-Score**:
+   \[
+   Z = z_{0.90}
+   \]
+   which gives \( Z \approx -1.28 \).
+
+2. **Calculate Sales**:
+   \[
+   \text{Sales} = \mu + Z \times \left(\frac{\sigma}{\sqrt{n}}\right)
+   \]
+   \[
+   \text{Sales} = 3000 + (-1.28) \times \left(\frac{500}{\sqrt{30}}\right)
+   \]
+   \[
+   \text{Sales} \approx 2674.08
+   \]
+
+
+### Right-tailed problem: 
+Find the sales amount above which the top 5% of days fall.
+
+```{r right-tail-value, echo=FALSE, message=FALSE, warning=FALSE}
+p <- 0.95
+z <- qnorm(p)
+x <- mu + z * (sigma / sqrt(n))
+# Plot
+ggplot() +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1 ), geom="area", fill="blue", xlim=c(z, 4)) + xlim(-4, 4) +
+  geom_density(data = data.frame(x = rnorm(1e6, 0, 1)), aes(x=x), alpha=0.5,linewidth = 0.75) +
+  labs( x="Daily Sales", y="Density") +
+  geom_vline(xintercept=z, color="red", linetype="dashed",linewidth = 0.75) +
+  annotate("text", x=0, y=0.1, label=paste("Z =", round(z, 2), "\n Sales =", round(x, 2)), color="red")
+```
+
+**Calculation**
+
+For the right-tailed problem, we find the sales amount above which the top 5% of days fall:
+
+1. **Determine Z-Score**:
+   \[
+   Z = z_{0.05}
+   \]
+   which gives \( Z \approx 1.645 \).
+
+2. **Calculate Sales**:
+   \[
+   \text{Sales} = \mu + Z \times \left(\frac{\sigma}{\sqrt{n}}\right)
+   \]
+   \[
+   \text{Sales} = 3000 + 1.645 \times \left(\frac{500}{\sqrt{30}}\right)
+   \]
+   \[
+   \text{Sales} \approx 3325.92
+   \]
+
+### Both-tailed problem:
+Find the range sales amount containing the middle 75% of days.
+
+```{r both-tail-value, echo=FALSE, message=FALSE, warning=FALSE}
+p1 <- 0.125
+p2 <- 0.875
+z1 <- qnorm(p1)
+z2 <- qnorm(p2)
+x1 <- mu + z1 * (sigma / sqrt(n))
+x2 <- mu + z2 * (sigma / sqrt(n))
+# Plot
+ggplot() +
+  stat_function(fun=dnorm, args=list(mean=0, sd=1 ), geom="area", fill="blue", xlim=c(z1, z2)) + xlim(-4, 4) +
+  geom_density(data = data.frame(x = rnorm(1e6, 0, 1)), aes(x=x), alpha=0.5,linewidth = 0.75  ) +
+  labs( x="Daily Sales", y="Density") +
+  geom_vline(xintercept=z1, color="red", linetype="dashed",linewidth = 0.75) +
+  geom_vline(xintercept=z2, color="red", linetype="dashed",linewidth = 0.75) +
+  annotate("text", x=z1-1, y=0.1, label=paste("Z1 =", round(z1, 2), "\n Sales1 =", round(x1, 2)), color="red") +
+  annotate("text", x=z2+1, y=0.1, label=paste("Z2 =", round(z2, 2), "\n Sales2 =", round(x2, 2)), color="red")
+
+
+```
+
+
+For the both-tailed problem, we find the range of sales containing the middle 75% of days:
+
+1. **Determine Z-Scores**:
+   \[
+   Z1 = z_{0.875}
+   \]
+   \[
+   Z2 = z_{0.125}
+   \]
+   which gives \( Z1 \approx -1.15 \) and \( Z2 \approx 1.15 \).
+
+2. **Calculate Sales Range**:
+   \[
+   \text{Sales1} = \mu + Z1 \times \left(\frac{\sigma}{\sqrt{n}}\right)
+   \]
+   \[
+   \text{Sales2} = \mu + Z2 \times \left(\frac{\sigma}{\sqrt{n}}\right)
+   \]
+   \[
+   \text{Sales1} \approx 2701.45 \quad \text{and} \quad \text{Sales2} \approx 3298.55
+   \]
+
+## Recap
+
+Throughout this document, we have explored the powerful Central Limit Theorem (CLT) and its practical applications in solving real-world problems. We've seen how the CLT helps in understanding the distribution of sample means and allows for the approximation of probabilities in normally distributed populations, regardless of the population's original distribution. The key takeaways include:
+
+- **Understanding Sampling**: Emphasized the importance of simple random sampling to ensure unbiased samples that reflect the entire population.
+- **Applications of CLT**: Demonstrated through examples in daily sales and test scores, showing how to convert both values to probabilities and probabilities to values.
+- **Statistical Accuracy**: Discussed the importance of large sample sizes in achieving more accurate and reliable statistical results.
+
+
+## Questions and Answers
+
+1. **What is the Central Limit Theorem?**  
+   The CLT states that the distribution of sample means approximates a normal distribution as the sample size becomes large, regardless of the population's distribution.
+
+2. **Why is simple random sampling important in statistics?**  
+   It ensures each member of the population has an equal chance of being selected, leading to unbiased and representative samples.
+
+3. **How does sample size affect the application of the CLT?**  
+   Larger sample sizes reduce the standard error and make the approximation to the normal distribution more accurate.
+
+4. **Can you apply the CLT to any population distribution?**  
+   Yes, the CLT can be applied as long as the population has a finite variance, though the shape of the population distribution affects the minimum sample size needed.
+
+5. **How do you calculate the Z-score in CLT applications?**  
+   The Z-score is calculated as \(Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}\), where \(\bar{X}\) is the sample mean.
+
+6. **What does the standard error of the mean tell us?**  
+   It measures the dispersion of sample means around the population mean and decreases with increasing sample size.
+
+
+7. **What is the role of the standard deviation in the CLT?**  
+   The standard deviation of the population, scaled by the square root of the sample size, determines the spread of the sample means around the population mean.
+   
+8. **How does the CLT help in solving probability problems?**
+
+   The CLT allows us to approximate probabilities in normally distributed populations, making it easier to solve problems involving sample means and probabilities.
+
+
+
+
+
