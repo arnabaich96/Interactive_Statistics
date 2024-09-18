@@ -112,11 +112,10 @@ biased_die_df <- data.frame("Die Face" = names(biased_freq_table),
                             "Relative Frequency" = as.vector(biased_rel_freq_table))
 
 biased_die_df %>%
-  kable() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
-  column_spec(1:3, bold = TRUE, width = "auto") %>%
-  kable_classic(full_width = F, html_font = "Verdana") %>%
-  row_spec(0, background = "#f2f2f2")
+  kable(align = "c") %>%
+   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(biased_die_df), background = "lightblue")
 ```
 
 ---
@@ -154,11 +153,11 @@ iq_df <- data.frame("IQ Range" = names(iq_freq_table),
                     "Relative Frequency" = as.vector(iq_rel_freq_table))
 
 iq_df %>%
-  kable() %>%
+  kable(align = "c") %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
-  column_spec(1:3, bold = TRUE, width = "auto") %>%
-  kable_classic(full_width = F, html_font = "Verdana") %>%
-  row_spec(0, background = "#f2f2f2")
+ kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(iq_df), background = "lightblue")
 ```
 
 ---

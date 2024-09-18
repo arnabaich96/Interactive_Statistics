@@ -235,6 +235,11 @@ For a dataset with a mean of 10 and a standard deviation of 2, and a value of 14
 2. Divide by the standard deviation: \(4 / 2 = 2\).
 
 So, the z-score is **2**.
+
+---
+
+
+
 ```{r}
 # Generate random heights using a normal distribution
 set.seed(123)  # Set seed for reproducibility
@@ -244,11 +249,14 @@ heights_ft <- heights_cm / 30.48  # Convert cm to feet
 
 h = cbind(heights_cm, heights_in, heights_ft)
 h[1:5,] %>%
-  kbl() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+  kbl(align = "c") %>%
+kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:5, background = "lightblue")
+
 ```
 
-
+### Summary Measures
 ```{r}
 # Summary Measures Function
 summary_measures <- function(data) {
@@ -293,18 +301,25 @@ z_score_table <- data.frame(
   Z_Score_ft = z_scores_ft
 )
 
-# Use HTML to align two tables side by side
-cat('<div class="table-container">')
-
 # Print the summary table
 summary_table %>%
-  kbl() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+  kbl(align = "c") %>%
+kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(summary_table), background = "lightblue")
+```
 
-# Print the Z-score table
+
+### Z-score table
+
+
+```{r}
 z_score_table %>%
-  kbl() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = F)
+  kbl(align = "c") %>%
+kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(z_score_table), background = "lightblue")
+
 
 
 ```

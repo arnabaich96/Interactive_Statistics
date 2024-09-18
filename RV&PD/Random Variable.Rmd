@@ -61,6 +61,32 @@ library(kableExtra)
 - A **random variable** (RV) is a variable whose possible values are outcomes of a random experiment.
   - *Example*: Rolling a six-sided die.
     - The random variable (**X**) can take on values from 1 to 6.
+  - *Example*: Rolling two six-sided die.
+    - The random variable (**Y**) indicates sum of two face values (2 to 12).
+    
+```{r}
+# plot showing sum of two die rolls in 100 rolls
+set.seed(123)
+die1 <- sample(1:6, 1e5, replace = TRUE)
+die2 <- sample(1:6, 1e5, replace = TRUE)
+sum_die <- die1 + die2
+barplot(table(sum_die)/length(sum_die), main = "Sum of Two Die Rolls", ylab = "Probability", col = "purple", border = "white"   )
+ 
+prob_table = t(table(sum_die)/length(sum_die))
+rownames(prob_table) <- "$P(X=x)$"
+```
+
+Probabilty Distribution of random variable $Y$ representing sum of two die rolls:
+
+```{r}
+prob_table %>%
+  round(3) %>%
+  kbl(align = "c") %>%
+  kable_styling(full_width = FALSE, position = "center", bootstrap_options = "striped") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1, background = "lightblue")
+```
+
 - Random variables can be:
   - **Discrete**: Can take on a countable number of values (e.g., die rolls).
   - **Continuous**: Can take on an infinite number of values within a range (e.g., IQ scores).
@@ -69,7 +95,7 @@ library(kableExtra)
 
 ## Discrete Random Variable
 
-- Suppose we roll a six-sided die $1000$ times and record the results. Let us consider $X$ be a random variable indicating the 
+- Suppose we roll a six-sided die $1000$ times and record the results. Let us consider $X$ be a random variable indicating the face value obtained on each roll. 
   - We will now calculate probabilities and show the frequency and relative frequency tables.
 
 ```{r, echo=FALSE}
@@ -92,8 +118,10 @@ library(knitr)
 library(kableExtra)
 
 biased_die_df %>%
-  kbl() %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = "striped")
+  kbl(align = "c") %>%
+  kable_styling(full_width = FALSE, position = "center", bootstrap_options = "striped") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(biased_die_df), background = "lightblue")
 ```
 
 ---
@@ -121,6 +149,7 @@ Calculating Probabilities of the following events:
 - **Mean (Expected Value)** of a discrete random variable X is given by:
   - *$E(X) = \Sigma [x \cdot P(X = x)]$*
   - The calculation for the biased die example:
+  
 
 ```{r}
 # Load required library
@@ -133,20 +162,26 @@ biased_die_table_1 <- data.frame(
   `X * P(X = x)` = c(0.15, 0.30, 1.05, 0.40, 0.50, 0.30)
 )
 
+
 # Display the table with center alignment and garnet header
-kable(biased_die_table_1, align = "c", row.names = FALSE,col.names = c("Value","Prob","Value*prob")) %>%
-  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+kable(biased_die_table_1, align = "c", row.names = FALSE,col.names = c(
+  "Die Face (X)", 
+  "$P(X = x)$", 
+  "$X * P(X = x)$")) %>%
+  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"), position = "center") %>%
   row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
-  row_spec(1:nrow(biased_die_table_1), background = "#f9e79f")
+  row_spec(1:nrow(biased_die_table_1), background = "lightblue")
 
 
 ```
 
-- **E(X) = 0.15 + 0.30 + 1.05 + 0.40 + 0.50 + 0.30 = 2.70**
+- $E(X) = 0.15 + 0.30 + 1.05 + 0.40 + 0.50 + 0.30 = 2.70$
 
 - **Variance** of a discrete random variable X is given by:
   - *$Var(X) = \Sigma [(x - E(X))^2 \cdot P(X = x)]$*
   - The calculation for the biased die example:
+  
+  
 ```{r}
 # Load required library
 library(kableExtra)
@@ -156,23 +191,21 @@ biased_die_table_2 <- data.frame(
   `Die Face (X)` = 1:6,
   `P(X = x)` = c(0.15, 0.15, 0.35, 0.10, 0.10, 0.05),
   `(X - E(X))^2` = c(2.89, 0.49, 0.09, 1.69, 5.29, 10.89),
-  `(X - E(X))^2 * P(X = x)` = c(0.43, 0.07, 0.03, 0.17, 0.53, 0.54)
+  `(X - E(X))^2 P(X = x)` = c(0.43, 0.07, 0.03, 0.17, 0.53, 0.54)
 )
 
-# Proper LaTeX expressions for headers
-colnames(biased_die_table_2) <- c(
-  "Die Face (X)", 
-  "P(X = x)", 
-  "(X - E(X))^2", 
-  "$(X - E(X))^2 * P(X = x)$"
-)
 
 # Display the table with center alignment, proper LaTeX, and garnet header
-kable(biased_die_table_2, align = "c", row.names = FALSE, escape = FALSE) %>%
+kable(biased_die_table_2, align = "c", col.names = c(
+  "Die Face (X)", 
+  "$P(X = x)$", 
+  "$(X - E(X))^2$", 
+  "$(X - E(X))^2 P(X = x)$"
+), escape = FALSE) %>%
   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
   row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
-  row_spec(1:nrow(biased_die_table_2), background = "#f9e79f")
-
+  row_spec(1:nrow(biased_die_table_2), background = "lightblue")
+ 
 ```
 
 
@@ -195,6 +228,8 @@ We are interested in calculating the following probabilities using this hypothet
 
 **P(165 cm ≤ height ≤ 185 cm)**: The probability of selecting an individual whose height falls between 165 cm and 185 cm.
 These probabilities can be idenfied using the area under the density curve.
+
+
 ```{r, echo=FALSE}
 # Simulating height data (dynamically generated based on seed)
 height_data <- rnorm(1000, mean=175, sd=10)
@@ -244,4 +279,6 @@ polygon(c(165, seq(165, 185, length=100), 185),
 
 5. **How is the probability calculated for a continuous random variable?**
    - The probability for a continuous random variable is calculated by finding the area under the probability density function (PDF) for a given range.
+
+
 

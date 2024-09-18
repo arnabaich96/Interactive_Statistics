@@ -103,8 +103,9 @@ fruit_data$RelativeFrequency <- fruit_data$Frequency / sum(fruit_data$Frequency)
 # Displaying the frequency table with relative frequency
 fruit_data %>%
   kable(format = "html", table.attr = "style='width:100%;'", align = 'c') %>%
-  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
-  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02")
+   kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(fruit_data), background = "lightblue")
 
 
 # Creating a ggplot bar chart for frequency
@@ -154,7 +155,12 @@ data_combined_pie <- data.frame(
 )
 
 # Print the data as an HTML table
-kable(data_combined_pie, format = "html", table.attr = "style='width:100%;'", align = 'c')
+data_combined_pie %>%
+  kable(format = "html", table.attr = "style='width:100%;'", align = 'c') %>%
+kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(data_combined_pie), background = "lightblue")
+
 ```
 
 
@@ -210,8 +216,10 @@ temperature_table <- data.frame(
 # Display the grouped frequency table
 temperature_table %>%
   kable(format = "html", table.attr = "style='width:100%;'", align = 'c') %>%
-  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
-  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02")
+kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(temperature_table), background = "lightblue")
+
 
 # Plotting the histogram with grouped frequency distribution
 ggplot(temperature_table, aes(x = Interval, y = Frequency)) +

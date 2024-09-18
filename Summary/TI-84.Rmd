@@ -96,10 +96,10 @@ data <- data.frame(
 )
 
 kable(data, format = "html", align = "c", escape = FALSE, col.names = c("Statistic", "Formula")) %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "bordered", "hover")) %>%
-  column_spec(1, width = "3em") %>%
-  column_spec(c(1, 2), width = "auto") %>%
-  row_spec(0, bold = TRUE)
+kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(data), background = "lightblue")
+
 
 
 ```
@@ -113,10 +113,10 @@ data <- data.frame(
 )
 
 kable(data, format = "html", align = "c", escape = FALSE, col.names = c("Statistic", "Value")) %>%
-  kable_styling(full_width = FALSE, position = "center", bootstrap_options = c("striped", "bordered", "hover")) %>%
-  column_spec(1, width = "3em") %>%
-  column_spec(c(1, 2), width = "auto") %>%
-  row_spec(0, bold = TRUE)
+kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed")) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#7C0A02") %>%
+  row_spec(1:nrow(data), background = "lightblue")
+
 ```
 
 
