@@ -7,6 +7,8 @@ output:
     toc_float: true
     toc_depth: 3
     theme: cerulean
+editor_options: 
+  chunk_output_type: console
 ---
 
 <style>
@@ -42,16 +44,22 @@ output:
   /* Assign the same color to all level 2 headings (## in markdown) */
   h2 {
     color: #7C0A02;
-    font-size: 24px;
+    font-size: 26px;
   }
   h3 {
-    font-size: 20px;
+    font-size: 24px;
   }
+  h4{
+    font-size: 20px;
+  
+}
 </style>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, comment = NA, message = FALSE,warning = FALSE)
 library(ggplot2)
+library(kableExtra)
+library(patchwork)
 ```
 
 ## Properties:
@@ -89,24 +97,24 @@ y <- dnorm(x)
 
 # Lower tail probability (Z < -1.645)
 lower_tail <- ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue", size = 1) +
+  geom_line(color = "darkblue", size = 1.2) +
   geom_area(data = subset(data.frame(x, y), x < -1.645), aes(x, y), fill = "lightblue") +
   annotate("text", x = -0.5, y = 0.06, label = expression(bold(Z[0.95]) ~ "=" ~ -1.645), 
            size = 5, vjust = 1.5, hjust = 1.2) +
   geom_segment(aes(x = -1.645, y = 0.03, xend = -1.645, yend = 0), 
-               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
+               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1.2) +
   annotate("text", x = -1.2, y = 0.15, label = "Area = \n 0.05", size = 5, vjust = 1.5, hjust = 1) +
   labs(title = "Lower Tail Probability", x = "Z-Score", y = "Density") +
   theme_minimal()
 
 # Upper tail probability (Z > 1.645)
 upper_tail <- ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue", size = 1) +
+  geom_line(color = "darkblue", size = 1.2) +
   geom_area(data = subset(data.frame(x, y), x > 1.645), aes(x, y), fill = "pink") +
   annotate("text", x = 0.2, y = 0.06, label = expression(bold(Z[0.05]) ~ "=" ~ 1.645), 
            size = 5, vjust = 1.5, hjust = -0.2) +
   geom_segment(aes(x = 1.645, y = 0.03, xend = 1.645, yend = 0), 
-               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1) +
+               arrow = arrow(length = unit(0.3, "cm")), color = "black", size = 1.2) +
   annotate("text", x = 1.2, y = 0.15, label = "Area = \n  0.05", size = 5, vjust = 1.5, hjust = -0.5) +
   labs(title = "Upper Tail Probability", x = "Z-Score", y = "Density") +
   theme_minimal()
@@ -150,7 +158,7 @@ x <- seq(-4, 4, length = 100)
 y <- dnorm(x, mean = mean, sd = sd)
 
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "blue") +
+ geom_line(color = "darkblue",linewidth =1) +
   geom_vline(xintercept = c(-1, 1), linetype = "dashed", color = "green") +
   geom_vline(xintercept = c(-2, 2), linetype = "dashed", color = "orange") +
   geom_vline(xintercept = c(-3, 3), linetype = "dashed", color = "red") +
@@ -180,7 +188,7 @@ ggplot(data.frame(x, y), aes(x, y)) +
 
 Consider the population monthly coffee consumption in liters follows a normal distribution with a mean of 10 liters and a standard deviation of 2 liters.
 
-### What percentage of people drink more than 12 liters of coffee per month?
+### What percentage of people drink more than 13 liters of coffee per month?
 We can convert the value to a z-score and find the upper tail probability.
 
 ```{r more-than-13-liters}
@@ -194,7 +202,7 @@ x <- seq(mean_coffee - 4 * sd_coffee, mean_coffee + 4 * sd_coffee, length = 100)
 y <- dnorm(x, mean = mean_coffee, sd = sd_coffee)
 
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue") +
+  geom_line(color = "darkblue",linewitdth=1) +
   geom_area(data = subset(data.frame(x, y), x > consumption), aes(x, y), fill = "pink") +
   annotate("text", x = 13, y = 0.02, label = expression(bold(Z) ~ "=" ~ 1.5), size = 5, vjust = 1.5, hjust = 1.2) +
   labs(title = "Probability of Coffee Consumption > 13 liters", x = "Consumption (liters)", y = "Density") +
@@ -206,11 +214,11 @@ ggplot(data.frame(x, y), aes(x, y)) +
 
 $$ Z = \frac{13 - 10}{2} = 1.5 $$
 
-From the standard normal table, the probability of a z-score greater than 1 is 0.0668. Therefore, approximately **6.68%** of people drink more than 12 liters of coffee per month.
+From the standard normal table, the probability of a z-score greater than 1 is 0.0668. Therefore, approximately **6.68%** of people drink more than 13 liters of coffee per month.
 
 ---
 
-###  What percentage of people drink less than 8 liters of coffee per month?
+###  What percentage of people drink less than 6.5 liters of coffee per month?
 
 We can convert the value to a z-score and find the lower tail probability.
 
@@ -220,7 +228,7 @@ z <- (consumption - mean_coffee) / sd_coffee
 
 # Plotting the probability
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue") +
+  geom_line(color = "darkblue",linewitdth=1) +
   geom_area(data = subset(data.frame(x, y), x < consumption), aes(x, y), fill = "lightblue") +
   annotate("text", x = 6.5, y = 0.02, label = expression(bold(Z) ~ "=" ~ -1.75), size = 5, vjust = 1.5, hjust = 1.2) +
   labs(title = "Probability of Coffee Consumption < 6.5 liters", x = "Consumption (liters)", y = "Density") +
@@ -228,11 +236,11 @@ ggplot(data.frame(x, y), aes(x, y)) +
 
 ```
 
-**Solution**: The z-score for 8 liters is:
+**Solution**: The z-score for 6.5 liters is:
 
 $$ Z = \frac{6.5 - 10}{2} = -1.75 $$
 
-From the standard normal table, the probability of a z-score less than -1 is 0.04. Therefore, approximately **4%** of people drink less than 8 liters of coffee per month.
+From the standard normal table, the probability of a z-score less than -1 is 0.04. Therefore, approximately **4%** of people drink less than 6.5 liters of coffee per month.
 
 ---
 
@@ -243,7 +251,7 @@ This is the area between the two z-scores: \( Z = -0.5 \) and \( Z = 1 \).
 ```{r between-8-and-12-liters}
 # Plotting the probability
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue") +
+  geom_line(color = "darkblue",linewitdth=1) +
   geom_area(data = subset(data.frame(x, y), x > 9 & x < 12), aes(x, y), fill = "lightgreen") +
   annotate("text", x = 9, y = 0.02, label = expression(bold(Z) ~ "=" ~ -0.5), size = 5, vjust = 1.5, hjust = 1.2) +
   annotate("text", x = 12, y = 0.02, label = expression(bold(Z) ~ "=" ~ 1), size = 5, vjust = 1.5, hjust = 1.2) +
@@ -252,7 +260,7 @@ ggplot(data.frame(x, y), aes(x, y)) +
 
 ```
 
-**Solution**: The area between \( Z = -0.5 \) and \( Z = 1 \) is approximately **54%** .
+**Solution**: The area between \( Z = -0.5 \) and \( Z = 1 \) is approximately **53.2%** .
 
 ## Probabilty to Value (Daily Screen Time in Hours):
 
@@ -276,10 +284,10 @@ where \( \mu \) is the mean (6 hours), \( Z \) is the z-score (1.28), and \( \si
 Calculation:
 
 \[
-X = 6 + 1.28 \cdot 1.5 = 6 + 1.92 = 7.92 	\text{hours}
+X = 6 + 1.28 \cdot 1.5 = 6 + 1.92 = 7.92 	\text{ hours}
 \]
 
-Thus, the top 10% of people spend more than approximately **7.92 hours** per day on screens.
+Thus, the top 10% of people spend more than approximately **7.92**  hours per day on screens.
 
 ```{r}
 mean_time <- 6
@@ -290,7 +298,7 @@ x <- seq(mean_time - 4 * sd_time, mean_time + 4 * sd_time, length = 100)
 y <- dnorm(x, mean = mean_time, sd = sd_time)
 
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue") +
+  geom_line(color = "darkblue",linewitdth=1) +
   geom_area(data = subset(data.frame(x, y), x > screen_time_90th), aes(x, y), fill = "pink") +
   annotate("text", x = screen_time_90th, y = 0.05, label = expression(bold("90th Percentile")), size = 5, vjust = -1) +
   labs(title = "Top 10% of Daily Screen Time", x = "Screen Time (hours)", y = "Density") +
@@ -325,7 +333,7 @@ Thus, the bottom 25% of people spend less than approximately **4.99 hours** per 
 screen_time_25th <- mean_time + (-0.674) * sd_time
 
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue") +
+  geom_line(color = "darkblue",linewitdth=1) +
   geom_area(data = subset(data.frame(x, y), x < screen_time_25th), aes(x, y), fill = "lightblue") +
   annotate("text", x = screen_time_25th, y = 0.05, label = expression(bold("25th Percentile")), size = 5, vjust = -1) +
   labs(title = "Bottom 25% of Daily Screen Time", x = "Screen Time (hours)", y = "Density") +
@@ -365,12 +373,147 @@ Thus, the middle 80% of people spend between approximately **4.08 hours** and **
 screen_time_10th <- mean_time + (-1.28) * sd_time
 
 ggplot(data.frame(x, y), aes(x, y)) +
-  geom_line(color = "darkblue") +
+  geom_line(color = "darkblue",linewitdth=1) +
   geom_area(data = subset(data.frame(x, y), x > screen_time_10th & x < screen_time_90th), aes(x, y), fill = "lightgreen") +
   annotate("text", x = screen_time_10th, y = 0.05, label = expression(bold("10th Percentile")), size = 5, vjust = -1) +
   annotate("text", x = screen_time_90th, y = 0.05, label = expression(bold("90th Percentile")), size = 5, vjust = -1) +
   labs(title = "Middle 80% of Daily Screen Time", x = "Screen Time (hours)", y = "Density") +
   theme_minimal()
+```
+
+## Detecting Normality: Q-Q Plot
+
+A **Q-Q (Quantile-Quantile) Plot** is a graphical tool used to compare the quantiles of a sample dataset to the quantiles of a theoretical distribution, such as the normal distribution.
+
+### How to Make a Q-Q Plot?
+
+To construct a Q-Q plot, follow these steps:
+
+1. **Sort the Data**: Arrange the data points in increasing order.
+2. **Calculate the Theoretical Quantiles**: For a normal Q-Q plot, calculate the theoretical quantiles from the standard normal distribution.
+3. **Plot**: Plot the sorted data points against the theoretical quantiles. If the data is normally distributed, the points should fall on or near a straight line.
+
+### Mathematical Details:
+
+Given a dataset with \( n \) values \( X_1, X_2, ..., X_n \), the steps are as follows:
+
+1. Order the data such that \( X_{(1)} \leq X_{(2)} \leq ... \leq X_{(n)} \).
+2. The \( i \)-th theoretical quantile for a standard normal distribution is computed as:
+
+\[
+Q_i = z_{ \left(1 - \frac{i - 0.5}{n} 
+\right)}
+\]
+
+where \( z_{\alpha} \) is a point on the standard normal distribution corresponding to have the probability \( \alpha \)    over it and \( i = 1, 2, ..., n \).
+
+3. Plot the ordered values \( X_{(i)} \) against the theoretical quantiles \( Q_i \).
+
+### How to Interpret a Q-Q Plot?
+
+- **Points lie on a straight line**: The data follows a normal distribution.
+- **Points curve away from the line**: This suggests non-normality. The nature of the deviation (e.g., upward or downward curves) indicates whether the distribution is skewed or has heavy/light tails.
+
+### Example: Q-Q Plot with 10 Randomly Generated Points
+
+Let’s generate 10 random points from a normal distribution and construct a Q-Q plot. We will also calculate and display the theoretical quantiles and observed values in a table.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate 10 random data points from a normal distribution
+sample_data <- rnorm(10)
+
+# Sort the data
+sorted_data <- sort(sample_data)
+
+# Compute theoretical quantiles for standard normal distribution
+n <- length(sorted_data)
+theoretical_quantiles <- qnorm((1:n - 0.5) / n)
+
+# Create a data frame to display in the HTML table
+data_frame <- t(data.frame(
+  "Ordered Data" = sorted_data,
+  "Theoretical Quantiles" = theoretical_quantiles
+))
+
+data_frame = round(data_frame, 3)
+
+# Display the table
+data_frame %>%
+  kable("html") %>%
+  kable_styling(full_width = F) %>%
+  column_spec(1, bold = T, color = "white", background = "#7C0A02") %>%
+  column_spec(2:11, background = "lightblue")
+
+```
+
+Now, let’s generate the Q-Q plot for these 10 points.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Q-Q plot for the 10 random points
+ggplot(data.frame(x = theoretical_quantiles, y = sorted_data), aes(x = x, y = y)) +
+  geom_point(color = "blue", size = 3) +
+  geom_abline(intercept = 0, slope = 1, color = "red", linetype = "dashed",size = 1) +
+  labs(title = "Q-Q Plot for 10 Random Points", x = "Theoretical Quantiles", y = "Ordered Data") +
+  theme_minimal()
+```
+
+### Different Q-Q plots:
+
+Let’s explore how Q-Q plots look for different distributions:
+
+1. **Positive Skew (Right-Skewed)**: Data with a long tail to the right.
+2. **Negative Skew (Left-Skewed)**: Data with a long tail to the left.
+3. **Symmetric**: Symmetrical data, possibly following a normal distribution.
+4. **Uniform Distribution**: Data uniformly distributed between two points.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Generate right-skewed data (chi-squared distribution)
+right_skewed_data <- rchisq(1000, df = 3)
+
+# Q-Q plot for right-skewed data 
+qqrs<- ggplot(data.frame(x = right_skewed_data), aes(sample = x)) +
+  stat_qq(color = "red") +
+  stat_qq_line(color = "blue",size =1) +
+  labs(title = "Positively Skewed Data") +
+  theme_minimal()
+
+# Generate left-skewed data (negatively skewed)
+left_skewed_data <- -rchisq(1000, df = 3)
+
+# Q-Q plot for left-skewed data
+qqls <- ggplot(data.frame(x = left_skewed_data), aes(sample = x)) +
+  stat_qq(color = "green") +
+  stat_qq_line(color = "blue",size =1) +
+  labs(title = "Negatively Skewed Data") +
+  theme_minimal()
+
+# Generate symmetric data (t-distribution with df = 10)
+symmetric_data <- rt(1000, df = 10)
+
+# Q-Q plot for symmetric data
+qqsym <- ggplot(data.frame(x = symmetric_data), aes(sample = x)) +
+  stat_qq(color = "purple") +
+  stat_qq_line(color = "blue",size =1) +
+  labs(title = " Symmetric Data") +
+  theme_minimal()
+
+# Generate uniformly distributed data
+uniform_data <- runif(1000)
+
+# Q-Q plot for uniformly distributed data
+qquni <- ggplot(data.frame(x = uniform_data), aes(sample = x)) +
+  stat_qq(color = "orange") +
+  stat_qq_line(color = "blue",size =1) +
+  labs(title = "Uniformly Distributed Data") +
+  theme_minimal()
+
+
+# plot the Q-Q plots side by side
+(qqrs + qqls)/(qqsym + qquni)
+
 ```
 
 ## Recap
@@ -398,6 +541,15 @@ The **Normal Distribution** is one of the most important probability distributio
 
 - **Tail Probabilities**:
   Tail probabilities help us understand the likelihood of data falling into the extreme ends (tails) of the distribution. These are useful for finding areas under the curve beyond a certain Z-score.
+
+- **Symmetricity**:
+  The normal distribution is symmetric around the mean, with 50% of the data falling below the mean and 50% above the mean. So for a std normal random variable Z
+  $$z_{\alpha} = - z_{1-\alpha} \text{   and   } P(Z > x) = P(Z < -x).$$
+ This property can be verified for Normal distribution with mean $\mu$ and variance $\sigma^2$ and we can have the following.
+  $$P(X > \mu + x) = P(X < \mu - x)$$
+
+- **QQ Plot**:
+  A Q-Q plot is a graphical tool used to compare the quantiles of a sample dataset to the quantiles of a theoretical distribution to check for normality.
 
 ---
 
@@ -542,6 +694,28 @@ Thus, the Z-score is **-0.674**.
   \]
 Thus, **68%** of data falls within 1 standard deviation of the mean.
 
+---
 
+### Question 11:
+**How can you use a Q-Q plot to detect skewness in data?**
+
+**Solution**:
+Skewness can be detected in a Q-Q plot by observing how the points deviate from the straight line:
+- **Positive skewness (right-skewed):** The points will curve upward, indicating a long tail to the right.
+- **Negative skewness (left-skewed):** The points will curve downward, indicating a long tail to the left.
 
 ---
+
+### Question 12:
+**Why might a Q-Q plot for a small sample size show more deviation from the straight line?**
+
+**Solution**:
+With smaller sample sizes, random variation can cause more deviation from the expected theoretical distribution in a Q-Q plot. This does not necessarily mean that the data does not follow the distribution; rather, it reflects the increased variability and noise present in smaller datasets. As the sample size increases, the points in the Q-Q plot will tend to align more closely with the straight line if the data follows the theoretical distribution.
+
+---
+
+### Question 13:
+**Can we detect outliers from a Normal Q-Q plot?**
+**Solution**:
+Yes, outliers can be detected from a Normal Q-Q plot. Outliers are data points that deviate significantly from the expected pattern of the Q-Q plot. They may appear as points that are far away from the straight line, indicating that these values do not follow the normal distribution pattern of the data.
+

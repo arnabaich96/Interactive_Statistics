@@ -6,7 +6,6 @@ output:
     toc: true
     toc_float: true
 ---
-
 <style>
   body {
     font-size: 18px; /* Adjust this value for your preferred font size */
