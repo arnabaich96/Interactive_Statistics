@@ -716,6 +716,7 @@ With smaller sample sizes, random variation can cause more deviation from the ex
 
 ### Question 13:
 **Can we detect outliers from a Normal Q-Q plot?**
+
 **Solution**:
 Yes, outliers can be detected from a Normal Q-Q plot. Outliers are data points that deviate significantly from the expected pattern of the Q-Q plot. They may appear as points that are far away from the straight line, indicating that these values do not follow the normal distribution pattern of the data.
 
