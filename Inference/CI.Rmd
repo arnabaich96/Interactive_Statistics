@@ -1,0 +1,117 @@
+---
+title: "**One Sample Confidence Interval for **"
+author: "**Arnab Aich**"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    theme: cerulean
+editor_options: 
+  chunk_output_type: console
+---
+<link rel="stylesheet" type="text/css" href="../styles.css">
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+```
+
+## Introduction
+A **confidence interval** gives an estimated range of values which is likely to include an unknown population parameter, the estimated range being calculated from a given set of sample data. The general form of a confidence interval is:
+
+$$ CI = \text{Point Estimate} \pm \text{Margin of Error} $$
+
+The margin of error depends on the desired confidence level, which typically is 95% or 99%, and the variability in the data.
+
+## Definition and Interpretation
+
+Consider the context of estimating the population mean from a sample. A 95% confidence interval means that if we take many samples and calculate the interval for each sample, approximately 95% of those intervals will contain the true population mean.
+
+For example, suppose we collect the sample mean \( \bar{x} \) and want to construct a confidence interval for the population mean \( \mu \).
+
+## Z-interval Construction - Population SD ($\sigma$) is known:
+
+The Z-interval is used when the population standard deviation \( \sigma \) is known and the sample size is large. The formula for the Z-interval is:
+
+$$ CI = \bar{x} \pm Z_{\alpha/2} \left( \frac{\sigma}{\sqrt{n}} \right) $$
+
+Where:
+
+- \( \bar{x} \) is the sample mean,
+- \( Z_{\alpha/2} \) is the critical value from the standard normal distribution for the desired confidence level (e.g., 1.96 for 95% confidence),
+- \( \sigma \) is the population standard deviation,
+- \( n \) is the sample size.
+
+### Example
+
+If we have a sample mean of 100, a known population standard deviation of 15, and a sample size of 50, we can compute a 95% confidence interval.
+
+```{r}
+# Parameters
+x_bar <- 100
+sigma <- 15
+n <- 50
+z_alpha <- qnorm(0.975)  # 95% confidence level
+
+# Confidence Interval calculation
+margin_of_error <- z_alpha * (sigma / sqrt(n))
+ci_lower <- x_bar - margin_of_error
+ci_upper <- x_bar + margin_of_error
+ci_lower
+ci_upper
+```
+
+## t-interval Construction - Population SD ($\sigma$) is not known:
+
+When the population standard deviation is unknown and the sample size is small, the **t-interval** is used. The formula is similar to the Z-interval but uses the sample standard deviation \( s \) and the t-distribution critical value:
+
+$$ CI = \bar{x} \pm t_{\alpha/2, df} \left( \frac{s}{\sqrt{n}} \right) $$
+
+Where:
+
+- \( t_{\alpha/2, df} \) is the critical value from the t-distribution with \( df = n-1 \) degrees of freedom.
+
+### Example
+
+Suppose we have a sample mean of 100, a sample standard deviation of 18, and a sample size of 20. We can compute the 95% confidence interval as follows:
+
+```{r}
+# Parameters
+x_bar_t <- 100
+s <- 18
+n_t <- 20
+t_alpha <- qt(0.975, df=n_t-1)  # 95% confidence level, 19 degrees of freedom
+
+# Confidence Interval calculation
+margin_of_error_t <- t_alpha * (s / sqrt(n_t))
+ci_lower_t <- x_bar_t - margin_of_error_t
+ci_upper_t <- x_bar_t + margin_of_error_t
+ci_lower_t
+ci_upper_t
+```
+
+## Question: Example Problem
+
+**Problem:**
+
+You collect a sample of 30 students' test scores with a mean of 75 and a sample standard deviation of 10. Compute the 95% confidence interval for the population mean.
+
+Solution:
+
+```{r}
+# Given values
+x_bar_q <- 75
+s_q <- 10
+n_q <- 30
+t_alpha_q <- qt(0.975, df=n_q-1)
+
+# Confidence Interval calculation
+margin_of_error_q <- t_alpha_q * (s_q / sqrt(n_q))
+ci_lower_q <- x_bar_q - margin_of_error_q
+ci_upper_q <- x_bar_q + margin_of_error_q
+ci_lower_q
+ci_upper_q
+```
+
+The 95% confidence interval for the population mean is between `r round(ci_lower_q, 2)` and `r round(ci_upper_q, 2)`.
+

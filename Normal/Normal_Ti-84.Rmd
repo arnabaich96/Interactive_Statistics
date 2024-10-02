@@ -10,46 +10,7 @@ output:
     theme: cerulean
 ---
 
-<style>
-  body {
-    font-size: 18px; /* Adjust this value for your preferred font size */
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #f9e79f;
-  }
-  
-  /* Center the title and author */
-  .title {
-    color: #7C0A02;
-    text-align: center;
-    font-size: 36px;
-  }
-  
-  .author {
-    text-align: center;
-    font-size: 28px;
-    color: #7C0A02;
-  }
-
-  TOC {
-    color: #7C0A02;
-    font-size: 10px;
-  }
-
-  .container-fluid {
-    max-width: 90%; 
-  }
-
-  /* Assign the same color to all level 2 headings (## in markdown) */
-  h2 {
-    color: #7C0A02;
-    font-size: 25px;
-  }
-  h3 {
-    font-size: 16px;
-  }
-</style>
-
+<link rel="stylesheet" type="text/css" href="../styles.css">
 ##  Tail Probability (P(X > value))
 
 ### **Example 1:** Find \( P(X > 1.5) \), \( X \sim N(2, 3^2) \)

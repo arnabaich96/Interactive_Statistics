@@ -3,64 +3,13 @@ title: "**Summary Graphs and Charts**"
 author: "**Arnab Aich**"
 output: 
   html_document:
+    self_contained: yes
     toc: true
     toc_float: true
+    toc_depth: 3
     theme: cerulean
-    css: |
-      .center-plot {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-      }
-      .table-container {
-        display: flex;
-        justify-content: space-around;
-        margin-top: 20px;
-      }
-      table {
-        margin-right: 30px;
-        font-size: 16px;
-      }
-       body {
-        font-size: 18px; /* Adjust this value for your preferred font size */     
-      margin-left: 10px;
-      margin-right: 10px;
-           }
-
-      .container-fluid {
-        max-width: 90%; /* Ensures that the content takes up the full page width */
-      }
-
 ---
-<style>
-  body {
-    font-size: 18px; /* Adjust this value for your preferred font size */
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #f9e79f;
-  }
-  /* Center the title and author */
-  .title {
-    color: #7C0A02;
-    text-align: center;
-    font-size: 36px;
-  }
-  .author {
-    text-align: center;
-    font-size: 24px;
-  color: #7C0A02;
-  }
-
-  /* Change TOC font color to garnet and hide title/author from TOC */
-  #TOC a {
-    color: #7C0A02;
-  }
-
-  .container-fluid {
-    max-width: 90%; /* Ensures that the content takes up the full page width */
-  }
-</style>
-
+<link rel="stylesheet" type="text/css" href="../styles.css">
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)

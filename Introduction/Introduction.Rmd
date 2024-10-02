@@ -3,50 +3,13 @@ title: "**Introduction to Statistics **"
 author: "**Arnab Aich**"
 output: 
   html_document:
+    self_contained: yes
     toc: true
     toc_float: true
     toc_depth: 3
     theme: cerulean
 ---
-<style>
-  body {
-    font-size: 18px; /* Adjust this value for your preferred font size */
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #f9e79f;
-  }
-  
-  /* Center the title and author */
-  .title {
-    color: #7C0A02;
-    text-align: center;
-    font-size: 36px;
-  }
-  
-  .author {
-    text-align: center;
-    font-size: 24px;
-    color: #7C0A02;
-  }
-
-  TOC {
-    color: #7C0A02;
-    font-size: 10px;
-  }
-
-  .container-fluid {
-    max-width: 90%; 
-  }
-
-  /* Assign the same color to all level 2 headings (## in markdown) */
-  h2 {
-    color: #7C0A02;
-    font-size: 26px;
-  }
-  h3 {
-    font-size: 20px;
-  }
-</style>
+<link rel="stylesheet" type="text/css" href="../styles.css">
 
 
 ## What is Statistics?
