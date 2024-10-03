@@ -1,6 +1,6 @@
 ---
-title: "**TI-84 Summary Statistics and Graphs**"
-author: "**Arnab Aich**"
+title: "TI-84 Summary Statistics and Graphs"
+author: "Arnab Aich"
 output: 
   html_document:
     self_contained: yes
@@ -19,9 +19,9 @@ We will use the following example dataset for all calculations:
 
 - Values: 2, 5, 7, 9, 12, 15, 18, 21, 25
 
-## <span style="color:#7C0A02;">Calculating Summary Measures on TI-84:</span>
+## Calculating Summary Measures on TI-84
 
-### Steps:
+### Steps
 1. **Enter Data:**
    <div class="calc-input">
    Press <code>STAT</code>, then <code>1:Edit</code> to access the list editor.<br>
@@ -74,7 +74,7 @@ kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "con
 ```
 
 
-## <span style="color:#7C0A02;">Calculating Z-Scores on TI-84:</span>
+## Calculating Z-Scores on TI-84
 
 To calculate the Z-scores for specific values, follow these steps:
 
@@ -96,9 +96,9 @@ To calculate the Z-scores for specific values, follow these steps:
    Z = \frac{18 - 12.67}{7.43} \approx 0.72
    \]
 
-## <span style="color:#7C0A02;">Creating Graphs on TI-84:</span>
+## Creating Graphs on TI-84
 
-### 1. **Bar Plot:**
+### 1. **Bar Plot**
    <div class="calc-input">
    Enter the data into <code>L1</code>.<br>
    Press <code>2nd</code>, then <code>Y=</code> to access the STAT PLOT menu.<br>
@@ -106,12 +106,12 @@ To calculate the Z-scores for specific values, follow these steps:
    Choose <code>L1</code> as the data source and press <code>GRAPH</code>.
    </div>
 
-### 2. **Histogram:**
+### 2. **Histogram**
    <div class="calc-input">
    Follow the steps for the bar plot but adjust the <code>Xmin</code>, <code>Xmax</code>, and bin width under <code>WINDOW</code> settings to fit your data range.
    </div>
 
-### 3. **Boxplot:**
+### 3. **Boxplot**
    <div class="calc-input">
    Press <code>2nd</code>, then <code>Y=</code> to access the STAT PLOT menu.<br>
    Turn on Plot1 and select the **Boxplot** option.<br>

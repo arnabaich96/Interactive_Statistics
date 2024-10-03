@@ -1,7 +1,6 @@
-
 ---
-title: "**Normal Distribution with Ti-84 Calculator**"
-author: "**Arnab Aich**"
+title: "Normal Distribution with Ti-84 Calculator"
+author: "Arnab Aich"
 output: 
   html_document:
     toc: true
@@ -11,7 +10,8 @@ output:
 ---
 
 <link rel="stylesheet" type="text/css" href="../styles.css">
-##  Tail Probability (P(X > value))
+
+##  Tail Probability - P(X > value)
 
 ### **Example 1:** Find \( P(X > 1.5) \), \( X \sim N(2, 3^2) \)
 

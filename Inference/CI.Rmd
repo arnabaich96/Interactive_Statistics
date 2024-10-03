@@ -1,117 +1,513 @@
 ---
-title: "**One Sample Confidence Interval for **"
-author: "**Arnab Aich**"
+title: "One Sample Confidence Interval for $\\mu$"
+author: "Arnab Aich"
 output: 
   html_document:
     toc: true
     toc_float: true
-    toc_depth: 3
+    toc_depth: 4
     theme: cerulean
-editor_options: 
-  chunk_output_type: console
 ---
 <link rel="stylesheet" type="text/css" href="../styles.css">
 
-```{r include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE,fig.align = 'center',out.width = '100%')
+library(plotly)
+library(ggplot2)
+library(kableExtra)
 ```
 
 ## Introduction
-A **confidence interval** gives an estimated range of values which is likely to include an unknown population parameter, the estimated range being calculated from a given set of sample data. The general form of a confidence interval is:
+A **confidence interval** gives an estimated range of values which is likely to include an unknown population parameter (ex: \(\mu,\sigma\), etc.) to some **extent**. The interval is estimated from a given set of sample data. The general form of a confidence interval is:
 
 $$ CI = \text{Point Estimate} \pm \text{Margin of Error} $$
 
-The margin of error depends on the desired confidence level, which typically is 95% or 99%, and the variability in the data.
+The margin of error depends on the desired confidence level - \(\boldsymbol{(1-\alpha)*100\%}\), the sample size  - \(\boldsymbol{n}\) and the variability - \(\boldsymbol{\sigma}\) in the data.
 
-## Definition and Interpretation
+## Interpretation and componentss of Confidence Intervals
 
-Consider the context of estimating the population mean from a sample. A 95% confidence interval means that if we take many samples and calculate the interval for each sample, approximately 95% of those intervals will contain the true population mean.
+A confidence interval (CI) is a range of values, derived from sample statistics, that is likely to contain the true population parameter. The most commonly used CI is the 95% confidence interval, which suggests that if we repeated our sampling process 100 times, 95 of those intervals would contain the true population parameter. However, it's important to note that the earlier statement does **not** mean there's a 95% chance that the population mean falls within this interval. The population mean is a Parameter so it is fixed for a specific population; the interval itself is random, depending on the sample.
 
-For example, suppose we collect the sample mean \( \bar{x} \) and want to construct a confidence interval for the population mean \( \mu \).
+### Interpreting a 95% Confidence Interval for the Mean
 
-## Z-interval Construction - Population SD ($\sigma$) is known:
+Let's say we conducted a study where we sampled 50 students' test scores and found the average score to be 75 with a confidence interval of [70, 80]. This means we are 95% confident that the true average score for all students lies between 70 and 80. The margin of error in this case is 5.
 
-The Z-interval is used when the population standard deviation \( \sigma \) is known and the sample size is large. The formula for the Z-interval is:
+Below is a plot that visualizes multiple confidence intervals for a given dataset. Each horizontal line represents a different sample's confidence interval, and the red line represents the true population mean. You will notice that while most intervals contain the population mean, some do not. This is the 5% error in the 95% confidence level.
+
+```{r plot_ci, fig.height=5, fig.width=7}
+set.seed(123)
+mu <- 75  # True population mean
+sigma <- 10  # Population standard deviation
+n <- 30  # Sample size
+samples <- 100  # Number of samples
+conf_level <- 0.95
+z <- qnorm((1 + conf_level) / 2)  # Z-value for 95% CI
+
+# Generate multiple samples and calculate CIs
+ci_data <- data.frame(lower=numeric(), upper=numeric(), contains_mu=logical())
+for (i in 1:samples) {
+  sample_data <- rnorm(n, mean=mu, sd=sigma)
+  sample_mean <- mean(sample_data)
+  se <- sigma / sqrt(n)
+  margin_error <- z * se
+  lower <- sample_mean - margin_error
+  upper <- sample_mean + margin_error
+  contains_mu <- mu >= lower & mu <= upper
+  ci_data <- rbind(ci_data, data.frame(lower=lower, upper=upper, contains_mu=contains_mu))
+}
+
+# Plot the CIs
+p = ggplot(ci_data, aes(x=1:samples, y=(lower + upper) / 2, ymin=lower, ymax=upper, color=contains_mu)) +
+  geom_errorbar(width=0.2) +
+  geom_point(size=1) +
+  geom_hline(yintercept=mu, color="red", linetype="dashed", lwd=1.5) +
+  scale_color_manual(values=c("blue", "black")) +
+  labs(x="Sample", y="Confidence Interval", title="95% Confidence Intervals for Multiple Samples") +
+  theme_minimal()
+
+ggplotly(p)
+```
+
+In this graph:
+
+- The **red line** indicates the true population mean.
+
+- Each **black line** represents a 95% confidence interval for a different sample.
+
+- **Blue lines** indicate intervals that **do not contain** the population mean (about 5% of the intervals).
+
+### Margin of error and length of the confidence interval
+
+The **Margin of Error (MOE)** is a critical component of a confidence interval. It represents the range of values above and below the point estimate (such as the sample mean) that we use to define the interval. The length of a confidence interval is determined by the margin of error. A larger margin of error results in a wider confidence interval, indicating less precision in the estimate.
+Typically, the **Length of Confidence Interval** is twice the margin of error, as it extends from the point estimate in both directions.
+
+The **Margin of Error** depends on the following three factors:
+
+- **Sample size (n):** A larger sample size results in a smaller margin of error. This is because, as the sample size increases, we get a more precise estimate of the population parameter, and thus the interval around the estimate narrows. Specifically, the margin of error decreases with the square root of the sample size, \(MOE \propto  \frac{1}{\sqrt{n}} \).
+
+- **Variability in the data (\\(\\sigma\\)):** The more variability or spread in the data, the larger the margin of error. Higher variability means less precision in the estimate, resulting in a wider confidence interval. If the data are highly variable, the estimate of the population parameter is less reliable, requiring a larger range (MOE) to ensure the parameter lies within the interval, \(MOE \propto \sigma \).
+
+- **Confidence level (\(1- \alpha \)):** A higher confidence level results in a larger critical value. This means that to be more confident that the interval contains the true population parameter, we must accept a wider interval. For example, a 95% confidence level means we are 95% confident that the interval contains the true population mean, while a 99% confidence level means we are 99% confident. However, a higher confidence level leads to a larger margin of error, resulting in a wider confidence interval, \(MOE \propto (1 - \alpha) \).
+
+```{r moe_effect, fig.height=5, fig.width=7}
+# Sample size and variability effects on MOE
+sample_sizes <- seq(10, 100, by=5)
+variabilities <- c(5, 10, 20)  # Different standard deviations
+z_value <- qnorm(0.975)  # 95% confidence level
+
+# Calculate MOE for different sample sizes and standard deviations
+moe_data <- data.frame(sample_size=numeric(), variability=numeric(), moe=numeric())
+for (sigma in variabilities) {
+  for (n in sample_sizes) {
+    moe <- z_value * (sigma / sqrt(n))
+    moe_data <- rbind(moe_data, data.frame(sample_size=n, variability=sigma, moe=moe))
+  }
+}
+
+p =ggplot(moe_data, aes(x=sample_size, y=moe, color=factor(variability))) +
+  geom_line(size=1) +
+  labs(title="Margin of Error vs Sample Size", x="Sample Size", y="Margin of Error",
+       color="Variability (σ)") +
+  theme_minimal()
+
+ggplotly(p)
+```
+
+
+## One Sample Confidence Intervals
+
+A one-sample confidence interval (CI) for the population mean \( \mu \) is a statistical tool used to estimate the range of values likely to contain the true population mean based on a single sample. It provides a measure of uncertainty around the sample mean \( \bar{x} \), considering the variability in the data and the sample size.
+
+The general form of a confidence interval for \( \mu \) is:
+
+\[
+CI = \bar{x} \pm \text{Margin of Error}
+\]
+
+We will introduce two types of one-sample confidence intervals based on the availability of the population standard deviation \( \sigma \).
+
+### Z-Interval - Population SD (\( \sigma \)) is known
+
+The **Z-interval** is used when the population standard deviation \( \sigma \) is known. The confidence interval provides a range of values, based on the sample data, that is likely to contain the population mean \( \mu \). 
+
+The general form of a $(1-\alpha)*100/%$ confidence interval is:
 
 $$ CI = \bar{x} \pm Z_{\alpha/2} \left( \frac{\sigma}{\sqrt{n}} \right) $$
 
 Where:
 
 - \( \bar{x} \) is the sample mean,
-- \( Z_{\alpha/2} \) is the critical value from the standard normal distribution for the desired confidence level (e.g., 1.96 for 95% confidence),
+
+- \( Z_{\alpha/2} \) is the critical value corresponding to the desired confidence level from the standard normal distribution,
+
 - \( \sigma \) is the population standard deviation,
+
 - \( n \) is the sample size.
 
-### Example
+#### Derivation for \((1-\alpha) \cdot 100\%\) Confidence Interval
 
-If we have a sample mean of 100, a known population standard deviation of 15, and a sample size of 50, we can compute a 95% confidence interval.
+Let's derive the general form for the confidence interval step-by-step.
 
-```{r}
-# Parameters
-x_bar <- 100
-sigma <- 15
-n <- 50
+We start by assuming that the sample mean \( \bar{x} \) follows a normal distribution if the sample size is large enough (Central Limit Theorem):
+
+$$ \bar{x} \sim N\left(\mu, \frac{\sigma^2}{n}\right) $$
+
+We want to construct an interval around the sample mean \( \bar{x} \) such that it has a specified confidence level \((1-\alpha) \cdot 100\%\), meaning that the interval contains the population mean \( \mu \) with that probability.
+
+1. **Standardize the sample mean**: To work with the standard normal distribution, we standardize \( \bar{x} \) to a Z-score:
+
+$$ Z = \frac{\bar{x} - \mu}{\frac{\sigma}{\sqrt{n}}} \sim N(0,1) $$
+
+2. **Find the critical value**: For a \((1-\alpha) \cdot 100\%\) confidence interval, we find the critical value \( Z_{\alpha/2} \) such that the area between \( -Z_{\alpha/2} \) and \( Z_{\alpha/2} \) under the standard normal curve equals \( 1 - \alpha \).
+
+   This means:
+
+   $$ P\left(-Z_{\alpha/2} \leq Z \leq Z_{\alpha/2}\right) = 1 - \alpha $$
+
+3. **Invert the inequality**: Substituting the formula for \( Z \), we get:
+
+$$ P\left(-Z_{\alpha/2} \leq \frac{\bar{x} - \mu}{\frac{\sigma}{\sqrt{n}}} \leq Z_{\alpha/2}\right) = 1 - \alpha $$
+
+Multiplying through by \( \frac{\sigma}{\sqrt{n}} \), we have:
+
+$$ P\left(-Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \leq \bar{x} - \mu \leq Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}\right) = 1 - \alpha $$
+
+4. **Solve for \( \mu \)**: Adding \( \bar{x} \) to all sides, we get:
+
+$$ P\left(\bar{x} - Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} \leq \mu \leq \bar{x} + Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}\right) = 1 - \alpha $$
+
+Thus, the \((1-\alpha) \cdot 100\%\) confidence interval for the population mean \( \mu \) is:
+
+$$ CI = \bar{x} \pm Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}} $$
+
+#### Example: Weekly Study Time of a Freshman
+
+The weekly study time (in hours) for 10 randomly selected freshmen is as follows:
+
+- **Data**: 10, 8, 12, 14, 11, 9, 15, 13, 8, 10
+- **Known population standard deviation**: \( \sigma = 3 \) hours
+- **Confidence level**: 95% (so \( \alpha = 0.05 \))
+
+Steps to Calculate the Confidence Interval:
+
+- Step 1: Calculate the sample mean
+
+The sample mean \( \bar{x} \) is the average of the 10 study times:
+
+$$
+\bar{x} = \frac{10 + 8 + 12 + 14 + 11 + 9 + 15 + 13 + 8 + 10}{10} = 11 \, \text{hours}
+$$
+
+- Step 2: Calculate the critical value
+
+For a 95% confidence level, \( Z_{\alpha/2} = 1.96 \) (from the standard normal distribution).
+
+- Step 3: Calculate the margin of error
+
+The margin of error is given by:
+
+$$
+MOE = Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
+$$
+
+Substitute the values:
+
+$$
+MOE = 1.96 \cdot \frac{3}{\sqrt{10}} \approx 1.86 \, \text{hours}
+$$
+- Step 4: Calculate the confidence interval
+
+Now, we calculate the lower and upper bounds of the confidence interval:
+
+$$
+CI = \bar{x} \pm MOE = 11 \pm 1.86
+$$
+
+Thus, the 95% confidence interval is:
+
+$$
+CI = [9.14, 12.86] \, \text{hours}
+$$
+
+
+Below is a plot showing the 95% confidence interval for the population mean based on the given data.
+
+```{r plot_ci_example, fig.height=4, fig.width=6}
+# Data and parameters
+study_times <- c(10, 8, 12, 14, 11, 9, 15, 13, 8, 10)
+x_bar <- mean(study_times)  # Sample mean
+sigma <- 3  # Known population standard deviation
+n <- length(study_times)  # Sample size
 z_alpha <- qnorm(0.975)  # 95% confidence level
 
 # Confidence Interval calculation
 margin_of_error <- z_alpha * (sigma / sqrt(n))
 ci_lower <- x_bar - margin_of_error
 ci_upper <- x_bar + margin_of_error
-ci_lower
-ci_upper
+
+# Plot
+df <- data.frame(
+  x = c(ci_lower, x_bar, ci_upper),
+  y = 0
+)
+
+p = ggplot(df, aes(x = x, y = y)) +
+  geom_point(size = 3, color = "blue") +
+  geom_errorbarh(aes(xmin = ci_lower, xmax = ci_upper), height = 0.05, color = "blue") +
+  geom_vline(xintercept = x_bar, linetype = "dashed", color = "red") +
+  annotate("text", x = x_bar, y = 0.1, label = "Sample \n Mean", color = "red", vjust = -1) +
+  annotate("text", x = ci_lower, y = 0.1, label = paste0("Lower Bound:\n ", round(ci_lower, 2)), color = "blue", vjust = -1) +
+  annotate("text", x = ci_upper, y = 0.1, label = paste0("Upper Bound:\n ", round(ci_upper, 2)), color = "blue", vjust = -1) +
+  xlim(ci_lower - 2, ci_upper + 2) + ylim(-0.1, 0.25) +
+  labs(title = "95% Confidence Interval for Weekly Study Time",
+       x = "Hours", y = "")
+
+ggplotly(p)
 ```
 
-## t-interval Construction - Population SD ($\sigma$) is not known:
+- The **red dashed line** indicates the sample mean (\( \bar{x} = 11 \) hours).
 
-When the population standard deviation is unknown and the sample size is small, the **t-interval** is used. The formula is similar to the Z-interval but uses the sample standard deviation \( s \) and the t-distribution critical value:
+- The **blue points** mark the lower and upper bounds of the 95% confidence interval (\( 9.14 \) and \( 12.86 \)).
 
-$$ CI = \bar{x} \pm t_{\alpha/2, df} \left( \frac{s}{\sqrt{n}} \right) $$
+- The confidence interval suggests that we are 95% confident that the true mean weekly study time for all freshmen lies between 9.14 and 12.86 hours.
 
-Where:
 
-- \( t_{\alpha/2, df} \) is the critical value from the t-distribution with \( df = n-1 \) degrees of freedom.
 
-### Example
 
-Suppose we have a sample mean of 100, a sample standard deviation of 18, and a sample size of 20. We can compute the 95% confidence interval as follows:
+### t-Interval - Population SD (\( \sigma \)) is Unknown
 
-```{r}
-# Parameters
-x_bar_t <- 100
-s <- 18
-n_t <- 20
-t_alpha <- qt(0.975, df=n_t-1)  # 95% confidence level, 19 degrees of freedom
+#### Student’s t-Distribution
+
+The **Student’s t-distribution** is used in statistics when the sample size is small and the population standard deviation \( \sigma \) is unknown. It accounts for the additional variability that comes from estimating the population standard deviation from the sample. Below, we explore the relationship between the t-distribution and the normal distribution by visualizing t-distributions with different degrees of freedom (df) alongside the standard normal distribution.
+
+#### Connection to the Normal Distribution
+Let us consider a random sample $\{X_1,X_2,...,X_n\}$. where \(X_i\) are independent and identically distributed (i.i.d.) random variables from a normal distribution with mean \( \mu \) and standard deviation \( \sigma \). The sample mean \( \bar{X} \) and sample standard deviation \( S \) are given by:
+$$\bar{X} = \frac{1}{n}\sum_{i = 1}^n X_i   \;\;\;\;\; S = \sqrt{\frac{1}{n-1}\sum_{i = 1}^n (X_i - \bar{X})^2}$$
+Then we have the following relationship:
+$$\frac{\bar{X} - \mu}{\frac{S}{\sqrt{n}}} = \frac{\sqrt{n}(\bar{X} - \mu)}{S} \sim t_{n-1}$$
+where \( t_{n-1} \) denotes a t-distribution with \( n-1 \) degrees of freedom.
+
+#### Properties of the t-Distribution
+
+- **Symmetry**: Like the normal distribution, the t-distribution is symmetric around zero.
+
+- **Heavier Tails**: The t-distribution has heavier tails than the normal distribution, which means it assigns more probability to extreme values. This reflects the greater variability when estimating \( \sigma \) from small samples.
+
+- **Effect of Degrees of Freedom**: The shape of the t-distribution depends on the degrees of freedom (df). As the degrees of freedom increase, the t-distribution approaches the normal distribution. When df is small, the distribution is more spread out with heavier tails, but as df increases, the t-distribution becomes more concentrated around the mean.
+
+- **Convergence to Normal Distribution**: For large sample sizes (typically \( n > 30 \)), the t-distribution closely resembles the normal distribution.
+
+
+```{r t_distribution_plot, fig.height=5, fig.width=7}
+library(ggplot2)
+
+# Degrees of freedom to plot
+dfs <- c(1, 10, 20, 30)
+
+# Create a sequence of t-values
+t_vals <- seq(-4, 4, length.out = 100)
+
+# Create a data frame for t-distributions with different dfs and the normal distribution
+df <- data.frame(
+  t_val = rep(t_vals, times = length(dfs) + 1),
+  Density = c(dt(t_vals, df = dfs[1]), dt(t_vals, df = dfs[2]), dt(t_vals, df = dfs[3]), dt(t_vals, df = dfs[4]), dnorm(t_vals)),
+  Distribution = factor(rep(c(paste0("t, df=", dfs), "Normal"), each = length(t_vals)))
+)
+
+# Plot the t-distributions and normal distribution
+p = ggplot(df, aes(x = t_val, y = Density, color = Distribution)) +
+  geom_line(size = 0.6) +
+  labs(title = "t-Distribution with Varying Degrees of Freedom vs Normal Distribution",
+       x = "t-value",
+       y = "Density") +
+  theme_minimal() +
+  scale_color_manual(values = c("red", "blue", "green", "purple", "black"))
+
+ggplotly(p)
+```
+
+#### Derivation for \((1-\alpha) \cdot 100\%\) Confidence Interval:
+
+
+Let’s derive the confidence interval for the population mean \( \mu \) when the population standard deviation \( \sigma \) is unknown.
+
+1. **Assumption of Normality**: For small sample sizes, we assume that the sample mean \( \bar{x} \) follows a normal distribution:
+   
+   $$
+   \bar{x} \sim N(\mu, \frac{\sigma^2}{n})
+   $$
+
+2. **Standardize the Sample Mean**: Since \( \sigma \) is unknown, we use the sample standard deviation \( s \) to estimate the population standard deviation:
+
+   $$
+   t = \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}}
+   $$
+
+3. **Find the Critical Value**: For a \((1-\alpha) \cdot 100\%\) confidence interval, we find the critical value \( t_{\alpha/2, df} \) from the t-distribution with \( n - 1 \) degrees of freedom:
+
+   $$
+   P\left(-t_{\alpha/2, df} \leq t \leq t_{\alpha/2, df}\right) = 1 - \alpha
+   $$
+
+4. **Invert the Inequality**: Substituting the formula for \( t \), we get:
+
+   $$
+   P\left(-t_{\alpha/2, df} \cdot \frac{s}{\sqrt{n}} \leq \bar{x} - \mu \leq t_{\alpha/2, df} \cdot \frac{s}{\sqrt{n}}\right) = 1 - \alpha
+   $$
+
+5. **Solve for \( \mu \)**: Adding \( \bar{x} \) to both sides, we obtain:
+
+   $$
+   P\left(\bar{x} - t_{\alpha/2, df} \cdot \frac{s}{\sqrt{n}} \leq \mu \leq \bar{x} + t_{\alpha/2, df} \cdot \frac{s}{\sqrt{n}}\right) = 1 - \alpha
+   $$
+
+Thus, the \((1-\alpha) \cdot 100\%\) confidence interval for \( \mu \) is:
+
+$$
+CI = \bar{x} \pm t_{\alpha/2, df} \cdot \frac{s}{\sqrt{n}}
+$$
+
+#### Example: Heights of Students
+
+Suppose the heights (in inches) of 12 randomly selected students are as follows:
+
+- **Data**: 65, 67, 72, 70, 68, 65, 74, 69, 70, 68, 71, 73
+- **Sample standard deviation**: \( s = 3.12 \) inches
+- **Confidence level**: 95% (so \( \alpha = 0.05 \))
+
+Steps to Calculate the Confidence Interval:
+
+- **Step 1**: Calculate the sample mean:
+
+   $$
+   \bar{x} = \frac{65 + 67 + 72 + 70 + 68 + 65 + 74 + 69 + 70 + 68 + 71 + 73}{12} = 69.25 \, \text{inches}
+   $$
+
+- **Step 2**: Calculate the critical value.
+
+For a 95% confidence level and \( n - 1 = 11 \) degrees of freedom, the critical value \( t_{\alpha/2, df} = 2.201 \).
+
+- **Step 3**: Calculate the margin of error:
+
+   $$
+   MOE = t_{\alpha/2, df} \cdot \frac{s}{\sqrt{n}} = 2.201 \cdot \frac{3.12}{\sqrt{12}} \approx 1.98 \, \text{inches}
+   $$
+
+- **Step 4**: Calculate the confidence interval:
+
+   $$
+   CI = 69.25 \pm 1.98 = [67.27, 71.23] \, \text{inches}
+   $$
+
+Thus, the 95% confidence interval for the population mean height is \( [67.27, 71.23] \, \text{inches} \).
+
+```{r plot_t_ci_example, fig.height=4, fig.width=6}
+# Data and parameters
+heights <- c(65, 67, 72, 70, 68, 65, 74, 69, 70, 68, 71, 73)
+x_bar <- mean(heights)  # Sample mean
+s <- sd(heights)  # Sample standard deviation
+n <- length(heights)  # Sample size
+t_alpha <- qt(0.975, df = n-1)  # 95% confidence level
 
 # Confidence Interval calculation
-margin_of_error_t <- t_alpha * (s / sqrt(n_t))
-ci_lower_t <- x_bar_t - margin_of_error_t
-ci_upper_t <- x_bar_t + margin_of_error_t
-ci_lower_t
-ci_upper_t
+margin_of_error <- t_alpha * (s / sqrt(n))
+ci_lower <- x_bar - margin_of_error
+ci_upper <- x_bar + margin_of_error
+
+# Plot
+df <- data.frame(
+  x = c(ci_lower, x_bar, ci_upper),
+  y = 0
+)
+
+p = ggplot(df, aes(x = x, y = y)) +
+  geom_point(size = 3, color = "blue") +
+  geom_errorbarh(aes(xmin = ci_lower, xmax = ci_upper), height = 0.05, color = "blue") +
+  geom_vline(xintercept = x_bar, linetype = "dashed", color = "red") +
+  annotate("text", x = x_bar, y = 0.1, label = "Sample 
+ Mean", color = "red", vjust = -1) +
+  annotate("text", x = ci_lower, y = 0.1, label = paste0("Lower Bound:\n ", round(ci_lower, 2)), color = "blue", vjust = -1) +
+  annotate("text", x = ci_upper, y = 0.1, label = paste0("Upper Bound:\n ", round(ci_upper, 2)), color = "blue", vjust = -1) +
+  xlim(ci_lower - 2, ci_upper + 2) + ylim(-0.1, 0.25) +
+  labs(title = "95% Confidence Interval for Heights (t-interval)",
+       x = "Inches", y = "")
+
+ggplotly(p)
 ```
 
-## Question: Example Problem
 
-**Problem:**
 
-You collect a sample of 30 students' test scores with a mean of 75 and a sample standard deviation of 10. Compute the 95% confidence interval for the population mean.
+## Recap
 
-Solution:
+In this document, we explored the fundamental concepts of **confidence intervals** for estimating population parameters based on sample data. Below is a recap of the key topics covered:
 
-```{r}
-# Given values
-x_bar_q <- 75
-s_q <- 10
-n_q <- 30
-t_alpha_q <- qt(0.975, df=n_q-1)
+- **Introduction to Confidence Intervals**: We defined what a confidence interval is, its components, and how it is used to estimate population parameters. The general form is:
 
-# Confidence Interval calculation
-margin_of_error_q <- t_alpha_q * (s_q / sqrt(n_q))
-ci_lower_q <- x_bar_q - margin_of_error_q
-ci_upper_q <- x_bar_q + margin_of_error_q
-ci_lower_q
-ci_upper_q
-```
+  \[
+  CI = \text{Point Estimate} \pm \text{Margin of Error}
+  \]
 
-The 95% confidence interval for the population mean is between `r round(ci_lower_q, 2)` and `r round(ci_upper_q, 2)`.
+  The margin of error depends on the confidence level, sample size, and data variability.
+
+- **Interpreting Confidence Intervals**: We discussed how to interpret confidence intervals, especially the common 95% confidence interval, explaining that 95% of such intervals would contain the true population parameter if repeated multiple times.
+
+- **Margin of Error and Confidence Interval Length**: We explored how the margin of error is influenced by the sample size, variability in the data, and the chosen confidence level. A larger sample size and lower variability result in a smaller margin of error and a more precise confidence interval.
+
+- **Z-Interval**: The **Z-interval** is used when the population standard deviation \( \sigma \) is known. We derived the Z-interval formula and explained how to compute it using the standard normal distribution. An example using student study times demonstrated its application.
+
+- **Student’s t-Distribution**: We introduced the t-distribution, its connection to the normal distribution, and its properties. The t-distribution has heavier tails than the normal distribution, making it more suitable for small samples. As the degrees of freedom increase, the t-distribution converges to the normal distribution.
+
+- **t-Interval**: The **t-interval** is used when the population standard deviation \( \sigma \) is unknown. It relies on the t-distribution, which accounts for the additional uncertainty in estimating \( \sigma \) from the sample. We derived the t-interval and provided an example using student height data.
+
+## Q&A Section
+
+#### **Question:** What is the general form of a confidence interval?
+   A confidence interval is represented as:
+   \[
+   CI = 	ext{Point Estimate} \pm 	ext{Margin of Error}
+   \]
+   The point estimate is usually the sample mean, and the margin of error depends on the confidence level, sample size, and variability in the data.
+
+#### **Question:** What does a 95% confidence interval mean?
+  **Answer:** A 95% confidence interval means that if we were to take 100 random samples and compute a confidence interval for each sample, approximately 95 of those intervals would contain the true population parameter.
+
+#### **Question:** How does the margin of error relate to the confidence interval length?
+  **Answer:** The margin of error determines the width of the confidence interval. The length of the confidence interval is twice the margin of error. A larger margin of error results in a wider confidence interval, indicating less precision in the estimate.
+
+#### **Question:** What factors influence the margin of error?
+   **Answer:** The margin of error is influenced by:
+   
+- **Sample size**: A larger sample size decreases the margin of error.
+     
+- **Variability**: Higher variability in the data increases the margin of error.
+     
+- **Confidence level**: A higher confidence level (e.g., 99%) increases the margin of error, resulting in a wider confidence interval.
+
+#### **Question:** When should you use a Z-interval?
+  **Answer:** A Z-interval is used when the population standard deviation \( \sigma \) is known, and the sample size is sufficiently large. It relies on the standard normal distribution for critical values.
+
+#### **Question:** How do you calculate the margin of error in a Z-interval?
+   The margin of error for a Z-interval is calculated as:
+   \[
+   MOE = Z_{\alpha/2} \cdot \frac{\sigma}{\sqrt{n}}
+   \]
+   where \( Z_{\alpha/2} \) is the critical value from the standard normal distribution, \( \sigma \) is the population standard deviation, and \( n \) is the sample size.
+
+#### **Question:** What is the formula for a t-interval?
+ **Answer:**  The formula for a t-interval is:
+   \[
+   CI = \bar{x} \pm t_{\alpha/2, df} \cdot \frac{s}{\sqrt{n}}
+   \]
+   where \( \bar{x} \) is the sample mean, \( t_{\alpha/2, df} \) is the critical value from the t-distribution, \( s \) is the sample standard deviation, and \( n \) is the sample size.
+
+#### **Question:** When do you use a t-interval instead of a Z-interval?
+ **Answer:**  A t-interval is used when the population standard deviation \( \sigma \) is unknown, and the sample standard deviation \( s \) is used in its place. The t-distribution is applied, particularly for sample sizes >30.
+
+#### **Question:** What are degrees of freedom in the t-distribution?
+ **Answer:**  Degrees of freedom (df) represent the number of independent values in the sample that can vary. In the context of a t-interval, the degrees of freedom are typically \( df = n - 1 \), where \( n \) is the sample size.
+
+#### **Question:** What is the relationship between the t-distribution and the normal distribution?
+  **Answer:** The t-distribution has heavier tails than the normal distribution, which means it gives more probability to extreme values. As the sample size (and degrees of freedom) increases, the t-distribution approaches the normal distribution.
+
+
 

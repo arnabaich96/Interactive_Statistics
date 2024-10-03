@@ -1,20 +1,19 @@
 ---
-title: "**Central Limit Theorem**"
-author: "**Arnab Aich**"
+title: "Central Limit Theorem"
+author: "Arnab Aich"
 output: 
   html_document:
     toc: true
     toc_float: true
-    toc_depth: 3
+    toc_depth: 4
     theme: cerulean
-editor_options: 
-  chunk_output_type: console
+
 ---
 
 <link rel="stylesheet" type="text/css" href="../styles.css">
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE,fig.align = 'center',out.width = '100%')
 ```
 
 
@@ -24,16 +23,15 @@ Statistics help us make sense of data. One of the key concepts in statistics is 
 
 ## Simple Random Sampling
 
-### Definition:
 Simple random sampling is a sampling technique where each unit in the population has equal chance to appear in the sample. 
 It's fundamental for ensuring that our samples are unbiased reflections of the entire population.
 
 Simple random sampling is important because it ensures that the assumptions underlying the Central Limit Theorem hold true. This means the results of our sample analysis are more likely to be accurate and representative of the entire population.
 
-### Example:
+### Example
 Imagine we randomly select 30 students from a school of 300 for a survey on lunch preferences. Each student, whether in the 1st grade or the 12th grade, has an equal chance of being selected.
 
-### Importance of Large Sample Sizes:
+### Importance of Large Sample Sizes
 
 Large sample sizes are crucial because they reduce the variability in estimates, leading to more reliable results. For instance, in political polling, a larger sample size can provide a more accurate reflection of the voting population's preferences.
 The rule of thumb for the minimum sample size needed to approximate the distribution of the sample mean by a normal distribution depends on the shape of the population distribution:
@@ -75,7 +73,7 @@ approaches a standard normal distribution. The term $\frac{\sigma}{\sqrt{n}}$ is
 
 Using the Central Limit Theorem, we can solve problems where we know the value and need to find the corresponding probability. Let's consider the context of test scores in a school. Suppose test scores are normally distributed with a mean of 500 and a standard deviation of 100.
 
-### Left-tailed problem:
+### Left-tailed problem
 What is the probability that the average test score from a random sample of 40 students is less than 485?
 
 ```{r left-tail, echo=FALSE, message=FALSE, warning=FALSE}
@@ -96,7 +94,7 @@ ggplot() +
 Prob =", round(p, 4)), color="red")
 ```
 
-### Right-tailed problem: 
+### Right-tailed problem 
 What is the probability that the average test score is greater than 520?
 
 ```{r right-tail, echo=FALSE, message=FALSE, warning=FALSE}
@@ -113,7 +111,7 @@ ggplot() +
 Prob =", round(p, 4)), color="red")
 ```
 
-### Both-tailed problem:
+### Both-tailed problem
 What is the probability that the average falls between 490 and 510?
 
 ```{r both-tail, echo=FALSE, message=FALSE, warning=FALSE}
@@ -137,7 +135,7 @@ Prob =", round(p, 4)), color="red")
 
 Using the Central Limit Theorem, we can solve problems where we know the probability and need to find the corresponding value. Let's consider the context of daily sales at a retail store. Suppose sales are normally distributed with a mean of $3000 and a standard deviation of $500. We'll find specific sales values corresponding to certain probabilities.
 
-### Left-tailed problem:
+### Left-tailed problem
 Find the sales amount below which the bottom 10% of days fall.
 
 ```{r left-tail-value, echo=FALSE, message=FALSE, warning=FALSE}
@@ -179,7 +177,7 @@ For the left-tailed problem, we find the sales amount below which the bottom 10%
    \]
 
 
-### Right-tailed problem: 
+### Right-tailed problem 
 Find the sales amount above which the top 5% of days fall.
 
 ```{r right-tail-value, echo=FALSE, message=FALSE, warning=FALSE}
@@ -216,7 +214,7 @@ For the right-tailed problem, we find the sales amount above which the top 5% of
    \text{Sales} \approx 3325.92
    \]
 
-### Both-tailed problem:
+### Both-tailed problem
 Find the range sales amount containing the middle 75% of days.
 
 ```{r both-tail-value, echo=FALSE, message=FALSE, warning=FALSE}
@@ -273,29 +271,29 @@ Throughout this document, we have explored the powerful Central Limit Theorem (C
 
 ## Questions and Answers
 
-1. **What is the Central Limit Theorem?**  
+#### **What is the Central Limit Theorem?**  
    The CLT states that the distribution of sample means approximates a normal distribution as the sample size becomes large, regardless of the population's distribution.
 
-2. **Why is simple random sampling important in statistics?**  
+#### **Why is simple random sampling important in statistics?**  
    It ensures each member of the population has an equal chance of being selected, leading to unbiased and representative samples.
 
-3. **How does sample size affect the application of the CLT?**  
+#### **How does sample size affect the application of the CLT?**  
    Larger sample sizes reduce the standard error and make the approximation to the normal distribution more accurate.
 
-4. **Can you apply the CLT to any population distribution?**  
+#### **Can you apply the CLT to any population distribution?**  
    Yes, the CLT can be applied as long as the population has a finite variance, though the shape of the population distribution affects the minimum sample size needed.
 
-5. **How do you calculate the Z-score in CLT applications?**  
+#### **How do you calculate the Z-score in CLT applications?**  
    The Z-score is calculated as \(Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}\), where \(\bar{X}\) is the sample mean.
 
-6. **What does the standard error of the mean tell us?**  
+#### **What does the standard error of the mean tell us?**  
    It measures the dispersion of sample means around the population mean and decreases with increasing sample size.
 
 
-7. **What is the role of the standard deviation in the CLT?**  
+#### **What is the role of the standard deviation in the CLT?**  
    The standard deviation of the population, scaled by the square root of the sample size, determines the spread of the sample means around the population mean.
    
-8. **How does the CLT help in solving probability problems?**
+#### **How does the CLT help in solving probability problems?**
 
    The CLT allows us to approximate probabilities in normally distributed populations, making it easier to solve problems involving sample means and probabilities.
 

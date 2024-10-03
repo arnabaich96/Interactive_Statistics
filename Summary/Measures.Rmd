@@ -1,32 +1,32 @@
 ---
-title: "**Summary Measures**"
-author: "**Arnab Aich**"
+title: "Summary Measures"
+author: "Arnab Aich"
 output: 
   html_document:
     self_contained: yes
     toc: true
     toc_float: true
-    toc_depth: 3
+    toc_depth: 4
     theme: cerulean
 ---
 <link rel="stylesheet" type="text/css" href="../styles.css">
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE,fig.align = 'center',out.width = '100%')
 library(ggplot2)
 library(kableExtra)  # For better HTML table visuals
 library(patchwork)
 
 ```
-## Mean:
+## Mean
 
 The **mean** is the average of a set of numbers, calculated by dividing the sum of the values by the total number of values.
 
-### Steps to Calculate:
+### Steps to Calculate
 1. **Sum all data points**: Add together all the values in the dataset.
 2. **Divide by the total number of data points**: Count how many values are in the dataset and divide the total sum by this count.
 
-### Example:
+### Example
 Consider the values: 5, 8, 12, 15, 18.
 
 1. Add all the values: \(5 + 8 + 12 + 15 + 18 = 58\).
@@ -36,7 +36,7 @@ So, the mean is **11.6**.
 
 ---
 
-##      Median:        
+##      Median    
 
 The **median** is the middle value of a dataset when the numbers are arranged in order. If the dataset has an odd number of values, the median is the central value. If the dataset has an even number of values, the median is the average of the two middle values.
 
@@ -46,13 +46,13 @@ The **median** is the middle value of a dataset when the numbers are arranged in
    - If there is an odd number of values, the median is the middle number.
    - If there is an even number of values, calculate the average of the two middle numbers.
 
-### Example (Odd Number of Values):
+### Example (Odd Number of Values)
 For the dataset: 3, 7, 9, 12, 18.
 
 1. Arrange in order: 3, 7, 9, 12, 18.
 2. The middle value is 9, so the median is **9**.
 
-### Example (Even Number of Values):
+### Example (Even Number of Values)
 For the dataset: 3, 7, 9, 12.
 
 1. Arrange in order: 3, 7, 9, 12.
@@ -62,21 +62,21 @@ So, the median is **8**.
 
 ---
 
-##      Quantile:        
+##      Quantile       
 
 A **quantile** divides the dataset into equal parts. The most common quantiles are quartiles, which split the data into four parts:
 - The 25th percentile (first quartile, Q1),
 - The 50th percentile (second quartile, Q2, or the median),
 - The 75th percentile (third quartile, Q3).
 
-### Steps to Calculate:
+### Steps to Calculate
 1. **Arrange the data in ascending order**.
 2. **Determine the desired quantile** (e.g., Q1 is the 25th percentile, Q3 is the 75th percentile).
 3. **Find the value at that position**:
    - For Q1, find the value at the 25th percentile position.
    - For Q3, find the value at the 75th percentile position.
 
-### Example:
+### Example
 For the dataset: 2, 5, 7, 9, 12, 15, 18.
 
 1. Arrange in order: 2, 5, 7, 9, 12, 15, 18.
@@ -85,16 +85,16 @@ For the dataset: 2, 5, 7, 9, 12, 15, 18.
 
 ---
 
-##      Range:        
+##      Range        
 
 The **range** is the difference between the largest and smallest values in the dataset.
 
-### Steps to Calculate:
+### Steps to Calculate
 1. **Find the minimum value** in the dataset.
 2. **Find the maximum value** in the dataset.
 3. **Subtract the minimum from the maximum** to get the range.
 
-### Example:
+### Example
 For the dataset: 3, 7, 12, 18, 22.
 
 1. Minimum value is 3.
@@ -105,7 +105,7 @@ So, the range is **19**.
 
 ---
 
-##      Interquartile Range (IQR):        
+##      Interquartile Range (IQR)        
 
 The **interquartile range (IQR)** is the difference between the first quartile (Q1) and the third quartile (Q3). It measures the spread of the middle 50% of the data.
 
@@ -118,7 +118,7 @@ The **interquartile range (IQR)** is the difference between the first quartile (
 
 ---
 
-### For 9 Observations:
+### For 9 Observations
 
 Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25
 
@@ -129,7 +129,7 @@ Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25
 
 ---
 
-### For 10 Observations:
+### For 10 Observations
 
 Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25, 28
 
@@ -140,18 +140,18 @@ Dataset: 2, 5, 7, 9, 12, 15, 18, 21, 25, 28
 
 ---
 
-##      Standard Deviation (SD):        
+##      Standard Deviation (SD)        
 
 The **standard deviation** measures how spread out the values are in a dataset. It is the square root of the variance, which represents the average squared differences from the mean.
 
-### Steps to Calculate:
+### Steps to Calculate
 1. **Find the mean** of the dataset.
 2. **Subtract the mean from each data point**, then square the result.
 3. **Sum all the squared differences**.
 4. **Divide the sum by the number of data points** (for a sample, divide by \(n - 1\)).
 5. **Take the square root** of the result.
 
-### Example:
+### Example
 For the dataset: 6, 8, 10, 12.
 
 1. Mean is \((6 + 8 + 10 + 12) / 4 = 9\).
@@ -167,17 +167,17 @@ So, the standard deviation is approximately **2.24**.
 
 ---
 
-##      Z Score:        
+##      Z Score        
 
 The **z-score** is a measure of how many standard deviations a data point is from the mean. It is useful for comparing values from different datasets.
 
-### Steps to Calculate:
+### Steps to Calculate
 1. **Find the mean** of the dataset.
 2. **Find the standard deviation** of the dataset.
 3. **Subtract the mean from the value of interest**.
 4. **Divide the result by the standard deviation**.
 
-### Example:
+### Example
 For a dataset with a mean of 10 and a standard deviation of 2, and a value of 14:
 
 1. Subtract the mean from 14: \(14 - 10 = 4\).
@@ -288,34 +288,34 @@ Each measure offers unique insights and, when used together, can provide a compr
 
 ## Questions and Answers
 
-### Q1: What is the primary use of the mean in data analysis?
+#### Q1: What is the primary use of the mean in data analysis?
 **A1:** The mean is used to find the average value of a dataset, indicating the central point of the data distribution.
 
-### Q2: How does the median differ from the mean in terms of data representation?
+#### Q2: How does the median differ from the mean in terms of data representation?
 **A2:** The median represents the middle value and is less affected by outliers and skewed data than the mean.
 
-### Q3: What is the purpose of calculating quantiles in a dataset?
+#### Q3: What is the purpose of calculating quantiles in a dataset?
 **A3:** Quantiles, including quartiles, divide the data into equal parts, helping to understand the distribution and variability of data.
 
-### Q4: Why is the range important in statistics?
+#### Q4: Why is the range important in statistics?
 **A4:** The range provides a quick sense of the spread of the data, highlighting the difference between the highest and lowest values.
 
-### Q5: What does the interquartile range tell us that the range does not?
+#### Q5: What does the interquartile range tell us that the range does not?
 **A5:** The IQR focuses on the middle 50% of the data, providing a clearer picture of the data's central tendency without the influence of outliers.
 
-### Q6: How is the standard deviation useful compared to the mean?
+#### Q6: How is the standard deviation useful compared to the mean?
 **A6:** While the mean provides a central value, the standard deviation quantifies the variation of the data points from the mean, indicating how spread out the data is.
 
-### Q7: What does a high standard deviation indicate about a dataset?
+#### Q7: What does a high standard deviation indicate about a dataset?
 **A7:** A high standard deviation indicates that the data points are spread widely around the mean, showing high variability.
 
-### Q8: How do you interpret a Z-score in terms of data analysis?
+#### Q8: How do you interpret a Z-score in terms of data analysis?
 **A8:** A Z-score indicates how many standard deviations a data point is from the mean. A Z-score of 0 represents a point at the mean.
 
-### Q9: In what scenario might you prefer to use the median over the mean?
+#### Q9: In what scenario might you prefer to use the median over the mean?
 **A9:** The median is preferred over the mean in datasets with outliers or when the data is highly skewed.
 
-### Q10: How can the concept of quantiles be used to compare two different data distributions?
+#### Q10: How can the concept of quantiles be used to compare two different data distributions?
 **A10:** Quantiles can be used to compare the relative standing of data points within different distributions, even if the scales of the datasets differ.
 
 

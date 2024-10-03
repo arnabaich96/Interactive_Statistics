@@ -1,41 +1,94 @@
-  body {
-    font-size: 18px; /* Adjust this value for your preferred font size */
+/* Body settings */
+body {
+    font-size: 18px; /* Adjust font size */
     margin-left: 10px;
     margin-right: 10px;
     background-color: #f9e79f;
-  }
+    color: black;
+}
 
-  /* Center the title and author */
-  .title {
+/* Adjust font size for LaTeX/MathJax equations */
+.katex-display, .MathJax_Display {
+    font-size: 0.75em; /* Resize equations */
+}
+
+/* Title and Author formatting */
+.title {
     color: #7C0A02;
     text-align: center;
     font-size: 36px;
-  }
+    font-weight: bold;
+    text-decoration: underline;
+}
 
-  .author {
+.author {
+    font-weight: bold;
     text-align: center;
-    font-size: 24px;
+    font-size: 28px;
     color: #7C0A02;
-  }
+}
+.author:after {
+    content: none;
+}
 
-  TOC {
+/* TOC font styling */
+TOC {
     color: #7C0A02;
     font-size: 10px;
-  }
-
-  .container-fluid {
-    max-width: 90%;
-  }
-
-  /* Assign the same color to all level 2 headings (## in markdown) */
-  h2 {
-    color: #7C0A02;
-    font-size: 26px;
-  }
-  h3 {
-    font-size: 24px;
-  }
-  h4{
-    font-size: 20px;
-
 }
+
+/* Container fluid width */
+.container-fluid {
+    max-width: 90%;
+}
+
+/* Styling for level 2 headings (## in markdown) */
+h2 {
+    color: #7C0A02;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+h2:after {
+    content: ":";
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+}
+
+/* Styling for level 3 headings (### in markdown) */
+h3 {
+    font-size: 24px;
+    color: blue;
+    font-weight: bold;
+}
+
+h3:after {
+    content: ":";
+    font-weight: bold;
+}
+
+/* Styling for level 4 headings (#### in markdown) */
+h4 {
+    font-size: 20px;
+    color: blue;
+    font-weight: bold;
+}
+
+h4:after {
+    content: ":";
+    font-weight: bold;
+}
+/* Center-align all tables */
+table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Center-align all images */
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+

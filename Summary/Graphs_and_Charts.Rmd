@@ -1,6 +1,6 @@
 ---
-title: "**Summary Graphs and Charts**"
-author: "**Arnab Aich**"
+title: "Summary Graphs and Charts"
+author: "Arnab Aich"
 output: 
   html_document:
     self_contained: yes
@@ -12,7 +12,7 @@ output:
 <link rel="stylesheet" type="text/css" href="../styles.css">
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE,fig.align = 'center',out.width = '100%')
 library(ggplot2)
 library(kableExtra)  # For better HTML table visuals
 library(patchwork)
@@ -23,13 +23,13 @@ library(patchwork)
 
 A **frequency distribution** for categorical data shows how often each category appears in the dataset. It is usually visualized using a bar plot where each category is represented by a bar, and the height of the bar represents the frequency of that category.
 
-### Steps to Make a Frequency Table:
+### Steps to Make a Frequency Table
 1. **Collect data** on the variable of interest.
 2. **List each category** that appears in the data.
 3. **Tally the frequency** of each category.
 4. **Calculate relative frequencies** (optional): Divide each category's frequency by the total number of observations.
 
-### Steps to Draw a Frequency Distribution Bar Plot:
+### Steps to Draw a Frequency Distribution Bar Plot
 1. **Collect categorical data**.
 2. **Identify distinct categories**.
 3. **Count the frequency** of each category.
@@ -64,7 +64,7 @@ ggplot(fruit_data, aes(x=Fruit, y=Frequency, fill=Fruit)) +
   labs(title="Favorite Fruit Survey", y="Frequency", x="")
 ```
 
-##      Pie Chart:        
+##      Pie Chart   
 
 A **pie chart** is a circular chart divided into sectors, each representing a proportion of the whole.
 
@@ -179,7 +179,7 @@ ggplot(temperature_table, aes(x = Interval, y = Frequency)) +
 
 ```
 
-### Types of Histogram:        
+### Types of Histogram        
 
 A **histogram** is a graphical representation of the distribution of numerical data. It displays data by grouping them into bins or intervals and shows the frequency of values within each bin.
 
@@ -207,7 +207,7 @@ hist(data_uniform, breaks = 20, main = "Uniform Distribution", xlab = "Values", 
 
 
 
-##      Boxplot:        
+##      Boxplot        
 
 A **box plot** (or box-and-whisker plot) visualizes the distribution of data by showing the minimum, first quartile (Q1), median (Q2), third quartile (Q3), and maximum.
 
@@ -264,38 +264,38 @@ Throughout the document, we covered:
 
 This section includes a set of questions designed to test your understanding of the graphs and charts discussed in this document. Answers are provided immediately after each question for quick feedback.
 
-### Question 1: What purpose does a frequency distribution serve in data analysis?
+#### Question 1: What purpose does a frequency distribution serve in data analysis?
 **Answer:** Frequency distributions are used to visualize how often each value in a dataset occurs, helping to identify patterns such as the central tendency, dispersion, and skewness of the data.
 
-### Question 2: How is relative frequency calculated from a frequency distribution?
+#### Question 2: How is relative frequency calculated from a frequency distribution?
 **Answer:** Relative frequency is calculated by dividing the frequency of each data point by the total number of data points. This measure provides a proportion that shows the percentage of the total represented by each category.
 
-### Question 3: What distinguishes a bar chart from a histogram?
+#### Question 3: What distinguishes a bar chart from a histogram?
 **Answer:** Bar charts represent categorical data with discrete bars, whereas histograms are used for continuous data, displaying data in contiguous intervals or bins.
 
-### Question 4: Why might one choose to use a pie chart in a presentation?
+#### Question 4: Why might one choose to use a pie chart in a presentation?
 **Answer:** Pie charts are particularly effective for illustrating the proportions of different categories in a whole, making them useful for showing market share, survey results, or any proportional data.
 
-### Question 5: What information does the box in a box plot represent?
+#### Question 5: What information does the box in a box plot represent?
 **Answer:** The box in a box plot encloses the interquartile range (IQR), which includes the middle 50% of the data between the first and third quartiles. The median of the dataset is also marked within the box.
 
-### Question 6: Describe the steps to construct a histogram for a grouped frequency distribution.
+#### Question 6: Describe the steps to construct a histogram for a grouped frequency distribution.
 **Answer:** To construct a histogram:
 1. Collect and sort the continuous data.
 2. Choose appropriate intervals or bins.
 3. Tally how many data points fall into each bin.
 4. Draw the histogram with bin intervals on the x-axis and frequency counts on the y-axis.
 
-### Question 7: What does the height of a bar in a histogram represent?
+#### Question 7: What does the height of a bar in a histogram represent?
 **Answer:** The height of a bar in a histogram represents the frequency of data points that fall within the corresponding interval.
 
-### Question 8: When should you use a histogram instead of a pie chart?
+#### Question 8: When should you use a histogram instead of a pie chart?
 **Answer:** Use a histogram for displaying the distribution of numerical data over a continuous interval, which is suitable for understanding variations in data ranges. A pie chart, on the other hand, should be used for categorical data when you need to show proportions in a whole.
 
-### Question 9: What are the potential drawbacks of using pie charts?
+#### Question 9: What are the potential drawbacks of using pie charts?
 **Answer:** Pie charts can be misleading if used with too many categories or with proportions that are too similar, as small differences can be difficult to discern visually.
 
-### Question 10: How can one ensure accuracy when plotting a box plot?
+#### Question 10: How can one ensure accuracy when plotting a box plot?
 **Answer:** Ensure accuracy in a box plot by carefully calculating the quartiles, median, and identifying any outliers. The range and outliers should be clearly marked to provide a true representation of the data distribution.
 
 

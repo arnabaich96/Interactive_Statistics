@@ -1,25 +1,23 @@
 ---
-title: "**Normal Distribution Detailed Overview**"
-author: "**Arnab Aich**"
+title: "Normal Distribution Overview"
+author: "Arnab Aich"
 output: 
   html_document:
     toc: true
     toc_float: true
     toc_depth: 3
     theme: cerulean
-editor_options: 
-  chunk_output_type: console
 ---
 <link rel="stylesheet" type="text/css" href="../styles.css">
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, comment = NA, message = FALSE,warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, comment = NA, warning = FALSE, message = FALSE,fig.align = 'center',out.width = '100%')
 library(ggplot2)
 library(kableExtra)
 library(patchwork)
 ```
 
-## Properties:
+## Properties
 
 The **Normal Distribution** is a continuous probability distribution that is symmetric about its mean. It has the following key properties:
 
@@ -41,7 +39,7 @@ The **Normal Distribution** is a continuous probability distribution that is sym
 ---
 ---
 
-## Tail Probabilities:
+## Tail Probabilities
 
 In normal distribution problems, we often calculate probabilities for values in the upper or lower tails. Let's consider an example where we find the upper and lower tail probabilities. We will calculate the probabilities for the upper and lower tails of the standard normal distribution and plot them side by side.
 
@@ -83,7 +81,7 @@ gridExtra::grid.arrange(lower_tail, upper_tail, ncol = 2)
 
 ---
 
-## Normal $(X)$ $\to$ Standard Normal $(Z)$:
+## Normal $(X)$ $\to$ Standard Normal $(Z)$
 
 Let's assume the **monthly coffee consumption** of an individual follows a normal distribution with a mean of 10 liters and a standard deviation of 2 liters. This can be written as:
 
@@ -97,7 +95,7 @@ The standardized normal distribution is called the **Standard Normal Distributio
 
 ---
 
-## Empirical Rule (68-95-99.7 Rule):
+## Empirical Rule (68-95-99.7 Rule)
 
 The empirical rule provides a quick way to understand the spread of data in a normal distribution:
 - 68% of data lies within 1 standard deviation of the mean
@@ -141,7 +139,7 @@ ggplot(data.frame(x, y), aes(x, y)) +
 
 ---
 
-## Value to Probabilty (Monthly Coffee Consumption in Liters):
+## Value to Probabilty (Monthly Coffee Consumption in Liters)
 
 Consider the population monthly coffee consumption in liters follows a normal distribution with a mean of 10 liters and a standard deviation of 2 liters.
 
@@ -219,7 +217,7 @@ ggplot(data.frame(x, y), aes(x, y)) +
 
 **Solution**: The area between \( Z = -0.5 \) and \( Z = 1 \) is approximately **53.2%** .
 
-## Probabilty to Value (Daily Screen Time in Hours):
+## Probabilty to Value (Daily Screen Time in Hours)
 
 Consider the population daily screen time in hours follows a normal distribution with a mean of 6 hours and a standard deviation of 1.5 hours.
 
@@ -311,13 +309,13 @@ Explanation:
 X = \mu + Z \cdot \sigma
 \]
 
-#### Calculation for the 10th percentile:
+#### Calculation for the 10th percentile
 
 \[
 X = 6 + (-1.28) \cdot 1.5 = 6 - 1.92 = 4.08 	\text{ hours}
 \]
 
-#### Calculation for the 90th percentile:
+#### Calculation for the 90th percentile
 
 \[
 X = 6 + 1.28 	\cdot 1.5 = 6 + 1.92 = 7.92 	\text{ hours}
@@ -338,7 +336,7 @@ ggplot(data.frame(x, y), aes(x, y)) +
   theme_minimal()
 ```
 
-## Detecting Normality: Q-Q Plot
+## Detecting Normality - Q-Q Plot
 
 A **Q-Q (Quantile-Quantile) Plot** is a graphical tool used to compare the quantiles of a sample dataset to the quantiles of a theoretical distribution, such as the normal distribution.
 
@@ -350,7 +348,7 @@ To construct a Q-Q plot, follow these steps:
 2. **Calculate the Theoretical Quantiles**: For a normal Q-Q plot, calculate the theoretical quantiles from the standard normal distribution.
 3. **Plot**: Plot the sorted data points against the theoretical quantiles. If the data is normally distributed, the points should fall on or near a straight line.
 
-### Mathematical Details:
+### Mathematical Details
 
 Given a dataset with \( n \) values \( X_1, X_2, ..., X_n \), the steps are as follows:
 

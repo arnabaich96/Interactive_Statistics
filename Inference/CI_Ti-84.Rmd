@@ -1,0 +1,94 @@
+---
+title: "Confidence Intervals - TI-84 Calculator"
+author: "Arnab Aich"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    theme: cerulean
+---
+
+<link rel="stylesheet" type="text/css" href="../styles.css">
+
+## Introduction
+
+In this document, we will solve the two confidence interval problems presented earlier—one using the **Z-Interval** and the other using the **t-Interval**—with step-by-step instructions for performing these calculations using a **TI-84 calculator**.
+
+---
+
+## Problem 1: Solving a Z-Interval (Known Population Standard Deviation)
+
+### Problem Statement
+We are given weekly study time data for 10 freshmen. We know the population standard deviation \( \sigma = 3 \) hours, and the sample mean is \( \bar{x} = 11 \) hours. We need to calculate a 95% confidence interval for the true population mean study time.
+
+- **Data**: 10, 8, 12, 14, 11, 9, 15, 13, 8, 10
+- **Known Population Standard Deviation**: \( \sigma = 3 \) hours
+- **Sample Mean**: \( \bar{x} = 11 \) hours
+- **Confidence Level**: 95%
+
+### Steps on the TI-84 Calculator
+
+1. **Turn on the Calculator**:
+   - Press the `ON` button to power on your TI-84.
+
+2. **Enter the Z-Interval Calculation**:
+   - Press `STAT`.
+   - Scroll right to the `TESTS` menu using the arrow keys.
+   - Scroll down to `7:ZInterval`.
+   - Press `ENTER`.
+
+3. **Input the Z-Interval Parameters**:
+   - On the next screen, select `Stats` by pressing `ENTER` (since we are using summary statistics).
+   
+4. **Enter the Summary Data**:
+   - Enter \( \sigma = 3 \) under `σ`, then press `ENTER`.
+   - Enter the sample mean \( \bar{x} = 11 \), then press `ENTER`.
+   - Enter the sample size \( n = 10 \), then press `ENTER`.
+   - Enter the confidence level \( C = 0.95 \), then press `ENTER`.
+
+5. **Calculate the Interval**:
+   - Scroll down to `Calculate` and press `ENTER`.
+   - The result will display the confidence interval: \( [9.14, 12.86] \).
+
+Thus, the 95% confidence interval is \( [9.14, 12.86] \, \text{hours} \), indicating that we are 95% confident that the true population mean study time lies within this range.
+
+---
+
+## Problem 2: Solving a t-Interval (Unknown Population Standard Deviation)
+
+### Problem Statement
+We are given the heights of 12 randomly selected students. The sample standard deviation is \( s = 3.12 \) inches, and the sample mean is \( \bar{x} = 69.25 \) inches. We need to calculate a 95% confidence interval for the population mean height.
+
+- **Data**: 65, 67, 72, 70, 68, 65, 74, 69, 70, 68, 71, 73
+- **Sample Standard Deviation**: \( s = 3.12 \) inches
+- **Sample Mean**: \( \bar{x} = 69.25 \) inches
+- **Confidence Level**: 95%
+
+### Steps on the TI-84 Calculator
+
+1. **Turn on the Calculator**:
+   - Press the `ON` button to power on your TI-84.
+
+2. **Enter the t-Interval Calculation**:
+   - Press `STAT`.
+   - Scroll right to the `TESTS` menu using the arrow keys.
+   - Scroll down to `8:TInterval`.
+   - Press `ENTER`.
+
+3. **Input the t-Interval Parameters**:
+   - On the next screen, select `Stats` by pressing `ENTER` (since we are using summary statistics).
+
+4. **Enter the Summary Data**:
+   - Enter the sample mean \( \bar{x} = 69.25 \), then press `ENTER`.
+   - Enter the sample standard deviation \( s = 3.12 \), then press `ENTER`.
+   - Enter the sample size \( n = 12 \), then press `ENTER`.
+   - Enter the confidence level \( C = 0.95 \), then press `ENTER`.
+
+5. **Calculate the Interval**:
+   - Scroll down to `Calculate` and press `ENTER`.
+   - The result will display the confidence interval: \( [67.27, 71.23] \).
+
+Thus, the 95% confidence interval is \( [67.27, 71.23] \, \text{inches} \), indicating that we are 95% confident that the true population mean height lies within this range.
+
+
