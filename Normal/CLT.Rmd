@@ -71,7 +71,7 @@ approaches a standard normal distribution. The term $\frac{\sigma}{\sqrt{n}}$ is
 
 ## Value to Probability Problems
 
-Using the Central Limit Theorem, we can solve problems where we know the value and need to find the corresponding probability. Let's consider the context of test scores in a school. Suppose test scores are normally distributed with a mean of 500 and a standard deviation of 100.
+Using the Central Limit Theorem, we can solve problems where we know the value and need to find the corresponding probability. Let's consider the context of test scores in a school. Suppose test scores are distributed with a mean of 500 and a standard deviation of 100.
 
 ### Left-tailed problem
 What is the probability that the average test score from a random sample of 40 students is less than 485?
@@ -133,7 +133,7 @@ Prob =", round(p, 4)), color="red")
 
 ## Probability to Value Problems
 
-Using the Central Limit Theorem, we can solve problems where we know the probability and need to find the corresponding value. Let's consider the context of daily sales at a retail store. Suppose sales are normally distributed with a mean of $3000 and a standard deviation of $500. We'll find specific sales values corresponding to certain probabilities.
+Using the Central Limit Theorem, we can solve problems where we know the probability and need to find the corresponding value. Let's consider the context of daily sales at a retail store. Suppose sales are distributed with a mean of $3000$ and a standard deviation of $500$. We'll find specific sales values corresponding to certain probabilities.
 
 ### Left-tailed problem
 Find the sales amount below which the bottom 10% of days fall.
