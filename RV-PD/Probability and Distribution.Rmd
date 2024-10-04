@@ -200,7 +200,7 @@ print(combined_plot)
 - **Answer**: Probability can be thought of as the long-term relative frequency of an event. The more times you perform an experiment, the closer the relative frequency of an outcome will match its probability.
 - **Example**: If you flip a fair coin many times, you’ll see that approximately 50% of the outcomes will be heads, and 50% will be tails, matching the theoretical probability of 0.5.
 
-#### Question 5: How can knowing probabilities help us make decisions about the future?
+#### Question 5: How can knowing probabilities help us make decisions about the future ?
 
 - **Answer**: Probabilities help us evaluate the likelihood of various outcomes, which can inform decision-making. By understanding the chances of different events, we can make more informed and rational choices.
 - **Example**: If the probability of rain tomorrow is 90%, you might decide to carry an umbrella when leaving the house.
