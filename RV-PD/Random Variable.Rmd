@@ -1,6 +1,6 @@
 ---
 title: "Random Variable"
-author: "**Arnab Aich**"
+author: "Arnab Aich"
 output: 
   html_document:
     self_contained: yes
@@ -49,7 +49,9 @@ prob_table %>%
 ```
 
 - Random variables can be:
+  
   - **Discrete**: Can take on a countable number of values (e.g., die rolls).
+  
   - **Continuous**: Can take on an infinite number of values within a range (e.g., IQ scores).
 
 

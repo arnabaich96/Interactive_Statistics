@@ -210,7 +210,7 @@ print(combined_plot)
 #### Question 6: What is the difference between discrete and continuous probability distributions?
 
 - **Answer**: A **discrete probability distribution** deals with distinct, countable outcomes (e.g., number of heads in 10 coin flips). A **continuous probability distribution** deals with an infinite number of possible outcomes within a range (e.g., a person's exact height).
-- **Example**: Rolling a die is a discrete distribution because the outcomes (1, 2, 3, etc.) are countable. Measuring someone's height is a continuous distribution because height can take any value within a range.
+- **Example**: Rolling a die is a discrete distribution because the outcomes (1, 2, 3, etc.) are countable. Measuring someone's height is a continuous distribution because height can take any value within  range.
 
 
 ---
