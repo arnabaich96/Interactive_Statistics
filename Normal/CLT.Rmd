@@ -133,7 +133,7 @@ Prob =", round(p, 4)), color="red")
 
 ## Probability to Value Problems
 
-Using the Central Limit Theorem, we can solve problems where we know the probability and need to find the corresponding value. Let's consider the context of daily sales at a retail store. Suppose sales are distributed with a mean of $3000$ and a standard deviation of $500$. We'll find specific sales values corresponding to certain probabilities.
+Using the Central Limit Theorem, we can solve problems where we know the probability and need to find the corresponding value. Let's consider the context of daily sales at a retail store. Suppose sales are distributed with a mean of $3000$ and a standard deviation of $500$. We'll find specific sales values corresponding to certain probabilities based on a sample of size 30.
 
 ### Left-tailed problem
 Find the sales amount below which the bottom 10% of days fall.
