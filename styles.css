@@ -1,94 +1,33 @@
-/* Body settings */
-body {
-    font-size: 18px; /* Adjust font size */
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: #f9e79f;
-    color: black;
+/* Style for all headers to indicate navigation functionality */
+h1, h2, h3, h4, h5, h6 {
+    cursor: pointer; /* Cursor indicates the element is clickable */
+    padding: 10px; /* Padding for better click area */
+    border-radius: 5px; /* Rounded corners for a modern look */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
 }
 
-/* Adjust font size for LaTeX/MathJax equations */
-.katex-display, .MathJax_Display {
-    font-size: 0.75em; /* Resize equations */
+/* Hover effects for headers */
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+    background-color: #ecf0f1; /* Light gray background on hover */
+    color: #3498db; /* Change text color to blue on hover */
 }
 
-/* Title and Author formatting */
-.title {
-    color: #7C0A02;
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.author {
-    font-weight: bold;
-    text-align: center;
-    font-size: 28px;
-    color: #7C0A02;
-}
-.author:after {
-    content: none;
-}
-
-/* TOC font styling */
-TOC {
-    color: #7C0A02;
-    font-size: 10px;
-}
-
-/* Container fluid width */
-.container-fluid {
-    max-width: 90%;
-}
-
-/* Styling for level 2 headings (## in markdown) */
-h2 {
-    color: #7C0A02;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-h2:after {
-    content: ":";
-    font-weight: bold;
-    font-family: "Times New Roman", Times, serif;
-}
-
-/* Styling for level 3 headings (### in markdown) */
-h3 {
+/* Specific styles to distinguish different levels of headers */
+h1 {
     font-size: 24px;
-    color: blue;
-    font-weight: bold;
+    color: #2980b9; /* Blue for primary headings */
 }
-
-h3:after {
-    content: ":";
-    font-weight: bold;
+h2 {
+    font-size: 22px;
+    color: #2c3e50; /* Dark blue-gray */
 }
-
-/* Styling for level 4 headings (#### in markdown) */
-h4 {
+h3 {
     font-size: 20px;
-    color: blue;
-    font-weight: bold;
+    color: #34495e;
 }
+/* Continue with h4, h5, h6 as needed */
 
-h4:after {
-    content: ":";
-    font-weight: bold;
+/* Optional: Underline headers to indicate they are part of TOC */
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: underline; /* Adds underline to indicate navigation */
 }
-/* Center-align all tables */
-table {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-/* Center-align all images */
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-

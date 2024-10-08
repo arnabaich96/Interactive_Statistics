@@ -1,0 +1,96 @@
+---
+title: "Hypothesis Testing - TI-84 Calculator"
+author: "Arnab Aich"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    theme: cerulean
+---
+
+<link rel="stylesheet" type="text/css" href="../styles.css">
+
+# Introduction
+
+This document demonstrates how to use a calculator to perform Z-tests and T-tests under different alternative hypotheses: two-tailed, left-tailed, and right-tailed. We will walk through each scenario step-by-step.
+
+# Z-test
+
+Z-tests are used when the population variance is known, allowing for the standardization of the test statistic under the standard normal distribution.
+
+## Two-tailed Z-test
+
+### Example Problem
+
+Determine whether there is a significant difference from the known population mean (\(\mu_0\)) of 50 with a sample mean (\(\bar{x}\)) of 53, a population standard deviation (\(\sigma\)) of 5, and a sample size (\(n\)) of 30.
+
+### Steps to Solve on a Calculator
+
+1. **Calculate the Z-score**:
+   \[
+   Z = \frac{\bar{x} - \mu_0}{\frac{\sigma}{\sqrt{n}}}
+   \]
+   \[
+   Z = \frac{53 - 50}{\frac{5}{\sqrt{30}}}
+   \]
+
+2. **Use the calculator** to compute the Z-score.
+
+3. **Determine the critical Z-value** for \(\alpha = 0.05\) (for a two-tailed test, \(\alpha/2 = 0.025\) on each tail).
+
+4. **Compare** the calculated Z-value with the critical values. If the absolute value of the calculated Z is greater than the critical Z, reject the null hypothesis.
+
+## Left-tailed Z-test
+
+### Steps to Solve on a Calculator
+
+Repeat the above steps but only compare the negative critical Z-value for the given \(\alpha\) level (e.g., \(\alpha = 0.05\)).
+
+## Right-tailed Z-test
+
+### Steps to Solve on a Calculator
+
+Repeat the Z-score calculation and compare it against the positive critical Z-value for the given \(\alpha\) level.
+
+# T-test
+
+T-tests are used when the population variance is unknown, and the sample size is relatively small. The test statistic follows a t-distribution.
+
+## Two-tailed T-test
+
+### Example Problem
+
+Evaluate whether the sample mean (\(\bar{x}\)) of 25 significantly differs from the known population mean (\(\mu_0\)) of 20 with a sample standard deviation (\(s\)) of 3 and a sample size (\(n\)) of 15.
+
+### Steps to Solve on a Calculator
+
+1. **Calculate the T-score**:
+   \[
+   T = \frac{\bar{x} - \mu_0}{\frac{s}{\sqrt{n}}}
+   \]
+   \[
+   T = \frac{25 - 20}{\frac{3}{\sqrt{15}}}
+   \]
+
+2. **Use the calculator** to compute the T-score.
+
+3. **Determine the critical T-value** for \(\alpha = 0.05\) with \(df = n-1\) (degrees of freedom).
+
+4. **Compare** the calculated T-value with the critical values.
+
+## Left-tailed T-test
+
+### Steps to Solve on a Calculator
+
+Repeat the above steps and compare the calculated T-score against the negative critical T-value.
+
+## Right-tailed T-test
+
+### Steps to Solve on a Calculator
+
+Repeat the T-score calculation and compare it against the positive critical T-value.
+
+# Conclusion
+
+Understanding how to manually calculate test statistics using a calculator is crucial for interpreting data correctly, especially when software or specific statistical tools are not available.
