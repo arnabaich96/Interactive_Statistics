@@ -14,3 +14,8 @@ LaTeX: pdfLaTeX
 
 AutoAppendNewline: Yes
 StripTrailingWhitespace: Yes
+
+QuitChildProcessesOnExit: Yes
+DisableExecuteRprofile: Yes
+
+ZoteroLibraries: "My Library"
