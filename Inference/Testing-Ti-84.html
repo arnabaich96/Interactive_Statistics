@@ -1485,115 +1485,117 @@ border-radius: 0px;
 
 
 <p><style type="text/css">h1, h2, h3, h4, h5, h6 {cursor: pointer; padding: 10px; border-radius: 5px; transition: background-color 0.3s, color 0.3s; }h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {background-color: #ecf0f1; color: #3498db; }h1 {font-size: 24px;color: #2980b9; }h2 {font-size: 22px;color: #2c3e50; }h3 {font-size: 20px;color: #34495e;}h1, h2, h3, h4, h5, h6 {text-decoration: underline; }</style></p>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-<p>This document demonstrates how to use a calculator to perform Z-tests
-and T-tests under different alternative hypotheses: two-tailed,
-left-tailed, and right-tailed. We will walk through each scenario
-step-by-step.</p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This document provides a comprehensive guide on how to perform
+hypothesis testing using a TI-84 calculator. It covers both z-test and
+t-test methods, suitable for different scenarios depending on whether
+the population standard deviation is known.</p>
 </div>
-<div id="z-test" class="section level1">
-<h1>Z-test</h1>
-<p>Z-tests are used when the population variance is known, allowing for
-the standardization of the test statistic under the standard normal
-distribution.</p>
-<div id="two-tailed-z-test" class="section level2">
-<h2>Two-tailed Z-test</h2>
-<div id="example-problem" class="section level3">
-<h3>Example Problem</h3>
-<p>Determine whether there is a significant difference from the known
-population mean (<span class="math inline">\(\mu_0\)</span>) of 50 with
-a sample mean (<span class="math inline">\(\bar{x}\)</span>) of 53, a
-population standard deviation (<span class="math inline">\(\sigma\)</span>) of 5, and a sample size (<span class="math inline">\(n\)</span>) of 30.</p>
+<div id="preliminaries" class="section level2">
+<h2>Preliminaries</h2>
+<ul>
+<li><strong>Null hypothesis (<span class="math inline">\(H_0\)</span>)</strong>: The statement that the
+parameter of the population is equal to a specified value.</li>
+<li><strong>Alternative hypothesis (<span class="math inline">\(H_a\)</span>)</strong>: The statement that the
+parameter is different from the specified value.</li>
+<li><strong>Significance level (<span class="math inline">\(\alpha\)</span>)</strong>: Commonly set at
+0.05.</li>
+<li><strong>Test type</strong>: One-tailed or two-tailed depending on
+the hypothesis.</li>
+</ul>
 </div>
-<div id="steps-to-solve-on-a-calculator" class="section level3">
-<h3>Steps to Solve on a Calculator</h3>
-<ol style="list-style-type: decimal">
-<li><p><strong>Calculate the Z-score</strong>: <span class="math display">\[
-Z = \frac{\bar{x} - \mu_0}{\frac{\sigma}{\sqrt{n}}}
-\]</span> <span class="math display">\[
-Z = \frac{53 - 50}{\frac{5}{\sqrt{30}}}
-\]</span></p></li>
-<li><p><strong>Use the calculator</strong> to compute the
-Z-score.</p></li>
-<li><p><strong>Determine the critical Z-value</strong> for <span class="math inline">\(\alpha = 0.05\)</span> (for a two-tailed test,
-<span class="math inline">\(\alpha/2 = 0.025\)</span> on each
-tail).</p></li>
-<li><p><strong>Compare</strong> the calculated Z-value with the critical
-values. If the absolute value of the calculated Z is greater than the
-critical Z, reject the null hypothesis.</p></li>
-</ol>
+<div id="example-1-z-test-for-the-mean" class="section level2">
+<h2>Example 1: Z-Test for the Mean</h2>
+<div id="scenario" class="section level3">
+<h3>Scenario</h3>
+<p>Test if the average IQ of a group is more than the population mean of
+100. Assume the population standard deviation is known to be 15. A
+sample of 50 individuals has a mean IQ of 104.</p>
 </div>
+<div id="steps-on-ti-84" class="section level3">
+<h3>Steps on TI-84</h3>
+<div id="step-1-configure-the-test" class="section level4">
+<h4>Step 1: Configure the Test</h4>
+<ul>
+<li>Press <code>STAT</code>.</li>
+<li>Right arrow to <code>TESTS</code>.</li>
+<li>Choose <code>1:Z-Test...</code>.</li>
+</ul>
 </div>
-<div id="left-tailed-z-test" class="section level2">
-<h2>Left-tailed Z-test</h2>
-<div id="steps-to-solve-on-a-calculator-1" class="section level3">
-<h3>Steps to Solve on a Calculator</h3>
-<p>Repeat the above steps but only compare the negative critical Z-value
-for the given <span class="math inline">\(\alpha\)</span> level (e.g.,
-<span class="math inline">\(\alpha = 0.05\)</span>).</p>
+<div id="step-2-input-the-data" class="section level4">
+<h4>Step 2: Input the Data</h4>
+<ul>
+<li>For <code>Stats</code>, input:
+<ul>
+<li><span class="math inline">\(\mu_0\)</span>: <code>100</code></li>
+<li><span class="math inline">\(\sigma\)</span>: <code>15</code></li>
+<li><span class="math inline">\(\bar{x}\)</span>: <code>104</code></li>
+<li><code>n</code>: <code>50</code></li>
+</ul></li>
+<li>Choose <code>&gt;μ_0</code> for a two-tailed test.</li>
+</ul>
 </div>
-</div>
-<div id="right-tailed-z-test" class="section level2">
-<h2>Right-tailed Z-test</h2>
-<div id="steps-to-solve-on-a-calculator-2" class="section level3">
-<h3>Steps to Solve on a Calculator</h3>
-<p>Repeat the Z-score calculation and compare it against the positive
-critical Z-value for the given <span class="math inline">\(\alpha\)</span> level.</p>
-</div>
-</div>
-</div>
-<div id="t-test" class="section level1">
-<h1>T-test</h1>
-<p>T-tests are used when the population variance is unknown, and the
-sample size is relatively small. The test statistic follows a
-t-distribution.</p>
-<div id="two-tailed-t-test" class="section level2">
-<h2>Two-tailed T-test</h2>
-<div id="example-problem-1" class="section level3">
-<h3>Example Problem</h3>
-<p>Evaluate whether the sample mean (<span class="math inline">\(\bar{x}\)</span>) of 25 significantly differs from
-the known population mean (<span class="math inline">\(\mu_0\)</span>)
-of 20 with a sample standard deviation (<span class="math inline">\(s\)</span>) of 3 and a sample size (<span class="math inline">\(n\)</span>) of 15.</p>
-</div>
-<div id="steps-to-solve-on-a-calculator-3" class="section level3">
-<h3>Steps to Solve on a Calculator</h3>
-<ol style="list-style-type: decimal">
-<li><p><strong>Calculate the T-score</strong>: <span class="math display">\[
-T = \frac{\bar{x} - \mu_0}{\frac{s}{\sqrt{n}}}
-\]</span> <span class="math display">\[
-T = \frac{25 - 20}{\frac{3}{\sqrt{15}}}
-\]</span></p></li>
-<li><p><strong>Use the calculator</strong> to compute the
-T-score.</p></li>
-<li><p><strong>Determine the critical T-value</strong> for <span class="math inline">\(\alpha = 0.05\)</span> with <span class="math inline">\(df = n-1\)</span> (degrees of freedom).</p></li>
-<li><p><strong>Compare</strong> the calculated T-value with the critical
-values.</p></li>
-</ol>
-</div>
-</div>
-<div id="left-tailed-t-test" class="section level2">
-<h2>Left-tailed T-test</h2>
-<div id="steps-to-solve-on-a-calculator-4" class="section level3">
-<h3>Steps to Solve on a Calculator</h3>
-<p>Repeat the above steps and compare the calculated T-score against the
-negative critical T-value.</p>
-</div>
-</div>
-<div id="right-tailed-t-test" class="section level2">
-<h2>Right-tailed T-test</h2>
-<div id="steps-to-solve-on-a-calculator-5" class="section level3">
-<h3>Steps to Solve on a Calculator</h3>
-<p>Repeat the T-score calculation and compare it against the positive
-critical T-value.</p>
+<div id="step-3-calculate-and-interpret" class="section level4">
+<h4>Step 3: Calculate and Interpret</h4>
+<ul>
+<li>Scroll to <code>Calculate</code> and press <code>ENTER</code>.</li>
+<li>The calculator will provide the z-statistic and p-value.</li>
+<li>Interpret the p-value relative to <span class="math inline">\(\alpha
+= 0.05\)</span>.</li>
+</ul>
 </div>
 </div>
 </div>
-<div id="conclusion" class="section level1">
-<h1>Conclusion</h1>
-<p>Understanding how to manually calculate test statistics using a
-calculator is crucial for interpreting data correctly, especially when
-software or specific statistical tools are not available.</p>
+<div id="example-2-t-test-for-the-mean" class="section level2">
+<h2>Example 2: T-Test for the Mean</h2>
+<div id="scenario-1" class="section level3">
+<h3>Scenario</h3>
+<p>Evaluate whether the mean height of a sample of 25 students is
+different from the known average of 68 inches. The sample has a mean
+height of 66 inches with a standard deviation of 3.5 inches.</p>
+</div>
+<div id="steps-on-ti-84-1" class="section level3">
+<h3>Steps on TI-84</h3>
+<div id="step-1-configure-the-test-1" class="section level4">
+<h4>Step 1: Configure the Test</h4>
+<ul>
+<li>Press <code>STAT</code>.</li>
+<li>Right arrow to <code>TESTS</code>.</li>
+<li>Choose <code>2:T-Test...</code>.</li>
+</ul>
+</div>
+<div id="step-2-input-the-data-1" class="section level4">
+<h4>Step 2: Input the Data</h4>
+<ul>
+<li>For <code>Stats</code>, input:
+<ul>
+<li><span class="math inline">\(\mu_0\)</span>: <code>68</code></li>
+<li><span class="math inline">\(\bar{x}\)</span>: <code>66</code></li>
+<li><code>Sx</code>: <code>3.5</code></li>
+<li><code>n</code>: <code>25</code></li>
+</ul></li>
+<li>Choose <code>≠μ_0</code> for a two-tailed test.</li>
+</ul>
+</div>
+<div id="step-3-calculate-and-interpret-1" class="section level4">
+<h4>Step 3: Calculate and Interpret</h4>
+<ul>
+<li>Scroll to <code>Calculate</code> and press <code>ENTER</code>.</li>
+<li>The calculator will provide the t-statistic, p-value, and degrees of
+freedom.</li>
+<li>Interpret the p-value relative to <span class="math inline">\(\alpha
+= 0.05\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>These examples demonstrate how to conduct a z-test and a t-test on
+the TI-84 calculator, depending on whether the population standard
+deviation is known. Follow these steps to test different hypotheses
+regarding population means using your calculator.</p>
 </div>
 
 

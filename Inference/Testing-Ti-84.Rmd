@@ -11,86 +11,78 @@ output:
 
 <link rel="stylesheet" type="text/css" href="../styles.css">
 
-# Introduction
 
-This document demonstrates how to use a calculator to perform Z-tests and T-tests under different alternative hypotheses: two-tailed, left-tailed, and right-tailed. We will walk through each scenario step-by-step.
 
-# Z-test
+## Introduction
 
-Z-tests are used when the population variance is known, allowing for the standardization of the test statistic under the standard normal distribution.
+This document provides a comprehensive guide on how to perform hypothesis testing using a TI-84 calculator. It covers both z-test and t-test methods, suitable for different scenarios depending on whether the population standard deviation is known.
 
-## Two-tailed Z-test
+## Preliminaries
 
-### Example Problem
+- **Null hypothesis ($H_0$)**: The statement that the parameter of the population is equal to a specified value.
+- **Alternative hypothesis ($H_a$)**: The statement that the parameter is different from the specified value.
+- **Significance level ($\alpha$)**: Commonly set at 0.05.
+- **Test type**: One-tailed or two-tailed depending on the hypothesis.
 
-Determine whether there is a significant difference from the known population mean (\(\mu_0\)) of 50 with a sample mean (\(\bar{x}\)) of 53, a population standard deviation (\(\sigma\)) of 5, and a sample size (\(n\)) of 30.
+## Example 1: Z-Test for the Mean
 
-### Steps to Solve on a Calculator
+### Scenario
 
-1. **Calculate the Z-score**:
-   \[
-   Z = \frac{\bar{x} - \mu_0}{\frac{\sigma}{\sqrt{n}}}
-   \]
-   \[
-   Z = \frac{53 - 50}{\frac{5}{\sqrt{30}}}
-   \]
+Test if the average IQ of a group is more than the population mean of 100. Assume the population standard deviation is known to be 15. A sample of 50 individuals has a mean IQ of 104.
 
-2. **Use the calculator** to compute the Z-score.
+### Steps on TI-84
 
-3. **Determine the critical Z-value** for \(\alpha = 0.05\) (for a two-tailed test, \(\alpha/2 = 0.025\) on each tail).
+#### Step 1: Configure the Test
 
-4. **Compare** the calculated Z-value with the critical values. If the absolute value of the calculated Z is greater than the critical Z, reject the null hypothesis.
+- Press `STAT`.
+- Right arrow to `TESTS`.
+- Choose `1:Z-Test...`.
 
-## Left-tailed Z-test
+#### Step 2: Input the Data
 
-### Steps to Solve on a Calculator
+- For `Stats`, input:
+  - $\mu_0$: `100`
+  - $\sigma$: `15`
+  - $\bar{x}$: `104`
+  - `n`: `50`
+- Choose `>μ_0` for a two-tailed test.
 
-Repeat the above steps but only compare the negative critical Z-value for the given \(\alpha\) level (e.g., \(\alpha = 0.05\)).
+#### Step 3: Calculate and Interpret
 
-## Right-tailed Z-test
+- Scroll to `Calculate` and press `ENTER`.
+- The calculator will provide the z-statistic and p-value.
+- Interpret the p-value relative to $\alpha = 0.05$.
 
-### Steps to Solve on a Calculator
+## Example 2: T-Test for the Mean
 
-Repeat the Z-score calculation and compare it against the positive critical Z-value for the given \(\alpha\) level.
+### Scenario
 
-# T-test
+Evaluate whether the mean height of a sample of 25 students is different from the known average of 68 inches. The sample has a mean height of 66 inches with a standard deviation of 3.5 inches.
 
-T-tests are used when the population variance is unknown, and the sample size is relatively small. The test statistic follows a t-distribution.
+### Steps on TI-84
 
-## Two-tailed T-test
+#### Step 1: Configure the Test
 
-### Example Problem
+- Press `STAT`.
+- Right arrow to `TESTS`.
+- Choose `2:T-Test...`.
 
-Evaluate whether the sample mean (\(\bar{x}\)) of 25 significantly differs from the known population mean (\(\mu_0\)) of 20 with a sample standard deviation (\(s\)) of 3 and a sample size (\(n\)) of 15.
+#### Step 2: Input the Data
 
-### Steps to Solve on a Calculator
+- For `Stats`, input:
+  - $\mu_0$: `68`
+  - $\bar{x}$: `66`
+  - `Sx`: `3.5`
+  - `n`: `25`
+- Choose `≠μ_0` for a two-tailed test.
 
-1. **Calculate the T-score**:
-   \[
-   T = \frac{\bar{x} - \mu_0}{\frac{s}{\sqrt{n}}}
-   \]
-   \[
-   T = \frac{25 - 20}{\frac{3}{\sqrt{15}}}
-   \]
+#### Step 3: Calculate and Interpret
 
-2. **Use the calculator** to compute the T-score.
+- Scroll to `Calculate` and press `ENTER`.
+- The calculator will provide the t-statistic, p-value, and degrees of freedom.
+- Interpret the p-value relative to $\alpha = 0.05$.
 
-3. **Determine the critical T-value** for \(\alpha = 0.05\) with \(df = n-1\) (degrees of freedom).
+## Conclusion
 
-4. **Compare** the calculated T-value with the critical values.
+These examples demonstrate how to conduct a z-test and a t-test on the TI-84 calculator, depending on whether the population standard deviation is known. Follow these steps to test different hypotheses regarding population means using your calculator.
 
-## Left-tailed T-test
-
-### Steps to Solve on a Calculator
-
-Repeat the above steps and compare the calculated T-score against the negative critical T-value.
-
-## Right-tailed T-test
-
-### Steps to Solve on a Calculator
-
-Repeat the T-score calculation and compare it against the positive critical T-value.
-
-# Conclusion
-
-Understanding how to manually calculate test statistics using a calculator is crucial for interpreting data correctly, especially when software or specific statistical tools are not available.
