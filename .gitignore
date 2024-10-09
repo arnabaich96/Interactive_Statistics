@@ -16,7 +16,7 @@ renv/
 .sh
 .lock
 .Rproj
-Interactive Statistics.Rproj
-render_rmds.sh
 renv.lock
 styles.css
+render_rmds.sh
+Interactive Statistics.Rproj
