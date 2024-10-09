@@ -6,3 +6,10 @@
 rsconnect/
 .Rprofile
 Assignments/
+.Rmd
+.qmd
+renv/
+.css
+.sh
+.lock
+.Rproj
