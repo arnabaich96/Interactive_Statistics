@@ -6,7 +6,8 @@
 rsconnect/
 .Rprofile
 Assignments/
-.Rmd
+*.Rmd
+*.R
 .qmd
 renv/
 .css
