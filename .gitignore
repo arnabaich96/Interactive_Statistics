@@ -6,7 +6,10 @@
 rsconnect/
 .Rprofile
 Assignments/
+**/*.Rmd
 *.Rmd
+**/*.R
+
 *.R
 .qmd
 renv/
