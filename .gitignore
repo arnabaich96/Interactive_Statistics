@@ -3,20 +3,3 @@
 .Rhistory
 .RData
 .Ruserdata
-rsconnect/
-.Rprofile
-Assignments/
-**/*.Rmd
-*.Rmd
-**/*.R
-*.R
-.qmd
-renv/
-.css
-.sh
-.lock
-.Rproj
-renv.lock
-styles.css
-render_rmds.sh
-Interactive Statistics.Rproj
