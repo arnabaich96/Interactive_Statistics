@@ -1484,7 +1484,7 @@ border-radius: 0px;
 </div>
 
 
-<p><style type="text/css">h1, h2, h3, h4, h5, h6 {cursor: pointer; padding: 10px; border-radius: 5px; transition: background-color 0.3s, color 0.3s; }h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {background-color: #ecf0f1; color: #3498db; }h1 {font-size: 25px;color: #2980b9; }h2 {font-size: 22px;color: #2c3e50; }h3 {font-size: 20px;color: #34495e;}h1, h2, h3, h4, h5, h6 {text-decoration: underline; }toc{display: block;position: fixed;top: 0;right: 0;width: 20%;height: 100%;overflow: auto;background-color: #f1f1f1;padding: 20px;border-left: 1px solid #ccc;}</style></p>
+<p><style type="text/css">body, html {margin: 0;padding: 0;font-family: 'Arial', sans-serif;background-color: #f9f9f9;color: #333;}header {background-color: #2980b9; color: white;padding: 15px 20px;text-align: center;font-size: 24px;font-weight: bold;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);}nav {background-color: #2c3e50;padding: 10px;}nav ul {list-style-type: none;padding: 0;margin: 0;display: flex;justify-content: space-around;}nav ul li {display: inline;}nav ul li a {color: white;text-decoration: none;padding: 10px 15px;transition: background-color 0.3s;}nav ul li a:hover {background-color: #3498db;border-radius: 5px;}h1, h2, h3, h4, h5, h6 {cursor: pointer;padding: 10px;border-radius: 5px;transition: background-color 0.3s, color 0.3s;text-decoration: underline;margin-top: 20px;}h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {background-color: #ecf0f1;color: #3498db;}h1 {font-size: 32px;color: #2980b9;margin-top: 30px;}h2 {font-size: 28px;color: #2c3e50;}h3 {font-size: 24px;color: #34495e;}toc {display: block;position: fixed;top: 70px; right: 0;width: 20%;height: calc(100% - 70px);overflow: auto;background-color: #f1f1f1;padding: 20px;border-left: 1px solid #ccc;box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);}.sidebar {position: fixed;left: 0;top: 70px; width: 20%;height: calc(100% - 70px);background-color: #ecf0f1;padding: 20px;box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);overflow: auto;}.sidebar ul {list-style-type: none;padding: 0;}.sidebar ul li {padding: 10px;margin-bottom: 5px;background-color: #ffffff;border: 1px solid #ccc;border-radius: 5px;transition: background-color 0.3s;}.sidebar ul li:hover {background-color: #ecf0f1;}footer {background-color: #2c3e50;color: white;text-align: center;padding: 10px;position: fixed;bottom: 0;width: 100%;box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);}.main-content {margin: 70px 20% 70px 20%; padding: 20px;}button {background-color: #3498db;color: white;border: none;padding: 10px 15px;border-radius: 5px;cursor: pointer;transition: background-color 0.3s;}button:hover {background-color: #2980b9;}@media (max-width: 768px) {nav ul {flex-direction: column;}.main-content {margin: 70px 10px;}toc, .sidebar {display: none; }}</style></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>Hypothesis testing is a critical statistical tool used to make
@@ -1538,10 +1538,10 @@ the following forms:</p>
 <li><p>Right-tailed: <span class="math inline">\(H_A: \mu &gt;
 \mu_0\)</span></p></li>
 <li><p>Left-tailed: <span class="math inline">\(H_A: \mu &lt;
-\mu_0\)</span> <strong>Example:</strong> The alternative hypothesis
-states that the drug does affect blood pressure. We can write this
-as:</p></li>
+\mu_0\)</span></p></li>
 </ul>
+<p><strong>Example:</strong> The alternative hypothesis states that the
+drug does affect blood pressure. We can write this as:</p>
 <p><span class="math display">\[
 H_A: \text{The drug has an effect on blood pressure (mean change ≠ 0)}
 \]</span></p>
@@ -1552,8 +1552,8 @@ hypothesis in favor of the alternative hypothesis.</p>
 <h3>Type I Error</h3>
 <p>A Type I error occurs when the null hypothesis is rejected but it is
 actually true. It represents a false positive result. Probability of
-Type I error is denoted by <span class="math inline">\(\alpha\)</span>.
-<strong>Example:</strong> Suppose the drug does not actually affect
+Type I error is denoted by <span class="math inline">\(\alpha\)</span>.</p>
+<p><strong>Example:</strong> Suppose the drug does not actually affect
 blood pressure (the null hypothesis is true), but our test incorrectly
 concludes that it does. This mistake is a Type I error.</p>
 </div>
@@ -1570,7 +1570,8 @@ that it does not, we have made a Type II error.</p>
 <h3>Significance Level (<span class="math inline">\(\alpha\)</span>)</h3>
 <p>The probability of making a Type I error is called the
 <strong>significance level</strong> (<span class="math inline">\(\alpha\)</span>, it is the threshold we set for
-rejecting the null hypothesis. <strong>Example:</strong> If we set <span class="math inline">\(\alpha = 0.05\)</span>, it means we are willing to
+rejecting the null hypothesis.</p>
+<p><strong>Example:</strong> If we set <span class="math inline">\(\alpha = 0.05\)</span>, it means we are willing to
 accept a 5% chance of making a Type I error. In other words, we will
 reject the null hypothesis if the p-value is less than 0.05.</p>
 </div>
@@ -1767,7 +1768,7 @@ size.</p></li>
 <p>Under the null hypothesis, the test statistic follows a standard
 normal distribution (Z-distribution) with a mean of 0 and a standard
 deviation of 1: <span class="math display">\[
-Z_{\text{stat}})  \sim N(0, 1)
+Z_{\text{stat}}  \sim N(0, 1)
 \]</span></p>
 </div>
 <div id="step-4-critical-value" class="section level3">
@@ -1794,19 +1795,19 @@ based on the type of test:</p>
 <li><p><strong>Right-tailed test:</strong><br />
 The p-value is the probability of obtaining a test statistic greater
 than the observed <span class="math inline">\(Z{\text{stat}})\)</span>-value: <span class="math display">\[
-p value = P_{H_0}(Z &gt; Z_{\text{observed}})
+p-value = P_{H_0}(Z &gt; Z_{\text{observed}})
 \]</span></p></li>
 <li><p><strong>Left-tailed test:</strong><br />
 The p-value is the probability of obtaining a test statistic less than
 the observed <span class="math inline">\(Z{\text{stat}})\)</span>-value:
 <span class="math display">\[
-p value = P_{H_0}(Z &lt; Z_{\text{observed}})
+p-value = P_{H_0}(Z &lt; Z_{\text{observed}})
 \]</span></p></li>
 <li><p><strong>Two-tailed test:</strong><br />
 The p-value is the probability of obtaining a test statistic as extreme
 as the observed <span class="math inline">\(Z{\text{stat}})\)</span>-value in either
 direction: <span class="math display">\[
-p value = 2 \times P_{H_0}(Z &gt; |Z_{\text{observed}}|)
+p-value = 2 \times P_{H_0}(Z &gt; |Z_{\text{observed}}|)
 \]</span></p></li>
 </ul>
 <p>where <span class="math inline">\(Z \sim N(0, 1)\)</span>.</p>
