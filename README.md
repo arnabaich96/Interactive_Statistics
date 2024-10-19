@@ -1,5 +1,5 @@
 
-# 🧠 **Interactive Statistical Concepts** 🧠
+# 🧠 **Introduction to Applied Statistics** 🧠
 
 ## 🎯 **Overview**
 
