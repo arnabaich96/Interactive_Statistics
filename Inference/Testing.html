@@ -1750,7 +1750,7 @@ The population mean is different from the hypothesized mean.</p></li>
 <h3>Step 2: Test Statistic</h3>
 <p>To test the hypotheses, the Z-statistic is calculated using the
 formula: <span class="math display">\[
-Z_{\text{stat}}) = \frac{\sqrt{n}(\bar{X} - \mu_0)}{\sigma}
+Z_{\text{stat}} = \frac{\sqrt{n}(\bar{X} - \mu_0)}{\sigma}
 \]</span> where:</p>
 <ul>
 <li><p><span class="math inline">\(\bar{X}\)</span> is the sample
@@ -1983,7 +1983,7 @@ t_{observed} = \frac{104 - 100}{\frac{10}{\sqrt{25}}} = \frac{4}{2} =
 2.0
 \]</span></p></li>
 <li><p><strong>Step 3: Distribution under <span class="math inline">\(H_0\)</span>:</strong><br />
-<span class="math inline">\(t \sim t_(24)_{24}\)</span> (since <span class="math inline">\(n - 1 = 25 - 1 = 24\)</span>)</p></li>
+<span class="math inline">\(t \sim t_{24}\)</span> (since <span class="math inline">\(n - 1 = 25 - 1 = 24\)</span>)</p></li>
 <li><p><strong>Step 4: Critical Value:</strong><br />
 For a right-tailed test with <span class="math inline">\(\alpha =
 0.05\)</span> and 24 degrees of freedom, the critical value is
@@ -2013,6 +2013,83 @@ corresponding to the significance level (<span class="math inline">\(\alpha\)</s
 value calculated from the data.</p></li>
 </ul>
 </div>
+</div>
+</div>
+<div id="two-tailed-test-and-confidence-interval" class="section level2">
+<h2>Two-Tailed Test and Confidence Interval</h2>
+<p>A two-tailed hypothesis test for the mean and a confidence interval
+(CI) are closely related methods for assessing whether there is evidence
+to reject a null hypothesis. Both approaches often lead to the same
+conclusion because they are based on the same underlying statistical
+principles.</p>
+<ul>
+<li><p><strong>Two-Tailed Test</strong>: In a two-tailed hypothesis
+test, we check whether the population mean is significantly different
+from a specific value (the null hypothesis). We reject the null
+hypothesis if the sample mean is significantly higher or lower than this
+value, based on a chosen significance level (e.g., <span class="math inline">\(\alpha = 0.05\)</span>).</p></li>
+<li><p><strong>Confidence Interval</strong>: A confidence interval
+provides a range of plausible values for the population mean. For
+instance, a 95% confidence interval indicates that we are 95% confident
+the true mean lies within this range.</p></li>
+</ul>
+<div id="why-do-they-lead-to-the-same-conclusion" class="section level3">
+<h3>Why Do They Lead to the Same Conclusion?</h3>
+<p>The reason a two-tailed hypothesis test and a confidence interval
+often lead to the same conclusion is that they are both based on the
+concept of sampling variability and the same distribution (usually the
+t-distribution or normal distribution):</p>
+<ul>
+<li><strong>Confidence Interval Perspective</strong>: A 95% confidence
+interval is constructed in a way that, if we repeatedly sampled from the
+population, 95% of those intervals would contain the true mean. If the
+hypothesized mean falls outside of this interval, it suggests that the
+observed sample mean is too extreme to be consistent with the null
+hypothesis.</li>
+<li><strong>Hypothesis Testing Perspective</strong>: In a two-tailed
+test, we determine whether <u>the observed sample mean is significantly
+different from the hypothesized mean by calculating a test
+statistic</u>. If this test statistic is extreme enough (based on the
+same threshold as the confidence interval), it leads to rejecting the
+null hypothesis.</li>
+</ul>
+<p>Because both methods rely on the same sampling distribution, they use
+the same logic to determine what counts as “significant” or “extreme”
+results. This is why, if a value is not in the confidence interval, it
+corresponds to rejecting the null hypothesis in a two-tailed test.</p>
+</div>
+<div id="example-2" class="section level3">
+<h3>Example</h3>
+<p>Suppose we want to test if the average weight of a product is
+different from 50 grams. We take a sample of 30 products and find that
+the average weight is 52 grams, with a sample standard deviation of 5
+grams. We conduct a two-tailed test at the 95% confidence level.</p>
+<ul>
+<li><strong>Two-Tailed Test Result</strong>:
+<ul>
+<li><strong>Null Hypothesis (<span class="math inline">\(H_0\)</span>)</strong>: The population mean weight
+is 50 grams.</li>
+<li><strong>Alternative Hypothesis (<span class="math inline">\(H_a\)</span>)</strong>: The population mean weight
+is not 50 grams.</li>
+<li>After conducting the test, we obtain a p-value of 0.03. Since the
+p-value (0.03) is less than the significance level (<span class="math inline">\(\alpha = 0.05\)</span>), we
+<strong>reject</strong> the null hypothesis. This indicates that there
+is significant evidence to suggest the average weight is different from
+50 grams.</li>
+</ul></li>
+<li><strong>Confidence Interval</strong>:
+<ul>
+<li>The 95% confidence interval for the average weight is calculated to
+be between <strong>51.2 grams</strong> and <strong>52.8
+grams</strong>.</li>
+<li>Since 50 grams (the hypothesized mean) does <strong>not fall
+within</strong> this interval, it suggests that the true mean is likely
+different from 50 grams. Therefore, we reject the null hypothesis.</li>
+</ul></li>
+</ul>
+<p>In essence, both approaches are different ways of answering the same
+question: “Is the observed sample mean likely to have come from a
+population with the hypothesized mean?”</p>
 </div>
 </div>
 <div id="recap" class="section level2">
