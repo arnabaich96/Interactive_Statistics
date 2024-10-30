@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Interactive Statistical Application</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Interactive_Statistics_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Interactive_Statistics_files/libs/quarto-html/quarto.js"></script>
+<script src="Interactive_Statistics_files/libs/quarto-html/popper.min.js"></script>
+<script src="Interactive_Statistics_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Interactive_Statistics_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Interactive_Statistics_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Interactive_Statistics_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Interactive_Statistics_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Interactive_Statistics_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Interactive_Statistics_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><strong>Interactive Statistical Application</strong></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<script>
+  function scrollToSection(sectionID) {
+    $('html, body').animate({
+      scrollTop: $(sectionID).offset().top
+    }, 1000);
+  }
+</script>
+<p style=" font-size: 18px;">
+Welcome! This document is designed to help you explore fundamental concepts in statistics through interactive tools. Understanding statistics goes beyond formulas—it’s about getting a feel for how data works and making smart decisions based on it. The tools provided here will guide you through practical, hands-on experiences to deepen your intuition for statistical analysis.
+</p>
+<p style="color: #2E4053; font-size: 18px;">
+These tools are straightforward and engaging, making it easier to grasp key statistical ideas. Whether you’re new to the subject or just refreshing your knowledge, you’ll find these tools helpful in learning how to analyze and interpret data effectively. You can use the buttons below to open desired section directly. Let’s start exploring!
+</p>
+<button onclick="document.getElementById('Introduction').scrollIntoView();">
+Introduction
+</button>
+<button onclick="document.getElementById('summary').scrollIntoView();">
+Summary Statistics
+</button>
+<button onclick="document.getElementById('distributions').scrollIntoView();">
+Distributions
+</button>
+<button onclick="document.getElementById('inference').scrollIntoView();">
+Inference
+</button>
+<button onclick="document.getElementById('chisq').scrollIntoView();">
+Test of Independece
+</button>
+<button onclick="document.getElementById('anova').scrollIntoView();">
+Anova
+</button>
+<button onclick="document.getElementById('regression').scrollIntoView();">
+Regression
+</button>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h3>
+<p>
+Imagine you’re trying to determine the average height of trees in a vast forest. Measuring every single tree would be impossible, so instead, you measure a few—this is your sample. You then use this sample to estimate the average height of all the trees. This tool helps you understand how the size of your sample affects the accuracy of your estimates. By adjusting the sample size, you can see how larger samples generally yield more reliable estimates, while smaller samples can still offer valuable insights.
+</p>
+<section id="contexts-and-usage" class="level4">
+<h4 class="anchored" data-anchor-id="contexts-and-usage"><strong>Contexts and Usage:</strong></h4>
+<p>
+Sampling is a universal concept—it applies to various fields, from estimating a country’s average income to predicting voter behavior. Understanding the link between sample size and estimate accuracy is crucial. With this tool, you can experiment with different sample sizes to see how larger samples provide more stable and reliable estimates, yet even small samples can be insightful, though with more variability.
+</p>
+<p><a id="Introduction" href=""></a></p>
+</section>
+<section id="how-to-use" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use"><strong>How to Use:</strong></h4>
+<ul>
+<li>
+<b>Adjust the Sample Size</b>: Use the slider to change the sample size. Watch how the sample mean of heights changes as you adjust the sample size.
+</li>
+<li>
+<b>Compare to Population Mean</b>: The tool shows both the sample mean and the true population mean, allowing you to see how close your estimate gets.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shiny-app-container">
+<iframe data-deferred-src="app492267b8cee37a1dcd6a63ea453bb61d/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics"><strong>Summary Statistics</strong></h3>
+<section id="introduction-1" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-1"><strong>Introduction:</strong></h4>
+<p>
+Summary statistics boil down a large dataset into a few key numbers that offer a snapshot of the data’s main features. Think of it like summarizing a book with a few sentences. This tool allows you to explore these summary statistics and understand how they represent different aspects of the data.
+</p>
+</section>
+<section id="contexts-and-usage-1" class="level4">
+<h4 class="anchored" data-anchor-id="contexts-and-usage-1"><strong>Contexts and Usage:</strong></h4>
+<p>
+Summary statistics are essential in every field that involves data. They help us quickly understand and compare information. This tool illustrates how statistics like the mean, median, and standard deviation give us different insights into a dataset. By interacting with the tool, you’ll see how changes in the data affect these statistics and what that means for real-world interpretation.
+</p>
+<p><a id="summary" href=""></a></p>
+</section>
+<section id="how-to-use-1" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use-1"><strong>How to Use:</strong></h4>
+<ul>
+<li>
+<b>Select a Dataset</b>: Choose a dataset to analyze.
+</li>
+<li>
+<b>Explore Summary Statistics</b>: The tool calculates key statistics, such as mean, median, and standard deviation.
+</li>
+<li>
+<b>Visualize the Data</b>: Use histograms, boxplots, and other visualizations to see how the data is distributed. Interact with the plots to better understand the distribution and identify outliers.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shiny-app-container">
+<iframe data-deferred-src="appcfa24660dfebd84dff3b1f3739cf4262/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="distributions-lefttextnormalmathbfchi2_n-t_n-1-f_n_1n_2right" class="level3">
+<h3 class="anchored" data-anchor-id="distributions-lefttextnormalmathbfchi2_n-t_n-1-f_n_1n_2right"><strong>Distributions <span class="math inline">\(\left(\text{Normal},\mathbf{\chi^2_n , t_{n-1} , F_{n_1,n_2}}\right)\)</span></strong></h3>
+<section id="introduction-2" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-2"><strong>Introduction:</strong></h4>
+<p>
+Probability distributions describe all possible outcomes of a random variable and the likelihood of each outcome. Imagine flipping a coin or rolling a dice—each outcome has a probability, and the distribution shows these probabilities for every possible outcome. This tool lets you explore different types of distributions and see how they change when you adjust the parameters.
+</p>
+</section>
+<section id="contexts-and-usage-2" class="level4">
+<h4 class="anchored" data-anchor-id="contexts-and-usage-2"><strong>Contexts and Usage:</strong></h4>
+<p>
+Distributions are fundamental to statistical modeling and decision-making. In finance, they might model stock returns; in engineering, they could assess material failure rates. Understanding distributions allows us to calculate probabilities and make informed predictions. This tool enables you to manipulate parameters like mean and standard deviation for normal distributions, or degrees of freedom for t-distributions, and see how these changes impact the shape of the distribution.
+</p>
+<p><a id="distributions" href=""></a></p>
+</section>
+<section id="how-to-use-2" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use-2"><strong>How to Use:</strong></h4>
+<ul>
+<li>
+<b>Select a Distribution</b>: Choose from Normal, Chi-squared, t, or F distributions.
+</li>
+<li>
+<b>Adjust Parameters</b>: Modify relevant parameters (e.g., mean, standard deviation, degrees of freedom) based on the selected distribution.
+</li>
+<li>
+<b>Calculate Probabilities</b>: The tool calculates probabilities for a specified range and highlights the corresponding area under the curve.
+</li>
+<li>
+<b>Visualize the Distribution</b>: An interactive plot shows the distribution curve, with shaded areas based on user inputs.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shiny-app-container">
+<iframe data-deferred-src="appedd689f30a16e7c7bb0a75fcb7a5297c/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="statistical-inference" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-inference"><strong>Statistical Inference</strong></h3>
+<section id="introduction-3" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-3"><strong>Introduction:</strong></h4>
+<p>
+Statistical inference is about drawing conclusions about a population based on a sample. It’s like making an educated guess about a book by reading a few pages. This tool helps you explore the key ideas of statistical inference, including confidence intervals and hypothesis testing. By interacting with data, you can see how changing sample sizes or confidence levels affects the conclusions you draw.
+</p>
+</section>
+<section id="contexts-and-usage-3" class="level4">
+<h4 class="anchored" data-anchor-id="contexts-and-usage-3"><strong>Contexts and Usage:</strong></h4>
+<p>
+Inference is widely used, from predicting election results to testing new medicines. This tool allows you to experiment with confidence intervals and hypothesis tests, helping you see how data can be used to make informed decisions. You’ll also learn about Z-tests and T-tests, depending on whether the population standard deviation is known.
+</p>
+<p><a id="inference" href=""></a></p>
+</section>
+<section id="how-to-use-3" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use-3"><strong>How to Use:</strong></h4>
+<ul>
+<li>
+<b>Input Data</b>: Enter your sample data and specify whether the population standard deviation is known.
+</li>
+<li>
+<b>Select Confidence Level</b>: Choose a confidence level for constructing the interval.
+</li>
+<li>
+<b>Perform Hypothesis Testing</b>: If desired, enter values for hypothesis testing, including the null hypothesis, alternative hypothesis, and significance level.
+</li>
+<li>
+<b>Interpret Results</b>: The tool displays the confidence interval, test statistic, p-value, and critical region, with a plot highlighting the relevant areas.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shiny-app-container">
+<iframe data-deferred-src="app859c0093628ca7cb7737a568413960c2/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="test-of-independence" class="level3">
+<h3 class="anchored" data-anchor-id="test-of-independence"><strong>Test of Independence</strong></h3>
+<section id="introduction-4" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-4"><strong>Introduction:</strong></h4>
+<p>
+The Chi-Square test is a statistical method used to determine if there is a significant association between two categorical variables. For instance, it can be used to test whether gender is related to voting preference. This tool allows you to perform Chi-Square tests interactively, helping you understand how to test for independence between variables and interpret the results.
+</p>
+</section>
+<section id="contexts-and-usage-4" class="level4">
+<h4 class="anchored" data-anchor-id="contexts-and-usage-4"><strong>Contexts and Usage:</strong></h4>
+<p>
+Chi-Square tests are particularly useful in fields like social sciences and market research, where the relationship between categorical variables needs to be assessed. For example, a company might use Chi-Square to see if customer satisfaction is independent of age group. This tool provides a hands-on way to conduct these tests, visualize the results, and understand the relationship between variables.
+</p>
+<p><a id="chisq" href=""></a></p>
+</section>
+<section id="how-to-use-4" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use-4"><strong>How to Use:</strong></h4>
+<ul>
+<li>
+<b>Input Categorical Data</b>: Enter the observed frequencies for each category.
+</li>
+<li>
+<b>Perform the Test</b>: The tool calculates the Chi-Square statistic and p-value.
+</li>
+<li>
+<b>Interpret Results</b>: See the relationship between the variables visually.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shiny-app-container">
+<iframe data-deferred-src="app356bc2eb4ac14d80bb3ae26bea6acd5e/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analysis-of-variance" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-of-variance"><strong>Analysis of Variance</strong></h3>
+<section id="introduction-5" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-5"><strong>Introduction:</strong></h4>
+<p>
+Analysis of Variance (ANOVA) is a statistical method used to compare the means of three or more groups. It’s commonly used in experiments where different groups are subjected to different treatments, and the goal is to determine whether any of the treatments lead to significantly different outcomes. This tool provides an interactive environment to perform ANOVA tests, helping you understand how this technique helps in identifying differences between groups.
+</p>
+</section>
+<section id="contexts-and-usage-5" class="level4">
+<h4 class="anchored" data-anchor-id="contexts-and-usage-5"><strong>Contexts and Usage:</strong></h4>
+<p>
+ANOVA is widely used in fields like agriculture, medicine, and marketing, where it’s essential to compare multiple groups simultaneously. For example, a pharmaceutical company might use ANOVA to compare the effectiveness of different drug dosages. This tool lets you input group data, run ANOVA, and interpret the results through both numerical and graphical outputs.
+</p>
+<p><a id="anova" href=""></a></p>
+</section>
+<section id="how-to-use-5" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use-5"><strong>How to Use:</strong></h4>
+<ul>
+<li>
+<b>Input Group Data</b>: Enter the data for each group you want to compare.
+</li>
+<li>
+<b>Run ANOVA</b>: The tool calculates the F-statistic and p-value.
+</li>
+<li>
+<b>Interpret Results</b>: The tool helps determine whether there are significant differences between group means. The results are displayed in both tabular and graphical formats.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shiny-app-container">
+<iframe data-deferred-src="app8418535ff2ddd0945f058ae4dfea40a8/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="regression-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="regression-analysis"><strong>Regression Analysis</strong></h3>
+<section id="introduction-6" class="level4">
+<h4 class="anchored" data-anchor-id="introduction-6"><strong>Introduction:</strong></h4>
+<p>
+Regression analysis is a fundamental statistical tool used to examine relationships between a dependent (response) variable and one or more independent (predictor) variables. It helps us understand how the dependent variable changes as the predictor variable(s) change. In this app, you can explore two types of regression models: <b>Simple Linear Regression (SLR)</b> and <b>Multiple Linear Regression (MLR)</b>.
+</p>
+</section>
+<section id="contexts-and-usage-6" class="level4">
+<h4 class="anchored" data-anchor-id="contexts-and-usage-6"><strong>Contexts and Usage:</strong></h4>
+<p>
+Regression analysis is widely used across fields like economics, medicine, environmental studies, engineering, and social sciences. - <strong>Simple Linear Regression (SLR)</strong> is useful when you want to model the relationship between one dependent variable and a single independent variable. - <strong>Multiple Linear Regression (MLR)</strong> allows you to explore how a dependent variable is affected by multiple independent variables simultaneously. Both methods are essential for understanding relationships between variables, predicting future trends, and making data-driven decisions. This tool enables you to experiment with real or simulated datasets and analyze how changes in the predictor variables affect the outcome.
+</p>
+<p><a id="regression" href=""></a></p>
+</section>
+<section id="how-to-use-6" class="level4">
+<h4 class="anchored" data-anchor-id="how-to-use-6"><strong>How to Use:</strong></h4>
+<ul>
+<li>
+<b>Select Data Input Method</b>: You can either upload your own dataset (CSV or TXT) or use a prebuilt dataset available within the app.
+</li>
+<li>
+<b>Choose Regression Type</b>:
+<ul>
+<li>
+<b>Simple Linear Regression (SLR)</b>: Use this when you want to examine the relationship between a single independent variable and a dependent variable. You will choose one predictor variable to fit the model.
+</li>
+<li>
+<b>Multiple Linear Regression (MLR)</b>: Use this option when you want to analyze the relationship between the dependent variable and two or more independent variables. You can select multiple predictors from the dataset.
+</li>
+</ul>
+</li>
+<li>
+<b>Perform Regression</b>: Once you’ve chosen your regression type and input the data, the app will perform the regression analysis and display key statistics such as the coefficients, R-squared value, p-values, and residuals.
+</li>
+<li>
+<b>Visualize Results</b>: The tool provides a graphical representation of the regression line for SLR, and for MLR, you can explore residual plots and other diagnostics to assess the model fit. You can also view interactive plots to better understand the relationship between the dependent and independent variables.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="shiny-app-container">
+<iframe data-deferred-src="appd2046d0e9b57925c86e47eab5d44a04e/?w=&amp;__subapp__=1" width="100%" height="400" class="shiny-frame shiny-frame-deferred"></iframe>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h3>
+<p style=" font-size: 18px;">
+We hope these interactive tools have made statistical concepts more accessible and engaging. Statistics is all about understanding data to make better decisions. The more you practice, the more comfortable you will become with these concepts. Keep exploring, keep learning, and remember that every dataset has a story to tell.
+</p>
+<p style=" font-size: 18px;">
+Whether you’re using these tools to support your studies or for practical applications, the skills you develop here will serve you well. Continue to experiment with different datasets and scenarios, and apply what you’ve learned to real-world problems. Happy exploring!
+</p>
+<hr style="margin-top: 20px;">
+<div style="margin-top: 1px; text-align: center; max-width: 52%; padding: 1px; margin-left: auto; margin-right: auto;">
+<p style="font-size: 20px;">
+Thank you for using the interactive application!
+</p>
+<p style="font-size: 16px;">
+Creator: Arnab Aich | Email: [<a href="mailto:arnab.aich99@gmail.com">click here</a>] | GitHub: [<a href="https://github.com/arnabaich96" target="_blank">click here</a>]
+</p>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
