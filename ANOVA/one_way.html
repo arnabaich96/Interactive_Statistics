@@ -1729,7 +1729,7 @@ determine if they are significantly different.</p></li>
 <p>Suppose a researcher is studying the effect of three different diets
 on weight loss(in kgs). The researcher collects data from participants
 on three different diets (A, B, and C) over a month:</p>
-<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-striped table-hover table-condensed" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:center;">
@@ -1785,33 +1785,27 @@ have different number of observations ( <span class="math inline">\(n_j\)</span>
 <p><span class="math display">\[
 Y_{ij} = \mu + \alpha_i + \epsilon_{ij}
 \]</span></p>
-<p>where:</p>
-<ul>
-<li><span class="math inline">\(Y_{ij}\)</span> is the observed value of
-the dependent variable for the <span class="math inline">\(j\)</span>-th
-observation in the <span class="math inline">\(i\)</span>-th group.</li>
-<li><span class="math inline">\(\mu\)</span> is the overall mean of the
-dependent variable.</li>
-<li><span class="math inline">\(\alpha_i\)</span> represents the effect
-of the <span class="math inline">\(i\)</span>-th group (treatment effect
-or deviation from the overall mean due to belonging to group <span class="math inline">\(i\)</span>).</li>
-<li><span class="math inline">\(\epsilon_{ij}\)</span> is the random
-error term associated with the <span class="math inline">\(j\)</span>-th
-observation in the <span class="math inline">\(i\)</span>-th group,
-assumed to be normally distributed with a mean of 0 and constant
-variance <span class="math inline">\(\sigma^2\)</span>.</li>
-</ul>
+<p>where <span class="math inline">\(Y_{ij}\)</span> is the observed
+value of the dependent variable for the <span class="math inline">\(j\)</span>-th observation in the <span class="math inline">\(i\)</span>-th group. - <span class="math inline">\(\mu\)</span> - <span class="math inline">\(\alpha_i\)</span> - <span class="math inline">\(\epsilon_{ij}\)</span></p>
 <p>The model assumes that the total variation in the observed data
 (<span class="math inline">\(Y_{ij}\)</span>) can be decomposed
 into:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Overall Mean (<span class="math inline">\(\mu\)</span>)</strong>: Represents the central
-location of all data points across all groups.</li>
-<li><strong>Group Effect (<span class="math inline">\(\alpha_i\)</span>)</strong>: Captures the
-deviation of each group mean from the overall mean, indicating how
-different each group is from the average.</li>
+location of all data points across all groups. It is the is the overall
+mean of the dependent variable.</li>
+<li><strong>Group Effect (<span class="math inline">\(\alpha_i\)</span>)</strong>: It represents the
+effect of the <span class="math inline">\(i\)</span>-th group (treatment
+effect or deviation from the overall mean due to belonging to group
+<span class="math inline">\(i\)</span>). Captures the deviation of each
+group mean from the overall mean, indicating how different each group is
+from the average.</li>
 <li><strong>Error (<span class="math inline">\(\epsilon_{ij}\)</span>)</strong>: Accounts for the
-random variability not explained by group differences.</li>
+random variability not explained by group differences. It is the random
+error term associated with the <span class="math inline">\(j\)</span>-th
+observation in the <span class="math inline">\(i\)</span>-th group,
+assumed to be normally distributed with a mean of 0 and constant
+variance <span class="math inline">\(\sigma^2\)</span>.</li>
 </ol>
 </div>
 <div id="explanation-of-components" class="section level3">
@@ -1838,10 +1832,10 @@ mean.</li>
 suggests that the <span class="math inline">\(i\)</span>-th group has a
 strong effect on the dependent variable, causing its mean to deviate
 significantly from the overall mean.</li>
-<li>Each group effect <span class="math inline">\(\alpha_i\)</span> is
-constrained such that <span class="math inline">\(\sum_{i=1}^{k}
-\alpha_i = 0\)</span>. This ensures that the group effects are measured
-relative to the overall mean and keeps the model balanced.</li>
+<li><u>Each group effect <span class="math inline">\(\alpha_i\)</span>
+is constrained such that <span class="math inline">\(\sum_{i=1}^{k}
+\alpha_i = 0\)</span>.</u> This ensures that the group effects are
+measured relative to the overall mean and keeps the model balanced.</li>
 </ul></li>
 <li><strong>Error Term (<span class="math inline">\(\epsilon_{ij}\)</span>)</strong>:
 <ul>
@@ -1849,8 +1843,8 @@ relative to the overall mean and keeps the model balanced.</li>
 cannot be explained by the overall mean or the group effect.</li>
 <li>It captures the random deviations of each individual observation
 from its group mean.</li>
-<li>The assumption is that these errors are independent, normally
-distributed, and have constant variance <span class="math inline">\(\sigma^2\)</span>.</li>
+<li><u>The assumption is that these errors are independent, normally
+distributed, and have constant variance <span class="math inline">\(\sigma^2\)</span> </u>.</li>
 <li>If the variability within groups is low, it indicates that the group
 means are good representations of the individual values within each
 group. High variability within groups can mask the differences between
@@ -1876,12 +1870,17 @@ is categorical.</p></li>
 <p><span class="math display">\[
   H_0: \mu_1 = \mu_2 = \mu_3 = \ldots = \mu_k
   \]</span></p>
+<p>which is equivalent to: <span class="math inline">\(\alpha_1 =
+\alpha_2 = \alpha_3 = \ldots = \alpha_k = 0\)</span> i.e. there is no
+effect of the group (Diets) on the dependent variable.</p>
 <ul>
 <li>Alternative Hypothesis: At least one group mean is different.</li>
 </ul>
 <p><span class="math display">\[
   H_A: \text{At least one } \mu_i \text{ is different}
-  \]</span></p>
+  \]</span> which is equivalent to: <span class="math inline">\(\text{At
+least one } \alpha_i \neq 0\)</span> i.e. there is an effect of the
+group (Diets) on the dependent variable.</p>
 </div>
 <div id="sum-of-squares" class="section level3">
 <h3>Sum of Squares</h3>
@@ -1961,7 +1960,7 @@ p-value = P(F_{k-1,n-k} &gt; F_{observed})
 </div>
 <div id="anova-table-calculation" class="section level3">
 <h3>ANOVA Table Calculation</h3>
-<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<table class="table table-striped table-hover table-condensed" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:center;">
