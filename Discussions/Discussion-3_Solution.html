@@ -11,7 +11,7 @@
 
 
 
-<title>Discussion Topics 3: Two Sample Problems</title>
+<title>Discussion Topics 3: Solution</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -1477,109 +1477,243 @@ border-radius: 0px;
 
 
 
-<h1 class="title toc-ignore">Discussion Topics 3: Two Sample
-Problems</h1>
+<h1 class="title toc-ignore">Discussion Topics 3: Solution</h1>
 
 </div>
 
 
-<p><style type="text/css">.title {font-size: 40px;color: #2980b9;margin-top: 30px;text-align: center;font-family: 'Georgia', serif;}.author {font-size: 35px;color: #34495e;text-align: center;font-family: 'Verdana', sans-serif;}body, html {margin: 0;padding: 0;font-family: 'Arial', sans-serif;font-size: 16px;background-color: #f4f4f4;color: #333;}header {background-color: #2980b9;color: white;padding: 5px 10px;text-align: center;font-weight: bold;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);}nav {background-color: #2c3e50;padding: 10px;}nav ul {list-style-type: none;padding: 0;margin: 0;display: flex;justify-content: space-around;}nav ul li {display: inline;}nav ul li a {color: white;text-decoration: none;padding: 10px 15px;transition: background-color 0.3s;}nav ul li a:hover {background-color: #3498db;border-radius: 5px;}h1, h2, h3, h4, h5, h6 {cursor: pointer;padding: 10px;border-radius: 5px;transition: background-color 0.3s, color 0.3s;text-decoration: underline;margin-top: 10px;}h2 {font-size: 36px;color: #2980b9;font-family: 'Helvetica Neue', sans-serif;}h3 {font-size: 32px;color: #2c3e50;font-family: 'Times New Roman', serif;}h4 {font-size: 28px;color: #34495e;font-family: 'Courier New', monospace;}h5 {font-size: 24px;color: #34495e;font-family: 'Tahoma', sans-serif;}h6 {font-size: 20px;color: #7f8c8d;font-family: 'Lucida Grande', sans-serif;}h7 {font-size: 16px;color: #95a5a6;font-family: 'Garamond', serif;}h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {background-color: #ecf0f1;color: #3498db;}toc {display: block;position: fixed;top: 70px;right: 0;width: 20%;height: calc(100% - 70px);overflow: auto;background-color: #f1f1f1;padding: 20px;border-left: 1px solid #ccc;box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);}.sidebar {position: fixed;left: 0;top: 70px;width: 20%;height: calc(100% - 70px);background-color: #ecf0f1;padding: 20px;box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);overflow: auto;}.sidebar ul {list-style-type: none;padding: 0;}.sidebar ul li {padding: 10px;margin-bottom: 5px;background-color: #ffffff;border: 1px solid #ccc;border-radius: 5px;transition: background-color 0.3s;}.sidebar ul li:hover {background-color: #ecf0f1;}footer {background-color: #2c3e50;color: white;text-align: center;padding: 10px;position: fixed;bottom: 0;width: 100%;box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);}.main-content {margin: 70px 20% 70px 20%;padding: 20px;}button {background-color: #3498db;color: white;border: none;padding: 10px 15px;border-radius: 5px;cursor: pointer;transition: background-color 0.3s;}button:hover {background-color: #2980b9;}@media (max-width: 768px) {nav ul {flex-direction: column;}.main-content {margin: 70px 10px;}toc, .sidebar {display: none; }}</style> # Topics
-1. Chi-Square Test (Test of Independence) 2. One-Way ANOVA 3. Two-Way
-ANOVA 4. Simple Linear Regression (SLR) 5. Multiple Linear Regression
-(MLR)</p>
+<p><style type="text/css">.title {font-size: 40px;color: #2980b9;margin-top: 30px;text-align: center;font-family: 'Georgia', serif;}.author {font-size: 35px;color: #34495e;text-align: center;font-family: 'Verdana', sans-serif;}body, html {margin: 0;padding: 0;font-family: 'Arial', sans-serif;font-size: 16px;background-color: #f4f4f4;color: #333;}header {background-color: #2980b9;color: white;padding: 5px 10px;text-align: center;font-weight: bold;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);}nav {background-color: #2c3e50;padding: 10px;}nav ul {list-style-type: none;padding: 0;margin: 0;display: flex;justify-content: space-around;}nav ul li {display: inline;}nav ul li a {color: white;text-decoration: none;padding: 10px 15px;transition: background-color 0.3s;}nav ul li a:hover {background-color: #3498db;border-radius: 5px;}h1, h2, h3, h4, h5, h6 {cursor: pointer;padding: 10px;border-radius: 5px;transition: background-color 0.3s, color 0.3s;text-decoration: underline;margin-top: 10px;}h2 {font-size: 36px;color: #2980b9;font-family: 'Helvetica Neue', sans-serif;}h3 {font-size: 32px;color: #2c3e50;font-family: 'Times New Roman', serif;}h4 {font-size: 28px;color: #34495e;font-family: 'Courier New', monospace;}h5 {font-size: 24px;color: #34495e;font-family: 'Tahoma', sans-serif;}h6 {font-size: 20px;color: #7f8c8d;font-family: 'Lucida Grande', sans-serif;}h7 {font-size: 16px;color: #95a5a6;font-family: 'Garamond', serif;}h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {background-color: #ecf0f1;color: #3498db;}toc {display: block;position: fixed;top: 70px;right: 0;width: 20%;height: calc(100% - 70px);overflow: auto;background-color: #f1f1f1;padding: 20px;border-left: 1px solid #ccc;box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);}.sidebar {position: fixed;left: 0;top: 70px;width: 20%;height: calc(100% - 70px);background-color: #ecf0f1;padding: 20px;box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);overflow: auto;}.sidebar ul {list-style-type: none;padding: 0;}.sidebar ul li {padding: 10px;margin-bottom: 5px;background-color: #ffffff;border: 1px solid #ccc;border-radius: 5px;transition: background-color 0.3s;}.sidebar ul li:hover {background-color: #ecf0f1;}footer {background-color: #2c3e50;color: white;text-align: center;padding: 10px;position: fixed;bottom: 0;width: 100%;box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);}.main-content {margin: 70px 20% 70px 20%;padding: 20px;}button {background-color: #3498db;color: white;border: none;padding: 10px 15px;border-radius: 5px;cursor: pointer;transition: background-color 0.3s;}button:hover {background-color: #2980b9;}@media (max-width: 768px) {nav ul {flex-direction: column;}.main-content {margin: 70px 10px;}toc, .sidebar {display: none; }}</style></p>
+<div id="topics" class="section level1">
+<h1>Topics</h1>
+<ol style="list-style-type: decimal">
+<li>Chi-Square Test (Test of Independence)</li>
+<li>One-Way ANOVA</li>
+<li>Two-Way ANOVA</li>
+<li>Simple Linear Regression (SLR)</li>
+<li>Multiple Linear Regression (MLR)</li>
+</ol>
 <hr />
 <div id="chi-square-test-test-of-independence" class="section level2">
 <h2>1. Chi-Square Test (Test of Independence)</h2>
-<p><strong>Discussion Questions:</strong></p>
+<p><strong>Discussion Questions with Solutions:</strong></p>
 <ol style="list-style-type: decimal">
-<li>What graphical or tabular tools can be used to explore relationships
-between categorical variables before conducting a Chi-Square Test? How
-do these tools help in understanding the data?</li>
-<li>What are the assumptions required for a Chi-Square Test of
-Independence to be valid?</li>
-<li>How do you calculate expected frequencies in a contingency table?
-Why is this step important in interpreting the results of the Chi-Square
-Test?</li>
-<li>When might the Chi-Square Test not be appropriate for categorical
-data analysis?</li>
-<li>What does it mean if the Chi-Square Test of Independence shows a
-significant result?</li>
+<li><strong>What graphical or tabular tools can be used to explore
+relationships between categorical variables before conducting a
+Chi-Square Test? How do these tools help in understanding the
+data?</strong>
+<ul>
+<li>Tools like contingency tables and bar plots are commonly used.
+Contingency tables summarize the frequency distribution of variables,
+while bar plots visually represent the proportion of each category,
+helping to identify potential associations.</li>
+</ul></li>
+<li><strong>What are the assumptions required for a Chi-Square Test of
+Independence to be valid?</strong>
+<ul>
+<li>The assumptions include:
+<ul>
+<li>The data must be in the form of frequencies or counts.</li>
+<li>Observations should be independent.</li>
+<li>The expected frequency in each cell of the contingency table should
+be at least 5.</li>
+</ul></li>
+</ul></li>
+<li><strong>How do you calculate expected frequencies in a contingency
+table? Why is this step important in interpreting the results of the
+Chi-Square Test?</strong>
+<ul>
+<li>Expected frequency for a cell = <span class="math inline">\(\frac{\text{Row Total} \times \text{Column
+Total}}{\text{Grand Total}}\)</span>.</li>
+<li>This step ensures the Chi-Square statistic accurately reflects the
+deviation between observed and expected frequencies.</li>
+</ul></li>
+<li><strong>When might the Chi-Square Test not be appropriate for
+categorical data analysis?</strong>
+<ul>
+<li>It may not be appropriate if:
+<ul>
+<li>Sample size is too small (expected frequencies are &lt; 5).</li>
+<li>Data are not counts but percentages or ranks.</li>
+</ul></li>
+</ul></li>
+<li><strong>What does it mean if the Chi-Square Test of Independence
+shows a significant result?</strong>
+<ul>
+<li>A significant result suggests there is a statistical association
+between the two categorical variables.</li>
+</ul></li>
 </ol>
 <hr />
 </div>
 <div id="one-way-anova" class="section level2">
 <h2>2. One-Way ANOVA</h2>
-<p><strong>Discussion Questions:</strong></p>
+<p><strong>Discussion Questions with Solutions:</strong></p>
 <ol style="list-style-type: decimal">
-<li>What are the key assumptions underlying a One-Way ANOVA, and how can
-you check for their validity?</li>
-<li>What is the null hypothesis in a One-Way ANOVA, and how do you
-interpret its rejection?</li>
-<li>How can you interpret the F-statistic and p-value in a One-Way
-ANOVA?</li>
-<li>How does One-Way ANOVA differ from a t-test for comparing two
-groups?</li>
-<li>what should you do if anova tests show significant differences
-between groups?</li>
+<li><p><strong>What are the key assumptions underlying a One-Way ANOVA,
+and how can you check for their validity?</strong></p>
+<ul>
+<li><p>Assumptions: Normality, homogeneity of variances, and
+independence.</p></li>
+<li><p>Check using residual plots, normal probability plots.</p></li>
+</ul></li>
+<li><p><strong>What is the null hypothesis in a One-Way ANOVA, and how
+do you interpret its rejection?</strong></p>
+<ul>
+<li>Null hypothesis: All group means are equal.</li>
+<li>Rejection indicates that at least one group mean is significantly
+different from the others.</li>
+</ul></li>
+<li><p><strong>How can you interpret the F-statistic and p-value in a
+One-Way ANOVA?</strong></p>
+<ul>
+<li>F-statistic: Ratio of variance between groups to variance within
+groups.</li>
+<li>p-value: Probability of observing the data if the null hypothesis is
+true.</li>
+</ul></li>
+<li><p><strong>How does One-Way ANOVA differ from a t-test for comparing
+two groups?</strong></p>
+<ul>
+<li>One-Way ANOVA compares multiple groups simultaneously, while a
+t-test compares two groups.</li>
+</ul></li>
+<li><p><strong>Why is it called ANOVA?</strong></p>
+<ul>
+<li>ANOVA stands for Analysis of Variance, as it assesses the variance
+between groups relative to the variance within groups.</li>
+</ul></li>
 </ol>
 <hr />
 </div>
 <div id="two-way-anova" class="section level2">
 <h2>3. Two-Way ANOVA</h2>
-<p><strong>Discussion Questions:</strong></p>
+<p><strong>Discussion Questions with Solutions:</strong></p>
 <ol style="list-style-type: decimal">
-<li>What is the purpose of including interaction terms in a Two-Way
-ANOVA?</li>
-<li>How can you interpret the main effects in a Two-Way ANOVA?</li>
-<li>What are the assumptions underlying a Two-Way ANOVA?</li>
-<li>When is it appropriate to use a Two-Way ANOVA instead of a One-Way
-ANOVA?</li>
-<li>How do you handle total variance decomposition in a Two-Way ANOVA
-model?</li>
+<li><strong>What is the purpose of including interaction terms in a
+Two-Way ANOVA?</strong>
+<ul>
+<li>Interaction terms help assess whether the effect of one factor
+depends on the level of another factor.</li>
+</ul></li>
+<li><strong>How can you interpret the main effects in a Two-Way
+ANOVA?</strong>
+<ul>
+<li>Main effects represent the average effect of each factor on the
+response variable, ignoring the other factor.</li>
+</ul></li>
+<li><strong>What are the assumptions underlying a Two-Way
+ANOVA?</strong>
+<ul>
+<li>Assumptions include normality, homogeneity of variances,
+independence, and no multicollinearity.</li>
+</ul></li>
+<li><strong>When is it appropriate to use a Two-Way ANOVA instead of a
+One-Way ANOVA?</strong>
+<ul>
+<li>Use a Two-Way ANOVA when you have two categorical factors and want
+to assess their individual and combined effects on the response
+variable.</li>
+</ul></li>
+<li><strong>How do you handle total variance decomposition in a Two-Way
+ANOVA model?</strong>
+<ul>
+<li>Total variance is decomposed into variance due to factors,
+interaction, and error terms to understand the sources of variability in
+the data.</li>
+</ul></li>
 </ol>
 <hr />
 </div>
 <div id="simple-linear-regression-slr" class="section level2">
 <h2>4. Simple Linear Regression (SLR)</h2>
-<p><strong>Discussion Questions:</strong></p>
+<p><strong>Discussion Questions with Solutions:</strong></p>
 <ol style="list-style-type: decimal">
-<li>How do you interpret the correlation coefficient (<span class="math inline">\(r\)</span>) in the context of Simple Linear
-Regression? How is it different from causation?</li>
-<li>What is the relationship between the coefficient of determination
-(<span class="math inline">\(R^2\)</span>) and the correlation
-coefficient (<span class="math inline">\(r\)</span>) in a Simple Linear
-Regression model?<br />
-</li>
-<li>How can we determine correlation coefficients using <span class="math inline">\(R^2\)</span> and slope <span class="math inline">\(coefficient\)</span>?</li>
-<li>What does it mean if the residuals in a residual plot show a clear
-pattern or trend?<br />
-</li>
-<li>Why do we add intercept terms in Simple Linear Regression models,
-and how do we interpret them?</li>
+<li><strong>How do you interpret the correlation coefficient (<span class="math inline">\(r\)</span>) in the context of Simple Linear
+Regression? How is it different from causation?</strong>
+<ul>
+<li>Correlation coefficient measures the strength and direction of the
+linear relationship between two variables.</li>
+<li>It does not imply causation but indicates the degree of
+association.</li>
+</ul></li>
+<li><strong>What is the relationship between the coefficient of
+determination (<span class="math inline">\(R^2\)</span>) and the
+correlation coefficient (<span class="math inline">\(r\)</span>) in a
+Simple Linear Regression model?</strong>
+<ul>
+<li><span class="math inline">\(R^2\)</span> is the square of the
+correlation coefficient, representing the proportion of variance
+explained by the model.</li>
+</ul></li>
+<li><strong>How can we determine correlation coefficients using <span class="math inline">\(R^2\)</span> and slope <span class="math inline">\(coefficient\)</span>? </strong>
+<ul>
+<li><span class="math inline">\(r = \sqrt{R^2} \times \text{sign of the
+slope coefficient}\)</span></li>
+</ul></li>
+<li><strong>What does it mean if the residuals in a residual plot show a
+clear pattern or trend?</strong>
+<ul>
+<li>A clear pattern or trend in the residuals indicates that the model
+assumptions are violated, suggesting non-linearity or
+heteroscedasticity.</li>
+</ul></li>
+<li><strong>Why do we add intercept terms in Simple Linear Regression
+models, and how do we interpret them? </strong>
+<ul>
+<li>Intercept terms account for the baseline value of the response
+variable when the predictor is zero.</li>
+<li>They represent the expected value of the response variable when the
+predictor is zero.</li>
+</ul></li>
 </ol>
 <hr />
 </div>
 <div id="multiple-linear-regression-mlr" class="section level2">
 <h2>5. Multiple Linear Regression (MLR)</h2>
-<p><strong>Discussion Questions:</strong></p>
+<p><strong>Discussion Questions with Solutions:</strong></p>
 <ol style="list-style-type: decimal">
-<li>How do you interpret the <span class="math inline">\(R^2\)</span>
-value in Multiple Linear Regression, and how is it different from the
-adjusted <span class="math inline">\(R^2\)</span>? when are they
-equal?</li>
-<li>How can residual plots help identify heteroscedasticity or
-non-linearity in Multiple Linear Regression?<br />
-</li>
-<li>What is the role of the correlation matrix in understanding
-relationships among predictors in Multiple Linear Regression?<br />
-</li>
-<li>How can high correlation among predictors (multicollinearity) affect
-the interpretation of <span class="math inline">\(R^2\)</span> and
-coefficients in the model?<br />
-</li>
-<li>How do you use residual plots to diagnose potential outliers or
-influential points in the model?</li>
+<li><strong>How do you interpret the <span class="math inline">\(R^2\)</span> value in Multiple Linear Regression,
+and how is it different from the adjusted <span class="math inline">\(R^2\)</span>? when are they equal?</strong>
+<ul>
+<li><span class="math inline">\(R^2\)</span> represents the proportion
+of variance in the response variable explained by the predictors.</li>
+<li>Adjusted <span class="math inline">\(R^2\)</span> accounts for the
+number of predictors in the model, penalizing for overfitting.</li>
+<li>They are equal when there is only one predictor in the model.</li>
+</ul></li>
+<li><strong>How can residual plots help identify heteroscedasticity or
+non-linearity in Multiple Linear Regression?</strong>
+<ul>
+<li>Residual plots show the distribution of residuals against predicted
+values, helping to identify patterns that violate model
+assumptions.</li>
+</ul></li>
+<li><strong>What is the role of the correlation matrix in understanding
+relationships among predictors in Multiple Linear Regression? </strong>
+<ul>
+<li>The correlation matrix helps identify multicollinearity among
+predictors, which can affect the stability and interpretation of the
+model.</li>
+</ul></li>
+<li><strong>How can high correlation among predictors
+(multicollinearity) affect the interpretation of <span class="math inline">\(R^2\)</span> and coefficients in the model?
+</strong>
+<ul>
+<li>Multicollinearity inflates the standard errors of coefficients,
+making them less precise.</li>
+<li>It can lead to unstable coefficients and misleading interpretations
+of the predictors’ effects.</li>
+</ul></li>
+<li><strong>How do you use residual plots to diagnose potential outliers
+or influential points in the model? </strong>
+<ul>
+<li>Residual plots help identify observations with large residuals,
+indicating potential outliers or influential points that may affect the
+model’s fit.</li>
+</ul></li>
 </ol>
+<hr />
+</div>
 </div>
 
 
